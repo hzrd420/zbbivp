@@ -1,0 +1,6 @@
+lib
+logs
+tmp
+config.ini
+composer.phar
+composer.lock

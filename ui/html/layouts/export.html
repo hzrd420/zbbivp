@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="de-DE">
+  <head>
+    <meta charset="{{@ENCODING}}">
+    <link rel="stylesheet" href="{{@BASE . '/' . @UI}}css/export.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{@page.title}}</title>
+  </head>
+
+  <body>
+    <include if="{{isset(@page.content)}}" href="{{@page.content}}" />
+  </body>
+</html>

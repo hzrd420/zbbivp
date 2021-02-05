@@ -1,0 +1,33 @@
+<h1>{{@lng.user.edit.heading}}</h1>
+<form method="post">
+  <p><label for="username">{{@lng.user.fields.username}} 
+    {{@lng.user.edit.betweenChars, @page.modelConsts.USERNAME_MIN_LENGTH, @page.modelConsts.USERNAME_MAX_LENGTH | format}}
+    </label>
+  <input autofocus required type="text" name="username" id="username" value="{{@@POST.username}}"
+    minlength="{{@page.modelConsts.USERNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.USERNAME_MAX_LENGTH}}"></p>
+
+  <p><label for="password">{{@lng.user.fields.password}} 
+    {{@lng.user.edit.betweenChars, @page.modelConsts.PASSWORD_MIN_LENGTH, @page.modelConsts.PASSWORD_MAX_LENGTH | format}}
+    </label>
+  <input type="password" name="password" id="password" minlength="{{@page.modelConsts.PASSWORD_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PASSWORD_MAX_LENGTH}}"></p>
+
+  <p><label for="password2">{{@lng.user.fields.password2}} 
+    {{@lng.user.edit.betweenChars, @page.modelConsts.PASSWORD_MIN_LENGTH, @page.modelConsts.PASSWORD_MAX_LENGTH | format}}
+    </label>
+  <input type="password" name="password2" id="password2" minlength="{{@page.modelConsts.PASSWORD_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PASSWORD_MAX_LENGTH}}"></p>
+
+  <p><label for="firstName">{{@lng.user.fields.firstName}} 
+    {{@lng.user.edit.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
+    minlength="{{@page.modelConsts.FIRST_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.FIRST_NAME_MAX_LENGTH}}"></p>
+
+  <p><label for="surname">{{@lng.user.fields.surname}} 
+    {{@lng.user.edit.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="surname" id="surname" value="{{@@POST.surname}}"
+    minlength="{{@page.modelConsts.SURNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.SURNAME_MAX_LENGTH}}"></p>
+
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button accesskey="s">{{@lng.user.edit.save}}</button>
+</form>

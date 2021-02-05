@@ -1,0 +1,29 @@
+<check if="{{empty(@QUERY)}}">
+  <true>
+    <set get="{{''}}" />
+  </true>
+  <false>
+    <set get="{{'?'.@QUERY}}" />
+  </false>
+</check>
+<div role="navigation" aria-label="{{@lng.pagination.pagination}}">
+  <ul class="pagination">
+    <check if="{{@pg.firstPage}}">
+      <li><a href="{{@BASE.@pg.route.@pg.prefix.@pg.firstPage.@get}}">{{@lng.pagination.first}}</a></li>
+    </check>
+    <check if="{{@pg.prevPage}}">
+      <li><a href="{{@BASE.@pg.route.@pg.prefix.@pg.prevPage.@get}}">{{@lng.pagination.back}}</a></li>
+    </check>
+    <repeat group="{{@pg.rangePages}}" value="{{@page}}">
+      <li {{@page == @pg.currentPage ? 'class="active"' : ''}}>
+        <a href="{{@BASE.@pg.route.@pg.prefix.@page.@get}}" {{@page == @pg.currentPage ? 'aria-current="page"' : ''}}>{{@page}}</a>
+      </li>
+    </repeat>
+    <check if="{{@pg.nextPage}}">
+      <li><a href="{{@BASE.@pg.route.@pg.prefix.@pg.nextPage.@get}}">{{@lng.pagination.next}}</a></li>
+    </check>
+    <check if="{{@pg.lastPage}}">
+      <li><a href="{{@BASE.@pg.route.@pg.prefix.@pg.lastPage.@get}}">{{@lng.pagination.last}} ({{@pg.lastPage}})</a></li>
+    </check>
+  </ul>
+</div>

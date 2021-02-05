@@ -1,0 +1,41 @@
+; Database parameters:
+[database]
+; Possible database types: mysql
+type = mysql
+host = localhost
+name = zbbivp
+port = 3306
+user = user
+password = passw0rd
+
+; Authentication settings:
+[authentication]
+; Maximum lifetime for a security token (stay signed in) in days (integer)
+tokenLifetime = 14
+
+; Pagination settings:
+[pagination]
+; Number of entries per page
+limit = 30
+; Number of previous and next pages from the current page
+range = 2
+
+; Other settings, only change if necessary or your are a developer!:
+[globals]
+; Development mode, set this setting to false in the productive use!
+DEV = false
+
+; logging settings:
+; Path to the logs folder
+LOGS = logs/
+; Destination of logs
+LOG_DESTINATION = zbb-ivp.log
+; Log level: Use: NONE, DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT or EMERGENCY (UPPER CASE!)
+LOG_LEVEL = DEBUG
+
+; Path to the templates for html output and emails
+UI = ui/
+; Path to the uploads of files
+UPLOADS = data/
+FALLBACK = de-DE
+LOCALES = app/dict/ | 3600
