@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>{{@lng.interested.fields.name}}</th>
+      <th>{{@lng.resource.actions}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <repeat group="{{@list}}" value="{{@item}}">
+      <tr>
+        <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedInterested' : 'showInterested', 'id =' . @item._id | alias}}">{{'{0} {1}', @item.firstName, @item.surname | format,esc}}</a></th>
+        <td>
+          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+        </td>
+      </tr>
+    </repeat>
+  </tbody>
+</table>

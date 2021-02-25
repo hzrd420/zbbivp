@@ -29,3 +29,26 @@ CREATE OR REPLACE TABLE `trainingCourse` (
     `name` VARCHAR(200) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+CREATE OR REPLACE TABLE `interested` (
+    `id` bigint unsigned AUTO_INCREMENT,
+    `trainingCourse1Id` bigint unsigned NOT NULL,
+    `trainingCourse2Id` bigint unsigned,
+    `firstName` VARCHAR(200) NOT NULL,
+    `surname` VARCHAR(200) NOT NULL,
+    `birthDate` DATE NOT NULL,
+    `birthLocation` VARCHAR(200),
+    `maritalStatus` VARCHAR(100) NOT NULL,
+    `hasChilds` BOOLEAN DEFAULT false NOT NULL,
+    `address` VARCHAR(500) NOT NULL,
+    `nationality` VARCHAR(100) NOT NULL,
+    `phonePrivate` VARCHAR(100),
+    `phoneMobile` VARCHAR(100) NOT NULL,
+    `email` VARCHAR(200) NOT NULL,
+    `legalRepresentative` VARCHAR(400),
+    `emailLegalRepresentative` VARCHAR(200),
+    `phoneLegalRepresentative` VARCHAR(100),
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`trainingCourse1Id`) REFERENCES `trainingCourse` (`id`),
+    FOREIGN KEY (`trainingCourse2Id`) REFERENCES `trainingCourse` (`id`)
+) ENGINE=InnoDB;

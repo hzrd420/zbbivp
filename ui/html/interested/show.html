@@ -1,0 +1,36 @@
+<h1>{{@lng.interested.show.heading, @page.interested.firstName, @page.interested.surname | format,esc}}</h1>
+<include href="{{'html/snippets/actions.html'}}" with="item={{@page.interested}}" />
+
+<h2>{{@lng.interested.sections.baseData}}</h2>
+<p>{{@lng.interested.fields.name}}: {{'{0} {1}', @page.interested.firstName, @page.interested.surname | format,esc}}</p>
+<p>{{@lng.interested.fields.birthDate}}: {{'{0,date}', strtotime(@page.interested.birthDate) | format,esc}}</p>
+<check if="{{!is_null(@page.interested.birthLocation)}}">
+  <p>{{@lng.interested.fields.birthLocation}}: {{@page.interested.birthLocation | esc}}</p>
+</check>
+<p>{{@lng.interested.fields.address}}: {{@page.interested.address | esc}}</p>
+<p>{{@lng.interested.fields.nationality}}: {{@page.interested.nationality | esc}}</p>
+<p>{{@lng.interested.fields.email}}: 
+  <a href="mailto:{{@page.interested.email | esc}}">{{@page.interested.email | esc}}</a>
+</p>
+<p>{{@lng.interested.fields.phoneMobile}}: {{@page.interested.phoneMobile | esc}}</p>
+<check if="{{!is_null(@page.interested.phonePrivate)}}">
+  <p>{{@lng.interested.fields.phonePrivate}}: {{@page.interested.phonePrivate | esc}}</p>
+</check>
+<p>{{@lng.interested.fields.maritalStatus}}: {{@lng.interested.maritalStatus[@page.interested.maritalStatus]}}</p>
+<p>{{@lng.interested.fields.hasChilds}}: {{@page.interested.hasChilds ? @lng.main.true : @lng.main.false}}</p>
+
+<check if="{{!is_null(@page.interested.legalRepresentative)}}">
+  <p>{{@lng.interested.fields.legalRepresentative}}: {{@page.interested.legalRepresentative | esc}}</p>
+</check>
+<check if="{{!is_null(@page.interested.emailLegalRepresentative)}}">
+  <p>{{@lng.interested.fields.emailLegalRepresentative}}: {{@page.interested.emailLegalRepresentative | esc}}</p>
+</check>
+<check if="{{!is_null(@page.interested.phoneLegalRepresentative)}}">
+  <p>{{@lng.interested.fields.phoneLegalRepresentative}}: {{@page.interested.phoneLegalRepresentative | esc}}</p>
+</check>
+
+<h2>{{@lng.interested.sections.training}}</h2>
+<p>{{@lng.interested.fields.trainingCourse1}}: {{@page.interested.trainingCourse1Id.name | esc}}</p>
+<check if="{{!is_null(@page.interested.trainingCourse2Id)}}">
+  <p>{{@lng.interested.fields.trainingCourse2}}: {{@page.interested.trainingCourse2Id.name | esc}}</p>
+</check>

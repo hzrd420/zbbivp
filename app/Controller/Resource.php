@@ -105,6 +105,7 @@ Abstract class Resource extends Base {
     // Generate filter and options for Cortex model:
     $filter = $this->createListFilter($f3, $this->model);
     $options = $this->createListOptions($f3, $this->model);
+    $this->loadLists($f3); // Load lists if method is used for the filter
     // Execute list hook to load additional data or change the model before loading it
     $this->listHook($f3, $this->model, $filter, $options);
     $resourceList = $this->model->paginate($page, $limit, $filter, $options);
@@ -320,7 +321,7 @@ Abstract class Resource extends Base {
     try {
       // Save csrf token to prevent CSRF attacks:
       $this->saveCsrf();
-
+      $this->loadLists($f3); // Load lists if method is used for select boxes
       // Execute hook function to load a specified record if there is such one
       $this->loadEditFormRecord($f3);
 
@@ -375,6 +376,7 @@ Abstract class Resource extends Base {
 
       // Start transaction and set fields into the model:
       $this->model->startTransaction();
+      $this->model->defaults(true); // Useful for check boxes without values like booleans)
       $this->model->copyfrom('POST');
       // Run optional function with model as parameter, may be overwridden by class to change model individually
       $this->editHook($f3, $this->model);
@@ -485,6 +487,17 @@ Abstract class Resource extends Base {
   protected function deleteHook(\Base $f3, \Model\Base $model): void {
     // Do nothing, only to overwrite optional
   } // deleteHook()
+
+  /**
+   * Overwrite this method to load needed lists
+   *
+   * These lists are loaded in editForm and List view for filtering
+   * Save all lists under global var "page" in the hive of F3
+   * @param \Base $f3 The instance of F3
+   */
+  protected function loadLists(\Base $f3): void {
+    // Do nothing, only to overwrite in sub classes
+  } // loadLists()
 
   /**
    * Check for the necessary post fields

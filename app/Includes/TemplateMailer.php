@@ -23,11 +23,11 @@ class TemplateMailer {
     // Check if templates exists:
     if (!file_exists($f3->get('UI') . $htmlTemplate))
       throw new \Exception('The specific html template "' . $htmlTemplate . '" doesn\'t exist.');
-    else if (!$textTemplate && !file_exists($f3->get('UI') . $textTemplate))
+    else if (!is_null($textTemplate) && !file_exists($f3->get('UI') . $textTemplate))
       throw new \Exception('The specific plain text template "' . $textTemplate . '" doesn\'t exist.');
 
     $mail = new \Mailer();
-    $mail->addTo($email, $title);
+    $mail->addTo($email);
     // Add html and text to the email:
     $htmlMessage = \Template::instance()->render($htmlTemplate);
     $mail->setHTML($htmlMessage);

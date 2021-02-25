@@ -1,0 +1,7 @@
+<h1>{{@lng.interested.delete.heading}}</h1>
+<p>{{@lng.interested.delete.question, @page.interested.firstName, @page.interested.surname | format,esc}}</p>
+<form method="post">
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button name="decision" value="true">{{@lng.interested.delete.delete}}</button>
+  <button name="decision" value="false">{{@lng.interested.delete.cancel}}</button>
+</form>

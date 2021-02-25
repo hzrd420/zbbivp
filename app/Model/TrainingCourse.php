@@ -22,19 +22,8 @@ class TrainingCourse extends Base {
       // 'has-many' => ['\Model\InterestedPeople', 'trainingCourseId']
     // ]
   ];
-  protected $table = 'TrainingCourse';
+  protected $table = 'trainingCourse';
   public $sortableFields = [
     'name' => 'name'
   ];
-
-  /**
-   * Get the translated value of the name from lng file
-   * @param string $value the raw value
-   * @return string The translated value
-   */
-  protected function get_name($value) {
-    if (!\Base::instance()->exists('lng.training.trainingType.' . $value, $name))
-      $name = $value;
-    return $name;
-  } // get_name()
 } // class

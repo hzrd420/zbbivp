@@ -1,0 +1,75 @@
+<details>
+  <summary>{{@lng.interested.sections.baseData}}</summary>
+  <p><label for="filter_firstName">{{@lng.interested.fields.firstName}}</label>
+  <input type="text" name="filter_firstName" id="filter_firstName" value="{{@@REQUEST.filter_firstName}}"></p>
+
+  <p><label for="filter_surname">{{@lng.interested.fields.surname}}</label>
+  <input type="text" name="filter_surname" id="filter_surname" value="{{@@REQUEST.filter_surname}}"></p>
+
+  <p><label for="filter_birthDate">{{@lng.interested.fields.birthDate}}</label>
+  <input type="date" name="filter_birthDate" id="filter_birthDate" 
+  <check if="{{isset(@REQUEST.filter_birthDate) && !empty(@REQUEST.filter_birthDate)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@REQUEST.filter_birthDate) | format}}"
+  </check>></p>
+
+  <p><label for="filter_birthLocation">{{@lng.interested.fields.birthLocation}}</label>
+  <input type="text" name="filter_birthLocation" id="filter_birthLocation" value="{{@@REQUEST.filter_birthLocation}}"></p>
+
+  <p><label for="nationality">{{@lng.interested.fields.nationality}}</label>
+  <input type="text" name="filter_nationality" id="filter_nationality" value="{{@@REQUEST.filter_nationality}}"></p>
+
+  <p><label for="address">{{@lng.interested.fields.address}}</label>
+  <input type="text" name="filter_address" id="filter_address" value="{{@@REQUEST.filter_address}}"></p>
+
+  <p><label for="filter_email">{{@lng.interested.fields.email}}</label>
+  <input type="email" name="filter_email" id="filter_email" value="{{@@REQUEST.filter_email}}"</p>
+
+  <p><label for="filter_phoneMobile">{{@lng.interested.fields.phoneMobile}}</label>
+  <input type="text" name="filter_phoneMobile" id="filter_phoneMobile" value="{{@@REQUEST.filter_phoneMobile}}"></p>
+
+  <p><label for="filter_phonePrivate">{{@lng.interested.fields.phonePrivate}}</label>
+  <input type="text" name="filter_phonePrivate" id="filter_phonePrivate" value="{{@@REQUEST.filter_phonePrivate}}"></p>
+
+  <p><label for="filter_hasChilds">{{@lng.interested.fields.hasChilds}}</label>
+  <select name="filter_hasChilds" id="filter_hasChilds">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_hasChilds === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_hasChilds === 'false' ? 'selected' : ''}}value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_maritalStatus">{{@lng.interested.fields.maritalStatus}}</label>
+    <select name="filter_maritalStatus" id="filter_maritalStatus">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.maritalStatusList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_maritalStatus === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.maritalStatus[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="filter_legalRepresentative">{{@lng.interested.fields.legalRepresentative}}</label>
+  <input type="text" name="filter_legalRepresentative" id="filter_legalRepresentative" value="{{@@REQUEST.filter_legalRepresentative}}"></p>
+
+  <p><label for="filter_emailLegalRepresentative">{{@lng.interested.fields.emailLegalRepresentative}}</label>
+  <input type="email" name="filter_emailLegalRepresentative" id="filter_emailLegalRepresentative" value="{{@@REQUEST.filter_emailLegalRepresentative}}"></p>
+
+  <p><label for="filter_phoneLegalRepresentative">{{@lng.interested.fields.phoneLegalRepresentative}}</label>
+  <input type="text" name="filter_phoneLegalRepresentative" id="filter_phoneLegalRepresentative" value="{{@@REQUEST.filter_phoneLegalRepresentative}}"></p>
+</details>
+
+<details>
+  <summary>{{@lng.interested.sections.training}}</summary>
+  <p><label for="filter_trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
+    <select name="filter_trainingCourse1Id" id="filter_trainingCourse1Id">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_trainingCourse1Id === @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="trainingCourse2Id">{{@lng.interested.fields.trainingCourse2}}</label>
+    <select name="filter_trainingCourse2Id" id="filter_trainingCourse2Id">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_trainingCourse2Id == @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+      </repeat>
+    </select></p>
+</details>

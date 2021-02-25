@@ -1,0 +1,105 @@
+<h1>{{@lng.interested.edit.heading}}</h1>
+<form method="post">
+<h2>{{@lng.interested.sections.baseData}}</h2>
+  <p><label for="firstName">{{@lng.interested.fields.firstName}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
+    </label>
+  <input autofocus required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
+    minlength="{{@page.modelConsts.FIRST_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.FIRST_NAME_MAX_LENGTH}}"></p>
+
+  <p><label for="surname">{{@lng.interested.fields.surname}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="surname" id="surname" value="{{@@POST.surname}}"
+    minlength="{{@page.modelConsts.SURNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.SURNAME_MAX_LENGTH}}"></p>
+
+  <p><label for="birthDate">{{@lng.interested.fields.birthDate}}</label>
+  <input required type="date" name="birthDate" id="birthDate" 
+  <check if="{{isset(@POST.birthDate)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.birthDate) | format,esc}}"
+  </check>></p>
+
+  <p><label for="birthLocation">{{@lng.interested.fields.birthLocation}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.BIRTH_LOCATION_MIN_LENGTH, @page.modelConsts.BIRTH_LOCATION_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="birthLocation" id="birthLocation" value="{{@@POST.birthLocation}}"
+    minlength="{{@page.modelConsts.BIRTH_LOCATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.BIRTH_LOCATION_MAX_LENGTH}}"></p>
+
+  <p><label for="nationality">{{@lng.interested.fields.nationality}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.NATIONALITY_MIN_LENGTH, @page.modelConsts.NATIONALITY_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="nationality" id="nationality" value="{{@@POST.nationality}}"
+    minlength="{{@page.modelConsts.NATIONALITY_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NATIONALITY_MAX_LENGTH}}"></p>
+
+  <p><label for="address">{{@lng.interested.fields.address}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="address" id="address" value="{{@@POST.address}}"
+    minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
+
+  <p><label for="email">{{@lng.interested.fields.email}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.EMAIL_MIN_LENGTH, @page.modelConsts.EMAIL_MAX_LENGTH | format}}
+    </label>
+  <input required type="email" name="email" id="email" value="{{@@POST.email}}"
+    minlength="{{@page.modelConsts.EMAIL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_MAX_LENGTH}}"></p>
+
+  <p><label for="phoneMobile">{{@lng.interested.fields.phoneMobile}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="phoneMobile" id="phoneMobile" value="{{@@POST.phoneMobile}}"
+    minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+  <p><label for="phonePrivate">{{@lng.interested.fields.phonePrivate}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="phonePrivate" id="phonePrivate" value="{{@@POST.phonePrivate}}"
+    minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+  <p><label for="hasChilds">{{@lng.interested.fields.hasChilds}}</label>
+    <input type="checkbox" {{@@POST.hasChilds ? 'checked' : ''}} name="hasChilds" id="hasChilds" value="true">
+  </p>
+
+  <p><label for="maritalStatus">{{@lng.interested.fields.maritalStatus}}</label>
+    <select required name="maritalStatus" id="maritalStatus">
+      <repeat group="{{@page.maritalStatusList}}" value="{{@item}}">
+        <option {{@@POST.maritalStatus === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.maritalStatus[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="legalRepresentative">{{@lng.interested.fields.legalRepresentative}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="legalRepresentative" id="legalRepresentative" value="{{@@POST.legalRepresentative}}"
+    minlength="{{@page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH}}"></p>
+
+  <p><label for="emailLegalRepresentative">{{@lng.interested.fields.emailLegalRepresentative}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
+    </label>
+  <input type="email" name="emailLegalRepresentative" id="emailLegalRepresentative" value="{{@@POST.emailLegalRepresentative}}"
+    minlength="{{@page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH}}"></p>
+
+  <p><label for="phoneLegalRepresentative">{{@lng.interested.fields.phoneLegalRepresentative}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="phoneLegalRepresentative" id="phoneLegalRepresentative" value="{{@@POST.phoneLegalRepresentative}}"
+    minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+  <h2>{{@lng.interested.sections.training}}</h2>
+  <p><label for="trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
+    <select required name="trainingCourse1Id" id="trainingCourse1Id">
+      <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
+        <option {{@@POST.trainingCourse1Id === @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="trainingCourse2Id">{{@lng.interested.fields.trainingCourse2}}</label>
+    <select required name="trainingCourse2Id" id="trainingCourse2Id">
+      <option {{@@POST.trainingCourse2Id === null ? 'selected' : ''}} value="none">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
+        <option {{@@POST.trainingCourse2Id == @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+      </repeat>
+    </select></p>
+
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button accesskey="s">{{@lng.interested.edit.save}}</button>
+</form>

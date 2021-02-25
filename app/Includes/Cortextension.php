@@ -86,7 +86,7 @@ abstract class Cortextension extends \DB\Cortex{
     } // if
     $this->touch($this->deleteField);
     $result = $this->update() && !is_null($this->get($this->deleteField));
-    if (method_exists($this, 'afterSoftErase'))
+    if ($result && method_exists($this, 'afterSoftErase'))
       $this->afterSoftErase();
     return $result;
   } // erase()
@@ -140,8 +140,8 @@ abstract class Cortextension extends \DB\Cortex{
     if (
       empty($this->deleteField)
       || !$this->filterSoftErased
-      || \Base::instance()->exists('CORTEX.showSoftErased', $globalFilterSetting)
-      || $globalFilterSetting === true
+      || (\Base::instance()->exists('CORTEX.showSoftErased', $globalFilterSetting)
+      && $globalFilterSetting === true)
     )
       return parent::filteredFind($filter, $options, $ttl, $count);
     if (!is_null($filter))
@@ -213,7 +213,7 @@ abstract class Cortextension extends \DB\Cortex{
     } // if
     $this->set($this->deleteField, null);
     $result = $this->update() && is_null($this->get($this->deleteField));
-    if (method_exists($this, 'afterRestore'))
+    if (result && method_exists($this, 'afterRestore'))
       $this->afterRestore();
     return $result;
   } // restore()
