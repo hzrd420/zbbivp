@@ -152,7 +152,8 @@ $validation->addFilter('optionalInt', function($value, $params = null) {
 
 $validation->addFilter('hashPassword', function($value, $params = null) {
   // Only hash plain passwords (no rehash):
-  if (password_get_info($value)['algo'] === 0)
+  $algo = password_get_info($value)['algo'];
+  if ($algo === 0 || is_null($algo))
     return password_hash($value, PASSWORD_DEFAULT);
   return $value;
 });
