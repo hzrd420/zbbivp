@@ -18,9 +18,12 @@ class TrainingCourse extends Base {
       'filter' => 'trim',
       'validate' => 'required|unique|min_len,' . self::NAME_MIN_LENGTH . '|max_len,' . self::NAME_MAX_LENGTH
     ],
-    // 'interestedPeople' => [
-      // 'has-many' => ['\Model\InterestedPeople', 'trainingCourseId']
-    // ]
+    'interested1' => [
+      'has-many' => ['\Model\Interested', 'trainingCourse1Id']
+    ],
+    'interested2' => [
+      'has-many' => ['\Model\Interested', 'trainingCourse2Id']
+    ]
   ];
   protected $table = 'trainingCourse';
   public $sortableFields = [

@@ -2,3 +2,27 @@
 <include href="{{'html/snippets/actions.html'}}" with="item={{@page.trainingCourse}}" />
 
 <p>{{@lng.trainingCourse.fields.name}}: {{@page.trainingCourse.name | esc}}</p>
+
+<h2>{{@lng.trainingCourse.show.interested1}}</h2>
+<check if="{{is_null(@page.trainingCourse.count_interested1)}}">
+  <true>
+    <p>{{@lng.trainingCourse.show.noInterested}}</p>
+  </true>
+  <false>
+    <p><a href="{{@BASE}}{{'listInterested' | alias}}{{'?filter_trainingCourse1={0}', @page.trainingCourse._id | format}}">
+      {{@page.trainingCourse.count_interested1}}
+    </a></p>
+  </false>
+</check>
+
+<h2>{{@lng.trainingCourse.show.interested2}}</h2>
+<check if="{{is_null(@page.trainingCourse.count_interested2)}}">
+  <true>
+    <p>{{@lng.trainingCourse.show.noInterested}}</p>
+  </true>
+  <false>
+    <p><a href="{{@BASE}}{{'listInterested' | alias}}{{'?filter_trainingCourse2={0}', @page.trainingCourse._id | format}}">
+      {{@page.trainingCourse.count_interested2}}
+    </a></p>
+  </false>
+</check>

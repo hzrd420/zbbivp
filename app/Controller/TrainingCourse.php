@@ -16,6 +16,8 @@ class TrainingCourse extends Resource {
   public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\TrainingCourse $model) {
     parent::__construct($logger, $authentication, $model);
     // Set some counters
+    $this->model->countRel('interested1');
+    $this->model->countRel('interested2');
   } // constructor
 
   protected function getFilters(\Model\Base $model, array $opts): array {

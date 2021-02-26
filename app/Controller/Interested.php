@@ -19,6 +19,14 @@ class Interested extends Resource {
 
   protected function getFilters(\Model\Base $model, array $opts): array {
     $filters = [];
+    // Training course 1:
+    if (array_key_exists('trainingCourse1', $opts))
+      $filters[] = ['trainingCourse1Id = ?', $opts['trainingCourse1']];
+
+    // Training course 2:
+    if (array_key_exists('trainingCourse2', $opts))
+      $filters[] = ['trainingCourse2Id = ?', $opts['trainingCourse2']];
+
     // First name:
     if (array_key_exists('firstName', $opts))
       $filters[] = ['firstName LIKE ?', '%' . $opts['firstName'] . '%'];
