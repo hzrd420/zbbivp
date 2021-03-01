@@ -10,7 +10,7 @@ class Step extends Resource {
     ['edit', 'editStep', ['interestedId' => 'interestedId', 'id' => '_id'], ['isSoftErased' => false]],
     ['delete', 'deleteStep', ['id' => '_id'], ['isSoftErased' => false]],
   ];
-  protected $reroute = '@listSteps';
+  protected $reroute = '@listInterested';
 
   public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\Step $model) {
     parent::__construct($logger, $authentication, $model);
