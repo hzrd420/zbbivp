@@ -28,6 +28,9 @@ class StepType extends Base {
       'default' => false,
       'nullable' => false,
       'accepted' => true
+    ],
+    'steps' => [
+      'has-many' => ['\Model\Step', 'stepTypeId']
     ]
   ];
   protected $table = 'stepType';

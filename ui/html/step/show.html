@@ -1,0 +1,9 @@
+<h1>{{@lng.step.show.heading}}</h1>
+<include href="{{'html/snippets/actions.html'}}" with="item={{@page.step}}" />
+
+<p>{{@lng.stepType.fields.meansSuccessfulCompletion}}: {{@page.step.stepTypeId.meansSuccessfulCompletion ? @lng.main.true : @lng.main.false}}</p>
+
+<check if="{{!is_null(@page.step.comment)}}">
+  <h2>{{@lng.step.fields.comment}}</h2>
+  <pre>{{@page.step.comment | esc}}</pre>
+</check>

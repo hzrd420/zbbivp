@@ -7,6 +7,7 @@ namespace Controller;
 class Interested extends Resource {
   protected $resourceName = 'interested';
   protected $uiActions = [
+    ['addStep', 'addStep', ['interestedId' => '_id'], ['isSoftErased' => false]],
     ['edit', 'editInterested', ['id' => '_id'], ['isSoftErased' => false]],
     ['delete', 'deleteInterested', ['id' => '_id'], ['isSoftErased' => false]],
   ];
@@ -15,6 +16,8 @@ class Interested extends Resource {
 
   public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\Interested $model) {
     parent::__construct($logger, $authentication, $model);
+    // Add some counters:
+    $this->model->countRel('steps');
   } // constructor
 
   protected function getFilters(\Model\Base $model, array $opts): array {

@@ -31,7 +31,10 @@ class TrainingCourse extends Resource {
 
   protected function deleteHook(\Base $f3, \Model\Base $model): void {
     // Only delete if training course isn't already in use:
-    // if (!is_null($model->count_interestedPeople) && $model->count_interestedPeople > 0)
-      // throw new ControllerException($f3->get('lng.trainingCourse.error.alreadyInUse'));
+    if (
+      (!is_null($model->count_interested1) && $model->count_interested1 > 0)
+      || (!is_null($model->count_interested2) && $model->count_interested2 > 0)
+    )
+      throw new ControllerException($f3->get('lng.trainingCourse.error.alreadyInUse'));
   } // deleteHook()
 } // class

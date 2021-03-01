@@ -1,0 +1,17 @@
+<h1>{{@lng.step.edit.heading}}</h1>
+<form method="post">
+  <input type="hidden" name="interestedId" value="{{@POST.interestedId}}">
+
+  <p><label for="stepTypeId">{{@lng.step.fields.stepType}}</label>
+    <select required name="stepTypeId" id="stepTypeId">
+      <repeat group="{{@page.stepTypeList}}" value="{{@item}}">
+        <option {{@@POST.stepTypeId === @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+      </repeat>
+    </select></p>
+
+  <label for="comment">{{@lng.step.fields.comment}}</label>
+  <textarea name="comment" id="comment">{{@@POST.comment}}</textarea>
+
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button accesskey="s">{{@lng.step.edit.save}}</button>
+</form>

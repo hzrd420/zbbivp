@@ -60,3 +60,13 @@ CREATE OR REPLACE TABLE `stepType` (
     `meansSuccessfulCompletion` BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+CREATE OR REPLACE TABLE `step` (
+  `id` BIGINT UNSIGNED AUTO_INCREMENT,
+  `interestedId` BIGINT UNSIGNED NOT NULL,
+  `stepTypeId` BIGINT UNSIGNED NOT NULL,
+  `comment` LONGTEXT,
+  FOREIGN KEY(`interestedId`) REFERENCES `interested`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY(`stepTypeId`) REFERENCES `stepType`(`id`) ON DELETE CASCADE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB;

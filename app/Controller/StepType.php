@@ -16,7 +16,7 @@ class StepType extends Resource {
   public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\StepType $model) {
     parent::__construct($logger, $authentication, $model);
     // Set some counters
-    // $this->model->countRel('steps');
+    $this->model->countRel('steps');
   } // constructor
 
   protected function getFilters(\Model\Base $model, array $opts): array {
@@ -37,8 +37,8 @@ class StepType extends Resource {
   } // getFilters()
 
   protected function deleteHook(\Base $f3, \Model\Base $model): void {
-    // Only delete if training course isn't already in use:
-    // if (!is_null($model->count_interestedPeople) && $model->count_interestedPeople > 0)
-      // throw new ControllerException($f3->get('lng.trainingCourse.error.alreadyInUse'));
+    // Only delete if step type isn't already in use:
+    if (!is_null($model->count_steps) && $model->count_steps > 0)
+      throw new ControllerException($f3->get('lng.stepType.error.alreadyInUse'));
   } // deleteHook()
 } // class

@@ -152,6 +152,9 @@ class Interested extends Base {
       'belongs-to-one' => '\Model\TrainingCourse',
       'accepted' => true,
       'necessaryPost' => true
+    ],
+    'steps' => [
+      'has-many' => ['\Model\Step', 'interestedId']
     ]
   ];
   protected $table = 'interested';

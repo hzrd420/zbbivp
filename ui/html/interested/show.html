@@ -34,3 +34,13 @@
 <check if="{{!is_null(@page.interested.trainingCourse2Id)}}">
   <p>{{@lng.interested.fields.trainingCourse2}}: {{@page.interested.trainingCourse2Id.name | esc}}</p>
 </check>
+
+<h2>{{@lng.interested.show.steps}}</h2>
+<check if="{{is_null(@page.interested.count_steps)}}">
+  <true>
+    <p>{{@lng.interested.show.noSteps}}</p>
+  </true>
+  <false>
+    <a href="{{@BASE}}{{'listSteps', 'interestedId =' . @page.interested._id | alias}}">{{@page.interested.count_steps}}</a></th>
+  </false>
+</check>

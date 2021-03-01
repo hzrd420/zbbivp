@@ -53,7 +53,7 @@ Abstract class Resource extends Base {
       'page.permitNew',
       $this->permitNew && $access->granted('/*/edit*', $subject)
     );
-    
+
     // Set up ui actions:
     if (!$f3->get('CLI')) {
       $actions = $this->uiActions;
@@ -78,12 +78,12 @@ Abstract class Resource extends Base {
         $actions = [];
         foreach ($this->uiActions as $action) {
           foreach ($action['conditions'] as $key => $value) {
-            if ($item[$key] != $value)
+            if ($item->getRaw($key) != $value)
               continue 2;
           } // foreach
           $params = $action['params'];
           foreach ($params as $key => &$param)
-            $param = $item[$param];
+            $param = $item->getRaw($param);
           $actions[] = [
             'name' => $action['name'],
             'route' => $f3->alias($action['alias'], $params),
