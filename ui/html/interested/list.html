@@ -5,6 +5,7 @@
       <th>{{@lng.interested.fields.birthDate}}</th>
       <th>{{@lng.interested.fields.trainingCourse1}}</th>
       <th>{{@lng.interested.fields.trainingCourse2}}</th>
+      <th>{{@lng.interested.list.numberOfSteps}}</th>
       <th>{{@lng.resource.actions}}</th>
     </tr>
   </thead>
@@ -30,6 +31,9 @@
             </false>
           </check>
         </td>
+        <td><a href="{{@BASE}}{{'listSteps', 'interestedId =' . @item._id | alias}}">
+          {{@item.count_steps ?? 0}}
+        </a></td>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
         </td>
