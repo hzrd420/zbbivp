@@ -1,0 +1,8 @@
+<h1>{{@lng.stepType.delete.heading}}</h1>
+<p>{{@lng.stepType.delete.question, @page.stepType.name | format,esc}}</p>
+<p>{{@lng.stepType.delete.warning}}</p>
+<form method="post">
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button name="decision" value="true">{{@lng.stepType.delete.delete}}</button>
+  <button name="decision" value="false">{{@lng.stepType.delete.cancel}}</button>
+</form>

@@ -1,0 +1,12 @@
+<p><label for="filter_name">{{@lng.trainingCourse.fields.name}}</label>
+<input type="text" name="filter_name" id="filter_name" value="{{@@REQUEST.filter_name}}"></p>
+
+<p><label for="filter_description">{{@lng.stepType.fields.description}}</label>
+<input type="text" name="filter_description" id="filter_description" value="{{@@REQUEST.filter_description}}"></p>
+
+  <p><label for="filter_meansSuccessfulCompletion">{{@lng.stepType.fields.meansSuccessfulCompletion}}</label>
+  <select name="filter_meansSuccessfulCompletion" id="filter_meansSuccessfulCompletion">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_meansSuccessfulCompletion === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_meansSuccessfulCompletion === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>

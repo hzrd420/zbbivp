@@ -52,3 +52,11 @@ CREATE OR REPLACE TABLE `interested` (
     FOREIGN KEY (`trainingCourse1Id`) REFERENCES `trainingCourse` (`id`),
     FOREIGN KEY (`trainingCourse2Id`) REFERENCES `trainingCourse` (`id`)
 ) ENGINE=InnoDB;
+
+CREATE OR REPLACE TABLE `stepType` (
+    `id` bigint unsigned AUTO_INCREMENT,
+    `name` VARCHAR(200) NOT NULL,
+    `description` LONGTEXT,
+    `meansSuccessfulCompletion` BOOLEAN NOT NULL DEFAULT false,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB;
