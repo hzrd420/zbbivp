@@ -63,7 +63,7 @@ class Interested extends Resource {
     if (array_key_exists('legalRepresentative', $opts))
       $filters[] = ['legalRepresentative LIKE ?', '%' . $opts['legalRepresentative'] . '%'];
 
-    // Has children:
+    // Has childs:
     if (array_key_exists('hasChilds', $opts))
       $filters[] = ['hasChilds = ?', $opts['hasChilds'] === 'true' ? true : false];
     return $filters;
