@@ -458,8 +458,7 @@ Abstract class Resource extends Base {
         // Show form:
         $this->saveCsrf();
         $f3->copy('lng.' . $this->resourceName . '.delete.title', 'page.title');
-        $f3->set('page.' . $this->resourceName,
-          $this->model);
+        $f3->set('page.' . $this->resourceName, $this->model);
         $f3->set('page.content', 'html/' . $this->resourceName . '/deleteForm.html');
       } else if ($f3->exists('POST.decision', $decision) && $decision === 'true') {
         // Delete resource:
