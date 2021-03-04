@@ -43,6 +43,11 @@ class Step extends Resource {
     } // if
   } // loadEditFormRecord()
 
+  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+    // Change reroute member to reroute to interested with deleted step
+    $this->reroute = $f3->alias('listSteps', ['interestedId' => $model->getRaw('interestedId')]);
+  } // deleteHook()
+
   protected function loadLists(\Base $f3): void {
     // Load step types:
     $list = $this->model->rel('stepTypeId');
