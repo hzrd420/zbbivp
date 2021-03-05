@@ -6,11 +6,13 @@
       <th>{{@lng.interested.fields.trainingCourse1}}</th>
       <th>{{@lng.interested.fields.trainingCourse2}}</th>
       <th>{{@lng.interested.list.numberOfSteps}}</th>
+      <th>{{@lng.interested.list.newestStep}}</th>
       <th>{{@lng.resource.actions}}</th>
     </tr>
   </thead>
   <tbody>
     <repeat group="{{@list}}" value="{{@item}}">
+      <set newestStep="{{@item->getNewestStep()}}" />
       <tr>
         <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedInterested' : 'showInterested', 'id =' . @item._id | alias}}">{{'{0} {1}', @item.firstName, @item.surname | format,esc}}</a></th>
         <td>{{'{0,date}', strtotime(@item.birthDate) | format,esc}}</td>
@@ -34,6 +36,18 @@
         <td><a href="{{@BASE}}{{'listSteps', 'interestedId =' . @item._id | alias}}">
           {{@item.count_steps ?? 0}}
         </a></td>
+        <td>
+          <check if="{{is_null(@newestStep)}}">
+            <true>
+              {{@lng.interested.list.noSteps}}
+            </true>
+            <false>
+              <a href="{{@BASE}}{{'showStep', 'id =' . @newestStep._id | alias}}">
+                {{@newestStep.stepTypeId.name . (is_null(@newestStep.comment) ? '' : ' (' . h::shortenString(@newestStep.comment, 50) . ')') | esc}}
+              </a>
+            </false>
+          </check>
+        </td>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
         </td>

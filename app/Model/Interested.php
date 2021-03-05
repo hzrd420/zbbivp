@@ -246,8 +246,9 @@ class Interested extends Base {
   public function getNewestStep() {
     if ($this->dry() || is_null($this->steps))
       return null;
-    return end($this->steps);
+    return $this->steps[count($this->steps)-1];
   } // getNewestStep()
+
   /**
    * Get list of allowed strings for marital status
    */
