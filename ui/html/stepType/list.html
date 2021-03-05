@@ -16,7 +16,7 @@
               {{@lng.main.notSet}}
             </true>
             <false>
-              {{trim(mb_substr(@item.description, 0, 50)) . (mb_strlen(@item.description) > 50 ? '...' :'') | esc}}
+              {{h::shortenString(@item.description, 50) | esc}}
             </false>
           </check>
         </td>

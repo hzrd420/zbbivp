@@ -241,6 +241,14 @@ class Interested extends Base {
   } // set_trainingCourse2Id()
 
   /**
+   * Get newest step of loaded interest
+   */
+  public function getNewestStep() {
+    if ($this->dry() || is_null($this->steps))
+      return null;
+    return end($this->steps);
+  } // getNewestStep()
+  /**
    * Get list of allowed strings for marital status
    */
   public function getMaritalStatusList() {

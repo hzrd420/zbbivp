@@ -18,7 +18,7 @@
               {{@lng.main.notSet}}
             </true>
             <false>
-              {{trim(mb_substr(@item.comment, 0, 50)) . (mb_strlen(@item.comment) > 50 ? '...' :'') | esc}}
+              {{h::shortenString(@item.comment, 50) | esc}}
             </false>
           </check>
         </td>
