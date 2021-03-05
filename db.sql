@@ -70,3 +70,11 @@ CREATE OR REPLACE TABLE `step` (
   FOREIGN KEY(`stepTypeId`) REFERENCES `stepType`(`id`) ON DELETE CASCADE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
+
+ALTER TABLE interested ADD COLUMN `lastGraduation` VARCHAR(200) NOT NULL;
+ALTER TABLE interested ADD COLUMN `graduationYear` INT;
+ALTER TABLE interested ADD COLUMN `lastSchool` VARCHAR(200) NOT NULL;
+ALTER TABLE interested ADD COLUMN `schoolFrom` DATE;
+ALTER TABLE interested ADD COLUMN `schoolTo` DATE;
+ALTER TABLE interested ADD COLUMN `hasBoardingSchoolExperience` BOOLEAN DEFAULT false NOT NULL;
+ALTER TABLE interested ADD COLUMN `germanLevel` CHAR(2) NOT NULL;

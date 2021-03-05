@@ -29,6 +29,35 @@
   <p>{{@lng.interested.fields.phoneLegalRepresentative}}: {{@page.interested.phoneLegalRepresentative | esc}}</p>
 </check>
 
+<h2>{{@lng.interested.sections.education}}</h2>
+<p>{{@lng.interested.fields.lastGraduation}}: {{@page.interested.lastGraduation | esc}}</p>
+<p>{{@lng.interested.fields.graduationYear}}: {{@page.interested.graduationYear ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.lastSchool}}: {{@page.interested.lastSchool| esc}}</p>
+<p>
+  {{@lng.interested.fields.schoolFrom}}: 
+  <check if="{{is_null(@page.interested.schoolFrom)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.schoolFrom) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>
+  {{@lng.interested.fields.schoolTo}}: 
+  <check if="{{is_null(@page.interested.schoolTo)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.schoolTo) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.interested.fields.hasBoardingSchoolExperience}}: {{@page.interested.hasBoardingSchoolExperience ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.interested.fields.germanLevel}}: {{@page.interested.germanLevel | esc}}</p>
+
 <h2>{{@lng.interested.sections.training}}</h2>
 <p>{{@lng.interested.fields.trainingCourse1}}: {{@page.interested.trainingCourse1Id.name | esc}}</p>
 <check if="{{!is_null(@page.interested.trainingCourse2Id)}}">

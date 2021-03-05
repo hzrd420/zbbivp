@@ -29,6 +29,13 @@ class Interested extends Base {
   public const EMAIL_MAX_LENGTH = 200;
   public const EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH = 1;
   public const EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH = 200;
+  public const LAST_GRADUATION_MIN_LENGTH = 1;
+  public const LAST_GRADUATION_MAX_LENGTH = 200;
+  public const LAST_SCHOOL_MIN_LENGTH = 1;
+  public const LAST_SCHOOL_MAX_LENGTH = 200;
+  public const GERMAN_LEVEL = [
+    'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'
+  ];
 
   protected $fieldConf = [
     'firstName' => [
@@ -142,6 +149,56 @@ class Interested extends Base {
       'filter' => 'trim',
       'validate' => 'phone_number|max_len,' . self::PHONE_MAX_LENGTH
     ],
+    'lastGraduation' => [
+      'type' => 'varchar(' . self::LAST_GRADUATION_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'nullable' => false,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'validate' => 'required|min_len,' . self::LAST_GRADUATION_MIN_LENGTH . '|max_len,' . self::LAST_GRADUATION_MAX_LENGTH
+    ],
+    'graduationYear' => [
+      'type' => \DB\SQL\Schema::DT_INT,
+      'accepted' => true,
+      'filter' => 'optionalInt,true',
+      'validate' => 'integer'
+    ],
+    'lastSchool' => [
+      'type' => 'varchar(' . self::LAST_SCHOOL_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'nullable' => false,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'validate' => 'required|min_len,' . self::LAST_SCHOOL_MIN_LENGTH . '|max_len,' . self::LAST_SCHOOL_MAX_LENGTH
+    ],
+    'schoolFrom' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
+    ],
+    'schoolTo' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
+    ],
+    'hasBoardingSchoolExperience' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'germanLevel' => [
+      'type' => 'char(2)',
+      'passThrough' => true,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'item' => self::GERMAN_LEVEL
+    ],
     'trainingCourse1Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',
       'nullable' => false,
@@ -189,4 +246,11 @@ class Interested extends Base {
   public function getMaritalStatusList() {
     return self::MARITAL_STATUS;
   } // getMaritalStatusList()
+
+  /**
+   * Get list of allowed strings for marital status
+   */
+  public function getGermanLevelList() {
+    return self::GERMAN_LEVEL;
+  } // getGermanLevelList()
 } // class

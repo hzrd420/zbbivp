@@ -69,6 +69,34 @@ class Interested extends Resource {
     // Has childs:
     if (array_key_exists('hasChilds', $opts))
       $filters[] = ['hasChilds = ?', $opts['hasChilds'] === 'true' ? true : false];
+
+    // Last Graduation:
+    if (array_key_exists('lastGraduation', $opts))
+      $filters[] = ['lastGraduation LIKE ?', '%' . $opts['lastGraduation'] . '%'];
+
+    // Graduation year:
+    if (array_key_exists('graduationYear', $opts))
+      $filters[] = ['graduationYear = ?', $opts['graduationYear']];
+
+    // Last school:
+    if (array_key_exists('lastSchool', $opts))
+      $filters[] = ['lastSchool LIKE ?', '%' . $opts['lastSchool'] . '%'];
+
+    // School from:
+    if (array_key_exists('schoolFrom', $opts))
+      $filters[] = ['schoolFrom = ?', $opts['schoolFrom']];
+
+    // School to:
+    if (array_key_exists('schoolTo', $opts))
+      $filters[] = ['schoolTo = ?', $opts['schoolTo']];
+
+    // Has boarding school experience:
+    if (array_key_exists('hasBoardingSchoolExperience', $opts))
+      $filters[] = ['hasBoardingSchoolExperience = ?', $opts['hasBoardingSchoolExperience'] === 'true'];
+
+    // German level:
+    if (array_key_exists('germanLevel', $opts))
+      $filters[] = ['germanLevel = ?', $opts['germanLevel']];
     return $filters;
   } // getFilters()
 
@@ -85,5 +113,7 @@ class Interested extends Resource {
     $f3->set('page.trainingCourseList', $list->find());
     // Load marital status list:
     $f3->set('page.maritalStatusList', $this->model->getMaritalStatusList());
+    // Load german level list:
+    $f3->set('page.germanLevelList', $this->model->getGermanLevelList());
   } // loadLists()
 } // class

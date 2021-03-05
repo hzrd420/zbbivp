@@ -56,6 +56,45 @@
 </details>
 
 <details>
+  <summary>{{@lng.interested.sections.education}}</summary>
+  <p><label for="filter_lastGraduation">{{@lng.interested.fields.lastGraduation}}</label>
+  <input type="text" name="filter_lastGraduation" id="filter_lastGraduation" value="{{@@REQUEST.filter_lastGraduation}}"></p>
+
+  <p><label for="filter_graduationYear">{{@lng.interested.fields.graduationYear}}</label>
+  <input type="number" name="filter_graduationYear" id="filter_graduationYear" value="{{@@REQUEST.filter_graduationYear ?? ''}}"></p>
+
+  <p><label for="filter_lastSchool">{{@lng.interested.fields.lastSchool}}</label>
+  <input type="text" name="filter_lastSchool" id="filter_lastSchool" value="{{@@REQUEST.filter_lastSchool}}"></p>
+
+  <p><label for="filter_schoolFrom">{{@lng.interested.fields.schoolFrom}}</label>
+  <input type="date" name="filter_schoolFrom" id="filter_schoolFrom" 
+  <check if="{{isset(@REQUEST.filter_schoolFrom) && !empty(@REQUEST.filter_schoolFrom)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_schoolFrom) | format}}"
+  </check>></p>
+
+  <p><label for="filter_schoolTo">{{@lng.interested.fields.schoolTo}}</label>
+  <input type="date" name="filter_schoolTo" id="filter_schoolTo" 
+  <check if="{{isset(@REQUEST.filter_schoolTo) && !empty(@REQUEST.filter_schoolTo)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_schoolTo) | format}}"
+  </check>></p>
+
+  <p><label for="filter_hasBoardingSchoolExperience">{{@lng.interested.fields.hasBoardingSchoolExperience}}</label>
+  <select name="filter_hasBoardingSchoolExperience" id="filter_hasBoardingSchoolExperience">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_hasBoardingSchoolExperience === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_hasBoardingSchoolExperience === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_germanLevel">{{@lng.interested.fields.germanLevel}}</label>
+    <select name="filter_germanLevel" id="filter_germanLevel">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.germanLevelList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+      </repeat>
+    </select></p>
+</details>
+
+<details>
   <summary>{{@lng.interested.sections.training}}</summary>
   <p><label for="filter_trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
     <select name="filter_trainingCourse1Id" id="filter_trainingCourse1Id">

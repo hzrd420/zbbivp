@@ -84,6 +84,45 @@
   <input type="text" name="phoneLegalRepresentative" id="phoneLegalRepresentative" value="{{@@POST.phoneLegalRepresentative}}"
     minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
 
+  <h2>{{@lng.interested.sections.education}}</h2>
+  <p><label for="lastGraduation">{{@lng.interested.fields.lastGraduation}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.LAST_GRADUATION_MIN_LENGTH, @page.modelConsts.LAST_GRADUATION_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="lastGraduation" id="lastGraduation" value="{{@@POST.lastGraduation}}"
+    minlength="{{@page.modelConsts.LAST_GRADUATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_GRADUATION_MAX_LENGTH}}"></p>
+
+  <p><label for="graduationYear">{{@lng.interested.fields.graduationYear}}</label>
+  <input type="number" name="graduationYear" id="graduationYear" value="{{@@POST.graduationYear ?? ''}}"></p>
+
+  <p><label for="lastSchool">{{@lng.interested.fields.lastSchool}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.LAST_SCHOOL_MIN_LENGTH, @page.modelConsts.LAST_SCHOOL_MAX_LENGTH | format}}
+    </label>
+  <input required type="text" name="lastSchool" id="lastSchool" value="{{@@POST.lastSchool}}"
+    minlength="{{@page.modelConsts.LAST_SCHOOL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_SCHOOL_MAX_LENGTH}}"></p>
+
+  <p><label for="schoolFrom">{{@lng.interested.fields.schoolFrom}}</label>
+  <input type="date" name="schoolFrom" id="schoolFrom" 
+  <check if="{{isset(@POST.schoolFrom)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.schoolFrom) | format,esc}}"
+  </check>></p>
+
+  <p><label for="schoolTo">{{@lng.interested.fields.schoolTo}}</label>
+  <input type="date" name="schoolTo" id="schoolTo" 
+  <check if="{{isset(@POST.schoolTo)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.schoolTo) | format,esc}}"
+  </check>></p>
+
+  <p><label for="hasBoardingSchoolExperience">{{@lng.interested.fields.hasBoardingSchoolExperience}}</label>
+    <input type="checkbox" {{@@POST.hasBoardingSchoolExperience ? 'checked' : ''}} name="hasBoardingSchoolExperience" id="hasBoardingSchoolExperience" value="true">
+  </p>
+
+  <p><label for="germanLevel">{{@lng.interested.fields.germanLevel}}</label>
+    <select required name="germanLevel" id="germanLevel">
+      <repeat group="{{@page.germanLevelList}}" value="{{@item}}">
+        <option {{@@POST.germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+      </repeat>
+    </select></p>
+
   <h2>{{@lng.interested.sections.training}}</h2>
   <p><label for="trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
     <select required name="trainingCourse1Id" id="trainingCourse1Id">
