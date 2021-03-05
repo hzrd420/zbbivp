@@ -57,7 +57,6 @@ CREATE OR REPLACE TABLE `stepType` (
     `id` bigint unsigned AUTO_INCREMENT,
     `name` VARCHAR(200) NOT NULL,
     `description` LONGTEXT,
-    `meansSuccessfulCompletion` BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 

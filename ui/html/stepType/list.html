@@ -2,7 +2,6 @@
   <thead>
     <tr>
       <th>{{@lng.stepType.fields.name}}</th>
-      <th>{{@lng.stepType.fields.meansSuccessfulCompletion}}</th>
       <th>{{@lng.resource.actions}}</th>
     </tr>
   </thead>
@@ -10,7 +9,6 @@
     <repeat group="{{@list}}" value="{{@item}}">
       <tr>
         <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedStepType' : 'showStepType', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
-        <td>{{@item.meansSuccessfulCompletion ? @lng.main.true : @lng.main.false}}</td>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
         </td>

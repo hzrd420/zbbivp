@@ -29,10 +29,6 @@ class StepType extends Resource {
     if (array_key_exists('description', $opts))
       $filters[] = ['description LIKE ?', '%' . $opts['description'] . '%'];
 
-    // Means successful completion:
-    if (array_key_exists('meansSuccessfulCompletion', $opts))
-      $filters[] = ['meansSuccessfulCompletion = ?', $opts['meansSuccessfulCompletion'] === 'true'];
-
     return $filters;
   } // getFilters()
 

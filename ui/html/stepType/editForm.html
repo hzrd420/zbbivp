@@ -9,10 +9,6 @@
   <label for="description">{{@lng.stepType.fields.description}}</label>
   <textarea name="description" id="description">{{@@POST.description}}</textarea>
 
-  <p><label for="meansSuccessfulCompletion">{{@lng.stepType.fields.meansSuccessfulCompletion}}</label>
-    <input type="checkbox" {{@@POST.meansSuccessfulCompletion ? 'checked' : ''}} name="meansSuccessfulCompletion" id="meansSuccessfulCompletion" value="true">
-  </p>
-
   <input type="hidden" name="csrf" value="{{@CSRF}}">
   <button accesskey="s">{{@lng.stepType.edit.save}}</button>
 </form>

@@ -23,12 +23,6 @@ class StepType extends Base {
       'accepted' => true,
       'filter' => 'trim'
     ],
-    'meansSuccessfulCompletion' => [
-      'type' => \DB\SQL\Schema::DT_BOOLEAN,
-      'default' => false,
-      'nullable' => false,
-      'accepted' => true
-    ],
     'steps' => [
       'has-many' => ['\Model\Step', 'stepTypeId']
     ]

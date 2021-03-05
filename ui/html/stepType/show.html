@@ -2,8 +2,6 @@
 <include href="{{'html/snippets/actions.html'}}" with="item={{@page.stepType}}" />
 
 <p>{{@lng.stepType.fields.name}}: {{@page.stepType.name | esc}}</p>
-<p>{{@lng.stepType.fields.meansSuccessfulCompletion}}: {{@page.stepType.meansSuccessfulCompletion ? @lng.main.true : @lng.main.false}}</p>
-
 <check if="{{!is_null(@page.stepType.description)}}">
   <h2>{{@lng.stepType.fields.description}}</h2>
   <pre>{{@page.stepType.description | esc}}</pre>
