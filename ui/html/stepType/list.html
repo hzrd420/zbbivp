@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>{{@lng.stepType.fields.name}}</th>
+      <th>{{@lng.stepType.fields.description}}</th>
       <th>{{@lng.resource.actions}}</th>
     </tr>
   </thead>
@@ -9,6 +10,16 @@
     <repeat group="{{@list}}" value="{{@item}}">
       <tr>
         <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedStepType' : 'showStepType', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
+        <td>
+          <check if="{{is_null(@item.description)}}">
+            <true>
+              {{@lng.main.notSet}}
+            </true>
+            <false>
+              {{trim(mb_substr(@item.description, 0, 50)) . (mb_strlen(@item.description) > 50 ? '...' :'') | esc}}
+            </false>
+          </check>
+        </td>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
         </td>
