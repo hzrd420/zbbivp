@@ -36,6 +36,13 @@ class Interested extends Base {
   public const GERMAN_LEVEL = [
     'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'
   ];
+  public const DEGREE_OF_VISUAL_IMPAIRMENT = [
+    1, 2, 5
+  ];
+  public const OTHER_DISABILITY = [
+    'K', 'P'
+  ];
+
 
   protected $fieldConf = [
     'firstName' => [
@@ -194,10 +201,42 @@ class Interested extends Base {
     'germanLevel' => [
       'type' => 'char(2)',
       'passThrough' => true,
+      'nullable' => false,
       'accepted' => true,
       'necessaryPost' => true,
       'filter' => 'trim',
       'item' => self::GERMAN_LEVEL
+    ],
+    'degreeOfVisualImpairment' => [
+      'type' => \DB\SQL\Schema::DT_INT,
+      'nullable' => false,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'item' => self::DEGREE_OF_VISUAL_IMPAIRMENT
+    ],
+    'otherDisability' => [
+      'type' => 'char(1)',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'item' => self::OTHER_DISABILITY
+    ],
+    'requiredAccessibilityTools' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
+    'handicappedIdAvailable' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'medicalRemarks' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
     ],
     'trainingCourse1Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',
@@ -257,9 +296,23 @@ class Interested extends Base {
   } // getMaritalStatusList()
 
   /**
-   * Get list of allowed strings for marital status
+   * Get list of allowed strings for the german level
    */
   public function getGermanLevelList() {
     return self::GERMAN_LEVEL;
   } // getGermanLevelList()
+
+  /**
+   * Get list of allowed ints for degree of visual impairment
+   */
+  public function getDegreeOfVisualImpairmentList() {
+    return self::DEGREE_OF_VISUAL_IMPAIRMENT;
+  } // getDegreeOfVisualImpairmentList()
+
+  /**
+   * Get list of allowed strings for other disability
+   */
+  public function getOtherDisabilityList() {
+    return self::OTHER_DISABILITY;
+  } // getOtherDisabilityList()
 } // class

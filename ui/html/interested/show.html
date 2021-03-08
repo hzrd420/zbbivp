@@ -58,6 +58,26 @@
 <p>{{@lng.interested.fields.hasBoardingSchoolExperience}}: {{@page.interested.hasBoardingSchoolExperience ? @lng.main.true : @lng.main.false}}</p>
 <p>{{@lng.interested.fields.germanLevel}}: {{@page.interested.germanLevel | esc}}</p>
 
+<h2>{{@lng.interested.sections.medicalData}}</h2>
+<p>{{@lng.interested.fields.degreeOfVisualImpairment}}: {{'{0} ({1})', @page.interested.degreeOfVisualImpairment, @lng.interested.degreeOfVisualImpairment[@page.interested.degreeOfVisualImpairment] | format,esc}}</p>
+<p>{{@lng.interested.fields.otherDisability}}: 
+  <check if="{{is_null(@page.interested.otherDisability)}}">
+    <true>
+      {{@lng.interested.otherDisability.none}}
+    </true>
+    <false>
+      {{'{0} ({1})', @page.interested.otherDisability, @lng.interested.otherDisability[@page.interested.otherDisability] | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.interested.fields.handicappedIdAvailable}}: {{@page.interested.handicappedIdAvailable ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.interested.fields.requiredAccessibilityTools}}</h3>
+<pre>{{@page.interested.requiredAccessibilityTools ?? @lng.main.notSet | esc}}</pre>
+
+<h3>{{@lng.interested.fields.medicalRemarks}}</h3>
+<pre>{{@page.interested.medicalRemarks ?? @lng.main.notSet | esc}}</pre>
+
 <h2>{{@lng.interested.sections.training}}</h2>
 <p>{{@lng.interested.fields.trainingCourse1}}: {{@page.interested.trainingCourse1Id.name | esc}}</p>
 <check if="{{!is_null(@page.interested.trainingCourse2Id)}}">

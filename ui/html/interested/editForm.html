@@ -123,6 +123,32 @@
       </repeat>
     </select></p>
 
+<h2>{{@lng.interested.sections.medicalData}}</h2>
+  <p><label for="degreeOfVisualImpairment">{{@lng.interested.fields.degreeOfVisualImpairment}}</label>
+    <select required name="degreeOfVisualImpairment" id="degreeOfVisualImpairment">
+      <repeat group="{{@page.degreeOfVisualImpairmentList}}" value="{{@item}}">
+      <option {{@@POST.degreeOfVisualImpairment === @item ? 'selected' : ''}} value="{{@item}}">{{'{0} ({1})', @item, @lng.interested.degreeOfVisualImpairment[@item] | format}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="otherDisability">{{@lng.interested.fields.otherDisability}}</label>
+    <select name="otherDisability" id="otherDisability">
+      <option {{is_null(@@POST.otherDisability) ? 'selected' : ''}} value="">{{@lng.interested.otherDisability.none}}</option>
+      <repeat group="{{@page.otherDisabilityList}}" value="{{@item}}">
+      <option {{@@POST.otherDisability === @item ? 'selected' : ''}} value="{{@item}}">{{'{0} ({1})', @item, @lng.interested.otherDisability[@item] | format}}</option>
+      </repeat>
+    </select></p>
+
+  <label for="requiredAccessibilityTools">{{@lng.interested.fields.requiredAccessibilityTools}}</label>
+  <textarea name="requiredAccessibilityTools" id="requiredAccessibilityTools">{{@@POST.requiredAccessibilityTools}}</textarea>
+
+  <p><label for="handicappedIdAvailable">{{@lng.interested.fields.handicappedIdAvailable}}</label>
+    <input type="checkbox" {{@@POST.handicappedIdAvailable ? 'checked' : ''}} name="handicappedIdAvailable" id="handicappedIdAvailable" value="true">
+  </p>
+
+  <label for="medicalRemarks">{{@lng.interested.fields.medicalRemarks}}</label>
+  <textarea name="medicalRemarks" id="medicalRemarks">{{@@POST.medicalRemarks}}</textarea>
+
   <h2>{{@lng.interested.sections.training}}</h2>
   <p><label for="trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
     <select required name="trainingCourse1Id" id="trainingCourse1Id">

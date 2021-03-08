@@ -68,7 +68,7 @@ class Interested extends Resource {
 
     // Has childs:
     if (array_key_exists('hasChilds', $opts))
-      $filters[] = ['hasChilds = ?', $opts['hasChilds'] === 'true' ? true : false];
+      $filters[] = ['hasChilds = ?', $opts['hasChilds'] === 'true'];
 
     // Last Graduation:
     if (array_key_exists('lastGraduation', $opts))
@@ -97,6 +97,26 @@ class Interested extends Resource {
     // German level:
     if (array_key_exists('germanLevel', $opts))
       $filters[] = ['germanLevel = ?', $opts['germanLevel']];
+
+    // Degree of visual impairment:
+    if (array_key_exists('degreeOfVisualImpairment', $opts))
+      $filters[] = ['degreeOfVisualImpairment = ?', $opts['degreeOfVisualImpairment']];
+
+    // Other disability:
+    if (array_key_exists('otherDisability', $opts))
+      $filters[] = ['otherDisability = ?', $opts['otherDisability']];
+    // Handycap ID available:
+    if (array_key_exists('handicappedIdAvailable', $opts))
+      $filters[] = ['handicappedIdAvailable = ?', $opts['handicappedIdAvailable'] === 'true'];
+
+    // Required accessibility tools:
+    if (array_key_exists('requiredAccessibilityTools', $opts))
+      $filters[] = ['requiredAccessibilityTools LIKE ?', '%' . $opts['requiredAccessibilityTools' . '%']];
+
+    // Medical remarks:
+    if (array_key_exists('medicalRemarks', $opts))
+      $filters[] = ['medicalRemarks LIKE ?', '%' . $opts['medicalRemarks' . '%']];
+
     return $filters;
   } // getFilters()
 
@@ -115,5 +135,9 @@ class Interested extends Resource {
     $f3->set('page.maritalStatusList', $this->model->getMaritalStatusList());
     // Load german level list:
     $f3->set('page.germanLevelList', $this->model->getGermanLevelList());
+    // Load visual impairment list:
+    $f3->set('page.degreeOfVisualImpairmentList', $this->model->getDegreeOfVisualImpairmentList());
+    // Load other disability list:
+    $f3->set('page.otherDisabilityList', $this->model->getOtherDisabilityList());
   } // loadLists()
 } // class
