@@ -128,6 +128,13 @@
 
 <details>
   <summary>{{@lng.interested.sections.training}}</summary>
+  <p><label for="filter_retraining">{{@lng.interested.fields.retraining}}</label>
+  <select name="filter_retraining" id="filter_retraining">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_retraining === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_retraining === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
   <p><label for="filter_trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
     <select name="filter_trainingCourse1Id" id="filter_trainingCourse1Id">
       <option value="">{{@lng.main.noChoice}}</option>
@@ -143,4 +150,7 @@
         <option {{@@REQUEST.filter_trainingCourse2Id == @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
       </repeat>
     </select></p>
+
+  <p><label for="filter_electives">{{@lng.interested.fields.electives}}</label>
+  <input type="text" name="filter_electives" id="filter_electives" value="{{@@REQUEST.filter_electives}}"></p>
 </details>

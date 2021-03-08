@@ -111,11 +111,19 @@ class Interested extends Resource {
 
     // Required accessibility tools:
     if (array_key_exists('requiredAccessibilityTools', $opts))
-      $filters[] = ['requiredAccessibilityTools LIKE ?', '%' . $opts['requiredAccessibilityTools' . '%']];
+      $filters[] = ['requiredAccessibilityTools LIKE ?', '%' . $opts['requiredAccessibilityTools'] . '%'];
 
     // Medical remarks:
     if (array_key_exists('medicalRemarks', $opts))
-      $filters[] = ['medicalRemarks LIKE ?', '%' . $opts['medicalRemarks' . '%']];
+      $filters[] = ['medicalRemarks LIKE ?', '%' . $opts['medicalRemarks'] . '%'];
+
+    // Retraining:
+    if (array_key_exists('retraining', $opts))
+      $filters[] = ['retraining = ?', $opts['retraining'] === 'true'];
+
+    // Electives:
+    if (array_key_exists('electives', $opts))
+      $filters[] = ['electives LIKE ?', '%' . $opts['electives'] . '%'];
 
     return $filters;
   } // getFilters()

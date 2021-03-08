@@ -150,6 +150,10 @@
   <textarea name="medicalRemarks" id="medicalRemarks">{{@@POST.medicalRemarks}}</textarea>
 
   <h2>{{@lng.interested.sections.training}}</h2>
+  <p><label for="retraining">{{@lng.interested.fields.retraining}}</label>
+    <input type="checkbox" {{@@POST.retraining ? 'checked' : ''}} name="retraining" id="retraining" value="true">
+  </p>
+
   <p><label for="trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
     <select required name="trainingCourse1Id" id="trainingCourse1Id">
       <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
@@ -164,6 +168,9 @@
         <option {{@@POST.trainingCourse2Id == @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
       </repeat>
     </select></p>
+
+  <label for="electives">{{@lng.interested.fields.electives}}</label>
+  <textarea name="electives" id="electives">{{@@POST.electives}}</textarea>
 
   <input type="hidden" name="csrf" value="{{@CSRF}}">
   <button accesskey="s">{{@lng.interested.edit.save}}</button>

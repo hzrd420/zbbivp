@@ -32,8 +32,6 @@ CREATE OR REPLACE TABLE `trainingCourse` (
 
 CREATE OR REPLACE TABLE `interested` (
     `id` bigint unsigned AUTO_INCREMENT,
-    `trainingCourse1Id` bigint unsigned NOT NULL,
-    `trainingCourse2Id` bigint unsigned,
     `firstName` VARCHAR(200) NOT NULL,
     `surname` VARCHAR(200) NOT NULL,
     `birthDate` DATE NOT NULL,
@@ -60,6 +58,11 @@ CREATE OR REPLACE TABLE `interested` (
     `requiredAccessibilityTools` LONGTEXT,
     `handicappedIdAvailable` BOOLEAN DEFAULT false NOT NULL,
     `medicalRemarks` LONGTEXT,
+
+    `retraining` BOOLEAN NOT NULL DEFAULT false,
+    `trainingCourse1Id` bigint unsigned NOT NULL,
+    `trainingCourse2Id` bigint unsigned,
+    `electives` LONGTEXT,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`trainingCourse1Id`) REFERENCES `trainingCourse` (`id`)  ON DELETE CASCADE,
     FOREIGN KEY (`trainingCourse2Id`) REFERENCES `trainingCourse` (`id`) ON DELETE CASCADE

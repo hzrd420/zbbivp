@@ -238,6 +238,17 @@ class Interested extends Base {
       'accepted' => true,
       'filter' => 'trim'
     ],
+    'retraining' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'electives' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
     'trainingCourse1Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',
       'nullable' => false,

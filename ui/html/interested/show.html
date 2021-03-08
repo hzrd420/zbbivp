@@ -79,10 +79,14 @@
 <pre>{{@page.interested.medicalRemarks ?? @lng.main.notSet | esc}}</pre>
 
 <h2>{{@lng.interested.sections.training}}</h2>
+<p>{{@lng.interested.fields.retraining}}: {{@page.interested.retraining ? @lng.main.true : @lng.main.false}}</p>
 <p>{{@lng.interested.fields.trainingCourse1}}: {{@page.interested.trainingCourse1Id.name | esc}}</p>
 <check if="{{!is_null(@page.interested.trainingCourse2Id)}}">
   <p>{{@lng.interested.fields.trainingCourse2}}: {{@page.interested.trainingCourse2Id.name | esc}}</p>
 </check>
+
+<h3>{{@lng.interested.fields.electives}}</h3>
+<pre>{{@page.interested.electives ?? @lng.main.notSet | esc}}</pre>
 
 <h2>{{@lng.interested.show.steps}}</h2>
 <check if="{{is_null(@page.interested.count_steps)}}">
