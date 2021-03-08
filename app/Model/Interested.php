@@ -287,32 +287,4 @@ class Interested extends Base {
       return null;
     return $this->steps[count($this->steps)-1];
   } // getNewestStep()
-
-  /**
-   * Get list of allowed strings for marital status
-   */
-  public function getMaritalStatusList() {
-    return self::MARITAL_STATUS;
-  } // getMaritalStatusList()
-
-  /**
-   * Get list of allowed strings for the german level
-   */
-  public function getGermanLevelList() {
-    return self::GERMAN_LEVEL;
-  } // getGermanLevelList()
-
-  /**
-   * Get list of allowed ints for degree of visual impairment
-   */
-  public function getDegreeOfVisualImpairmentList() {
-    return self::DEGREE_OF_VISUAL_IMPAIRMENT;
-  } // getDegreeOfVisualImpairmentList()
-
-  /**
-   * Get list of allowed strings for other disability
-   */
-  public function getOtherDisabilityList() {
-    return self::OTHER_DISABILITY;
-  } // getOtherDisabilityList()
 } // class

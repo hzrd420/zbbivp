@@ -132,12 +132,12 @@ class Interested extends Resource {
     $list = $this->model->rel('trainingCourse1Id');
     $f3->set('page.trainingCourseList', $list->find());
     // Load marital status list:
-    $f3->set('page.maritalStatusList', $this->model->getMaritalStatusList());
+    $f3->set('page.maritalStatusList', $this->model::MARITAL_STATUS);
     // Load german level list:
-    $f3->set('page.germanLevelList', $this->model->getGermanLevelList());
+    $f3->set('page.germanLevelList', $this->model::GERMAN_LEVEL);
     // Load visual impairment list:
-    $f3->set('page.degreeOfVisualImpairmentList', $this->model->getDegreeOfVisualImpairmentList());
+    $f3->set('page.degreeOfVisualImpairmentList', $this->model::DEGREE_OF_VISUAL_IMPAIRMENT);
     // Load other disability list:
-    $f3->set('page.otherDisabilityList', $this->model->getOtherDisabilityList());
+    $f3->set('page.otherDisabilityList', $this->model::OTHER_DISABILITY);
   } // loadLists()
 } // class
