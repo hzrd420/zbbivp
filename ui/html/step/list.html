@@ -12,7 +12,7 @@
       <tr>
         <th><a href="{{@BASE}}{{'showStep', 'id =' . @item._id | alias}}">{{@count}}</a></th>
         <td>{{@item.stepTypeId.name | esc}}</td>
-        <td>{{h::shortenString(@item.comment, 50) ?? @lng.main.notSet | esc}}</td>
+        <td>{{H::shortenString(@item.comment, 50) ?? @lng.main.notSet | esc}}</td>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
         </td>

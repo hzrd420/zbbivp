@@ -43,7 +43,7 @@
             </true>
             <false>
               <a href="{{@BASE}}{{'showStep', 'id =' . @newestStep._id | alias}}">
-                {{@newestStep.stepTypeId.name . (is_null(@newestStep.comment) ? '' : ' (' . h::shortenString(@newestStep.comment, 50) . ')') | esc}}
+                {{@newestStep.stepTypeId.name . (is_null(@newestStep.comment) ? '' : ' (' . H::shortenString(@newestStep.comment, 50) . ')') | esc}}
               </a>
             </false>
           </check>
