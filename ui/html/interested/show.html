@@ -78,6 +78,16 @@
 <h3>{{@lng.interested.fields.medicalRemarks}}</h3>
 <pre>{{@page.interested.medicalRemarks ?? @lng.main.notSet | esc}}</pre>
 
+<h2>{{@lng.interested.sections.otherInformation}}</h2>
+<p>{{@lng.interested.fields.pensionInsuranceNumber}}: {{@page.interested.pensionInsuranceNumber ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.taxID}}: {{@page.interested.taxID ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.taxClass}}: {{@page.interested.taxClass ?? @lng.main.notSet}}</p>
+<p>{{@lng.interested.fields.denomination}}: {{@lng.interested.denomination[@page.interested.denomination] ?? @lng.interested.denomination.none}}</p>
+<p>{{@lng.interested.fields.healthInsuranceName}}: {{@page.interested.healthInsuranceName ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.healthInsuranceNumber}}: {{@page.interested.healthInsuranceNumber ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.membershipCertificateForHealthInsuranceAvailable}}: {{@page.interested.membershipCertificateForHealthInsuranceAvailable ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.interested.fields.paymentOfSVContributions}}: {{@lng.interested.paymentOfSVContributions[@page.interested.paymentOfSVContributions] ?? @lng.interested.paymentOfSVContributions.none}}</p>
+
 <h2>{{@lng.interested.sections.training}}</h2>
 <p>{{@lng.interested.fields.retraining}}: {{@page.interested.retraining ? @lng.main.true : @lng.main.false}}</p>
 <p>{{@lng.interested.fields.trainingCourse1}}: {{@page.interested.trainingCourse1Id.name | esc}}</p>

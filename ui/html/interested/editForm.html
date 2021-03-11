@@ -149,6 +149,59 @@
   <label for="medicalRemarks">{{@lng.interested.fields.medicalRemarks}}</label>
   <textarea name="medicalRemarks" id="medicalRemarks">{{@@POST.medicalRemarks}}</textarea>
 
+  <h2>{{@lng.interested.sections.otherInformation}}</h2>
+  <p><label for="pensionInsuranceNumber">{{@lng.interested.fields.pensionInsuranceNumber}}
+    {{@lng.resource.exactLength, @page.modelConsts.PENSION_INSURANCE_NUMBER_LENGTH | format}}
+    </label>
+  <input type="text" name="pensionInsuranceNumber" id="pensionInsuranceNumber" value="{{@@POST.pensionInsuranceNumber}}"
+    minlength="{{@page.modelConsts.PENSION_INSURANCE_NUMBER_LENGTH}}" maxlength="{{@page.modelConsts.PENSION_INSURANCE_NUMBER_LENGTH}}"></p>
+
+  <p><label for="taxID">{{@lng.interested.fields.taxID}}
+    {{@lng.resource.exactLength, @page.modelConsts.TAX_ID_LENGTH | format}}
+    </label>
+  <input type="text" name="taxID" id="taxID" value="{{@@POST.taxID}}"
+    minlength="{{@page.modelConsts.TAX_ID_LENGTH}}" maxlength="{{@page.modelConsts.TAX_ID_LENGTH}}"></p>
+
+  <p><label for="taxClass">{{@lng.interested.fields.taxClass}}</label>
+    <select name="taxClass" id="taxClass">
+      <option {{is_null(@@POST.taxClass) ? 'selected' : ''}} value="">{{@lng.main.notSet}}</option>
+      <repeat group="{{@page.taxClassList}}" value="{{@item}}">
+      <option {{@@POST.taxClass === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="denomination">{{@lng.interested.fields.denomination}}</label>
+    <select name="denomination" id="denomination">
+      <option {{is_null(@@POST.denomination) ? 'selected' : ''}} value="">{{@lng.interested.denomination.none}}</option>
+      <repeat group="{{@page.denominationList}}" value="{{@item}}">
+      <option {{@@POST.denomination=== @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.denomination[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="healthInsuranceName">{{@lng.interested.fields.healthInsuranceName}}
+    {{@lng.resource.betweenChars, @page.modelConsts.HEALTH_INSURANCE_NAME_MIN_LENGTH, @page.modelConsts.HEALTH_INSURANCE_NAME_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="healthInsuranceName" id="healthInsuranceName" value="{{@@POST.healthInsuranceName}}"
+    minlength="{{@page.modelConsts.HEALTH_INSURANCE_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.HEALTH_INSURANCE_NAME_MAX_LENGTH}}"></p>
+
+  <p><label for="healthInsuranceNumber">{{@lng.interested.fields.healthInsuranceNumber}}
+    {{@lng.resource.betweenChars, @page.modelConsts.HEALTH_INSURANCE_NUMBER_MIN_LENGTH, @page.modelConsts.HEALTH_INSURANCE_NUMBER_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="healthInsuranceNumber" id="healthInsuranceNumber" value="{{@@POST.healthInsuranceNumber}}"
+    minlength="{{@page.modelConsts.HEALTH_INSURANCE_NUMBER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.HEALTH_INSURANCE_NUMBER_MAX_LENGTH}}"></p>
+
+  <p><label for="membershipCertificateForHealthInsuranceAvailable">{{@lng.interested.fields.membershipCertificateForHealthInsuranceAvailable}}</label>
+    <input type="checkbox" {{@@POST.membershipCertificateForHealthInsuranceAvailable ? 'checked' : ''}} name="membershipCertificateForHealthInsuranceAvailable" id="membershipCertificateForHealthInsuranceAvailable" value="true">
+  </p>
+
+  <p><label for="paymentOfSVContributions">{{@lng.interested.fields.paymentOfSVContributions}}</label>
+    <select name="paymentOfSVContributions" id="paymentOfSVContributions">
+      <option {{is_null(@@POST.paymentOfSVContributions) ? 'selected' : ''}} value="">{{@lng.interested.paymentOfSVContributions.none}}</option>
+      <repeat group="{{@page.paymentOfSVContributionsList}}" value="{{@item}}">
+      <option {{@@POST.paymentOfSVContributions=== @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.paymentOfSVContributions[@item]}}</option>
+      </repeat>
+    </select></p>
+
   <h2>{{@lng.interested.sections.training}}</h2>
   <p><label for="retraining">{{@lng.interested.fields.retraining}}</label>
     <input type="checkbox" {{@@POST.retraining ? 'checked' : ''}} name="retraining" id="retraining" value="true">

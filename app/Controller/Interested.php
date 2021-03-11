@@ -125,6 +125,38 @@ class Interested extends Resource {
     if (array_key_exists('electives', $opts))
       $filters[] = ['electives LIKE ?', '%' . $opts['electives'] . '%'];
 
+    // Pension insurance number:
+    if (array_key_exists('pensionInsuranceNumber', $opts))
+      $filters[] = ['pensionInsuranceNumber LIKE ?', '%' . $opts['pensionInsuranceNumber'] . '%'];
+
+    // Tax ID:
+    if (array_key_exists('taxID', $opts))
+      $filters[] = ['taxID LIKE ?', '%' . $opts['taxID'] . '%'];
+
+    // Tax class:
+    if (array_key_exists('taxClass', $opts))
+      $filters[] = ['taxClass = ?', $opts['taxClass'] === 'none' ? null : $opts['taxClass']];
+
+    // Denomination:
+    if (array_key_exists('denomination', $opts))
+      $filters[] = ['denomination = ?', $opts['denomination'] === 'none' ? null : $opts['denomination']];
+
+    // Health insurance name:
+    if (array_key_exists('healthInsuranceName', $opts))
+      $filters[] = ['healthInsuranceName LIKE ?', '%' . $opts['healthInsuranceName'] . '%'];
+
+    // Health insurance number:
+    if (array_key_exists('healthInsuranceNumber', $opts))
+      $filters[] = ['healthInsuranceNumber LIKE ?', '%' . $opts['healthInsuranceNumber'] . '%'];
+
+    // Membership certificate for healt insurance available:
+    if (array_key_exists('membershipCertificateForHealthInsuranceAvailable', $opts))
+      $filters[] = ['membershipCertificateForHealthInsuranceAvailable = ?', $opts['membershipCertificateForHealthInsuranceAvailable'] === 'true'];
+
+    // Payment of SV contributions:
+    if (array_key_exists('paymentOfSVContributions', $opts))
+      $filters[] = ['paymentOfSVContributions = ?', $opts['paymentOfSVContributions'] === 'none' ? null : $opts['paymentOfSVContributions']];
+
     return $filters;
   } // getFilters()
 
@@ -147,5 +179,11 @@ class Interested extends Resource {
     $f3->set('page.degreeOfVisualImpairmentList', $this->model::DEGREE_OF_VISUAL_IMPAIRMENT);
     // Load other disability list:
     $f3->set('page.otherDisabilityList', $this->model::OTHER_DISABILITY);
+    // Load tax class list:
+    $f3->set('page.taxClassList', $this->model::TAX_CLASS);
+    // Load denomination list:
+    $f3->set('page.denominationList', $this->model::DENOMINATION);
+    // Load payment of SV contributions list:
+    $f3->set('page.paymentOfSVContributionsList', $this->model::PAYMENT_OF_SV_CONTRIBUTIONS);
   } // loadLists()
 } // class

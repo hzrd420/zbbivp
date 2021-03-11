@@ -127,6 +127,55 @@
 </details>
 
 <details>
+  <summary>{{@lng.interested.sections.otherInformation}}</summary>
+  <p><label for="filter_pensionInsuranceNumber">{{@lng.interested.fields.pensionInsuranceNumber}}</label>
+  <input type="text" name="filter_pensionInsuranceNumber" id="filter_pensionInsuranceNumber" value="{{@@REQUEST.filter_pensionInsuranceNumber}}"></p>
+
+  <p><label for="filter_taxID">{{@lng.interested.fields.taxID}}</label>
+  <input type="text" name="filter_taxID" id="filter_taxID" value="{{@@REQUEST.filter_taxID}}"></p>
+
+  <p><label for="filter_taxClass">{{@lng.interested.fields.taxClass}}</label>
+    <select name="filter_taxClass" id="filter_taxClass">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_taxClass === 'none' ? 'selected' : ''}} value="none">{{@lng.main.notSet}}</option>
+      <repeat group="{{@page.taxClassList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_taxClass === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="filter_denomination">{{@lng.interested.fields.denomination}}</label>
+    <select name="filter_denomination" id="filter_denomination">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_denomination === 'none' ? 'selected' : ''}} value="none">{{@lng.interested.denomination.none}}</option>
+      <repeat group="{{@page.denominationList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_denomination === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.denomination[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="filter_healthInsuranceName">{{@lng.interested.fields.healthInsuranceName}}</label>
+  <input type="text" name="filter_healthInsuranceName" id="filter_healthInsuranceName" value="{{@@REQUEST.filter_healthInsuranceName}}"></p>
+
+  <p><label for="filter_healthInsuranceNumber">{{@lng.interested.fields.healthInsuranceNumber}}</label>
+  <input type="text" name="filter_healthInsuranceNumber" id="filter_healthInsuranceNumber" value="{{@@REQUEST.filter_healthInsuranceNumber}}"></p>
+
+  <p><label for="filter_membershipCertificateForHealthInsuranceAvailable">{{@lng.interested.fields.membershipCertificateForHealthInsuranceAvailable}}</label>
+  <select name="filter_membershipCertificateForHealthInsuranceAvailable" id="filter_membershipCertificateForHealthInsuranceAvailable">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_membershipCertificateForHealthInsuranceAvailable === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_membershipCertificateForHealthInsuranceAvailable === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_paymentOfSVContributions">{{@lng.interested.fields.paymentOfSVContributions}}</label>
+    <select name="filter_paymentOfSVContributions" id="filter_paymentOfSVContributions">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_paymentOfSVContributions === 'none' ? 'selected' : ''}} value="none">{{@lng.interested.paymentOfSVContributions.none}}</option>
+      <repeat group="{{@page.paymentOfSVContributionsList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_paymentOfSVContributions === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.paymentOfSVContributions[@item]}}</option>
+      </repeat>
+    </select></p>
+</details>
+
+<details>
   <summary>{{@lng.interested.sections.training}}</summary>
   <p><label for="filter_retraining">{{@lng.interested.fields.retraining}}</label>
   <select name="filter_retraining" id="filter_retraining">

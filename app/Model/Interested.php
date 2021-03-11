@@ -42,7 +42,21 @@ class Interested extends Base {
   public const OTHER_DISABILITY = [
     'K', 'P'
   ];
-
+  public const PENSION_INSURANCE_NUMBER_LENGTH = 12;
+  public const TAX_ID_LENGTH = 11;
+  public const TAX_CLASS = [
+    'I', 'II', 'III', 'IV', 'V', 'VI'
+  ];
+  public const DENOMINATION = [
+    'evangelical', 'catholic', 'muslim', 'budgetary', 'jewish'
+  ];
+  public const HEALTH_INSURANCE_NAME_MIN_LENGTH = 1;
+  public const HEALTH_INSURANCE_NAME_MAX_LENGTH = 200;
+  public const HEALTH_INSURANCE_NUMBER_MIN_LENGTH = 1;
+  public const HEALTH_INSURANCE_NUMBER_MAX_LENGTH = 30;
+  public const PAYMENT_OF_SV_CONTRIBUTIONS = [
+    'payer', 'administrationStaff'
+  ];
 
   protected $fieldConf = [
     'firstName' => [
@@ -237,6 +251,61 @@ class Interested extends Base {
       'type' => \DB\SQL\Schema::DT_LONGTEXT,
       'accepted' => true,
       'filter' => 'trim'
+    ],
+    'pensionInsuranceNumber' => [
+      'type' => 'char(' . self::PENSION_INSURANCE_NUMBER_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'exact_len,' . self::PENSION_INSURANCE_NUMBER_LENGTH
+    ],
+    'taxID' => [
+      'type' => 'char(' . self::TAX_ID_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'exact_len,' . self::TAX_ID_LENGTH
+    ],
+    'taxClass' => [
+      'type' => 'char(2)',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'item' => self::TAX_CLASS
+    ],
+    'denomination' => [
+      'type' => 'varchar(50)',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'item' => self::DENOMINATION
+    ],
+    'healthInsuranceName' => [
+      'type' => 'varchar(' . self::HEALTH_INSURANCE_NAME_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::HEALTH_INSURANCE_NAME_MIN_LENGTH . '|max_len,' . self::HEALTH_INSURANCE_NAME_MAX_LENGTH
+    ],
+    'healthInsuranceNumber' => [
+      'type' => 'varchar(' . self::HEALTH_INSURANCE_NUMBER_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::HEALTH_INSURANCE_NUMBER_MIN_LENGTH . '|max_len,' . self::HEALTH_INSURANCE_NUMBER_MAX_LENGTH
+    ],
+    'membershipCertificateForHealthInsuranceAvailable' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'paymentOfSVContributions' => [
+      'type' => 'varchar(50)',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'item' => self::PAYMENT_OF_SV_CONTRIBUTIONS
     ],
     'retraining' => [
       'type' => \DB\SQL\Schema::DT_BOOLEAN,
