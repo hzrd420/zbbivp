@@ -40,6 +40,7 @@
   <p><label for="filter_maritalStatus">{{@lng.interested.fields.maritalStatus}}</label>
     <select name="filter_maritalStatus" id="filter_maritalStatus">
       <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_maritalStatus === 'none' ? 'selected' : ''}} value="none">{{@lng.interested.maritalStatus.none}}</option>
       <repeat group="{{@page.maritalStatusList}}" value="{{@item}}">
         <option {{@@REQUEST.filter_maritalStatus === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.maritalStatus[@item]}}</option>
       </repeat>

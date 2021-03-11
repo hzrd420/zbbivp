@@ -11,7 +11,6 @@ class Interested extends Base {
   public const BIRTH_LOCATION_MIN_LENGTH = 1;
   public const BIRTH_LOCATION_MAX_LENGTH = 200;
   public const MARITAL_STATUS = [
-    'unknown',
     'single',
     'married',
     'divorced',
@@ -123,7 +122,6 @@ class Interested extends Base {
       'type' => 'varchar(100)',
       'passThrough' => true,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
       'item' => self::MARITAL_STATUS
     ],

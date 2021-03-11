@@ -60,7 +60,8 @@
   </p>
 
   <p><label for="maritalStatus">{{@lng.interested.fields.maritalStatus}}</label>
-    <select required name="maritalStatus" id="maritalStatus">
+    <select name="maritalStatus" id="maritalStatus">
+      <option {{is_null(@@POST.maritalStatus) ? 'selected' : ''}} value="">{{@lng.interested.maritalStatus.none}}</option>
       <repeat group="{{@page.maritalStatusList}}" value="{{@item}}">
         <option {{@@POST.maritalStatus === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.maritalStatus[@item]}}</option>
       </repeat>

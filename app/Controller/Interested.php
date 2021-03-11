@@ -50,6 +50,10 @@ class Interested extends Resource {
     if (array_key_exists('birthLocation', $opts))
       $filters[] = ['birthLocation LIKE ?', '%' . $opts['birthLocation'] . '%'];
 
+    // Marital status:
+    if (array_key_exists('maritalStatus', $opts))
+      $filters[] = ['maritalStatus = ?', $opts['maritalStatus'] === 'none' ? null : $opts['maritalStatus']];
+
     // Email:
     if (array_key_exists('email', $opts))
       $filters[] = ['email LIKE ?', '%' . $opts['email'] . '%'];

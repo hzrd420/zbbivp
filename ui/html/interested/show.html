@@ -16,7 +16,7 @@
 <check if="{{!is_null(@page.interested.phonePrivate)}}">
   <p>{{@lng.interested.fields.phonePrivate}}: {{@page.interested.phonePrivate | esc}}</p>
 </check>
-<p>{{@lng.interested.fields.maritalStatus}}: {{@lng.interested.maritalStatus[@page.interested.maritalStatus]}}</p>
+<p>{{@lng.interested.fields.maritalStatus}}: {{@lng.interested.maritalStatus[@page.interested.maritalStatus] ?? @lng.interested.maritalStatus.none}}</p>
 <p>{{@lng.interested.fields.hasChilds}}: {{@page.interested.hasChilds ? @lng.main.true : @lng.main.false}}</p>
 
 <check if="{{!is_null(@page.interested.legalRepresentative)}}">

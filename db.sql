@@ -36,7 +36,7 @@ CREATE OR REPLACE TABLE `interested` (
     `surname` VARCHAR(200) NOT NULL,
     `birthDate` DATE NOT NULL,
     `birthLocation` VARCHAR(200),
-    `maritalStatus` VARCHAR(100) NOT NULL,
+    `maritalStatus` VARCHAR(100),
     `hasChilds` BOOLEAN DEFAULT false NOT NULL,
     `address` VARCHAR(500) NOT NULL,
     `nationality` VARCHAR(100) NOT NULL,
