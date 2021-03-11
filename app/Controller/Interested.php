@@ -7,9 +7,9 @@ namespace Controller;
 class Interested extends Resource {
   protected $resourceName = 'interested';
   protected $uiActions = [
-    ['addStep', 'addStep', ['interestedId' => '_id'], ['isSoftErased' => false]],
-    ['edit', 'editInterested', ['id' => '_id'], ['isSoftErased' => false]],
-    ['delete', 'deleteInterested', ['id' => '_id'], ['isSoftErased' => false]],
+    ['addStep', 'addStep', ['interestedId' => '_id'], []],
+    ['edit', 'editInterested', ['id' => '_id'], []],
+    ['delete', 'deleteInterested', ['id' => '_id'], []],
   ];
   protected $reroute = '@listInterested';
   protected $hasFilter = true;

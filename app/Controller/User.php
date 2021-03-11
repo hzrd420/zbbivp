@@ -7,8 +7,8 @@ namespace Controller;
 class User extends Resource {
   protected $resourceName = 'user';
   protected $uiActions = [
-    ['edit', 'editUser', ['id' => '_id'], ['isSoftErased' => false]],
-    ['delete', 'deleteUser', ['id' => '_id'], ['isSoftErased' => false]]
+    ['edit', 'editUser', ['id' => '_id'], []],
+    ['delete', 'deleteUser', ['id' => '_id'], []]
   ];
   protected $hasFilter = true;
   protected $reroute = '@listUsers';

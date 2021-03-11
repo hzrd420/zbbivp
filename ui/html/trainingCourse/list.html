@@ -8,7 +8,7 @@
   <tbody>
     <repeat group="{{@list}}" value="{{@item}}">
       <tr>
-        <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedTrainingCourse' : 'showTrainingCourse', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
+        <th><a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
         </td>

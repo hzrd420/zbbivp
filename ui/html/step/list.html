@@ -10,7 +10,7 @@
   <tbody>
     <repeat group="{{@list}}" value="{{@item}}" counter="{{@count}}">
       <tr>
-        <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedStep' : 'showStep', 'id =' . @item._id | alias}}">{{@count}}</a></th>
+        <th><a href="{{@BASE}}{{'showStep', 'id =' . @item._id | alias}}">{{@count}}</a></th>
         <td>{{@item.stepTypeId.name | esc}}</td>
         <td>{{h::shortenString(@item.comment, 50) ?? @lng.main.notSet | esc}}</td>
         <td>

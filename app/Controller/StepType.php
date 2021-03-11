@@ -7,8 +7,8 @@ namespace Controller;
 class StepType extends Resource {
   protected $resourceName = 'stepType';
   protected $uiActions = [
-    ['edit', 'editStepType', ['id' => '_id'], ['isSoftErased' => false]],
-    ['delete', 'deleteStepType', ['id' => '_id'], ['isSoftErased' => false]],
+    ['edit', 'editStepType', ['id' => '_id'], []],
+    ['delete', 'deleteStepType', ['id' => '_id'], []],
   ];
   protected $reroute = '@listStepTypes';
   protected $hasFilter = true;

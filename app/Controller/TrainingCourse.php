@@ -7,8 +7,8 @@ namespace Controller;
 class TrainingCourse extends Resource {
   protected $resourceName = 'trainingCourse';
   protected $uiActions = [
-    ['edit', 'editTrainingCourse', ['id' => '_id'], ['isSoftErased' => false]],
-    ['delete', 'deleteTrainingCourse', ['id' => '_id'], ['isSoftErased' => false]],
+    ['edit', 'editTrainingCourse', ['id' => '_id'], []],
+    ['delete', 'deleteTrainingCourse', ['id' => '_id'], []],
   ];
   protected $reroute = '@listTrainingCourses';
   protected $hasFilter = true;

@@ -9,7 +9,7 @@
   <tbody>
     <repeat group="{{@list}}" value="{{@item}}">
       <tr>
-        <th><a href="{{@BASE}}{{@item->isSoftErased() ? 'showSoftErasedStepType' : 'showStepType', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
+        <th><a href="{{@BASE}}{{'showStepType', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
         <td>{{h::shortenString(@item.description, 50) ?? @lng.main.notSet | esc}}</td>
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />

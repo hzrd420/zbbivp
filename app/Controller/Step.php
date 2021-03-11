@@ -7,8 +7,8 @@ namespace Controller;
 class Step extends Resource {
   protected $resourceName = 'step';
   protected $uiActions = [
-    ['edit', 'editStep', ['interestedId' => 'interestedId', 'id' => '_id'], ['isSoftErased' => false]],
-    ['delete', 'deleteStep', ['id' => '_id'], ['isSoftErased' => false]],
+    ['edit', 'editStep', ['interestedId' => 'interestedId', 'id' => '_id'], []],
+    ['delete', 'deleteStep', ['id' => '_id'], []],
   ];
   protected $reroute = '@listInterested';
 

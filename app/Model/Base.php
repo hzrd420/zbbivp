@@ -2,7 +2,13 @@
 declare(strict_types=1);
 namespace Model;
 
-abstract class Base extends \Cortextension {
+abstract class Base extends \DB\Cortex {
+  // Disable this var to disable replacing empty strings with null for nullable fields
+  protected $nullableEmptyStrings = true;
+  // Use this vars to use the created and uppdated feature of the base model
+  protected $createdField = null;
+  protected $updatedField = null;
+
   protected $fieldConf = [];
   protected $table = '';
   protected $db = 'db';
@@ -106,4 +112,69 @@ abstract class Base extends \Cortextension {
   public function getPrimary(): string {
       return $this->primary;
   } // getPrimary()
+
+  /**
+   * Little helper method to erase multiple records with specific filter
+   *
+   * Useful if before and after erase events are important
+   *
+   * Warning: Do not use with a large number of records, this would lead  to a high memory usage!
+   *
+   * @param Cortextension $model The model to erase records from
+   * @param array $filter The filter to use
+   * @param bool $forceErase Force erae or try soft erase
+   */
+  protected function eraseRecords(self $model, ?array $filter, $forceErase = false) {
+    $records = $model->load($filter);
+    while (!$model->dry()) {
+      $model->erase();
+      $model->next();
+    } // while
+  } // eraseRecords()
+
+  /**
+   * Little helper method to erase all records of a specific cortex collection
+   * @param mixed $collection The collection to delete
+   * @param bool $forceErase Force erase function
+   */
+  protected function eraseCollection($collection, $forceErase = false) {
+    if (!is_null($collection) && $collection !== false) {
+      foreach ($collection as $record) {
+        $record->erase();
+      } // foreach
+    } // if
+  } // eraseCollection()
+
+  /**
+   * Overwrite cortex function set to replace empty strings with null if field is nullable
+   */
+  public function set($key, $val) {
+    if (
+      $this->nullableEmptyStrings
+      && isset($this->fieldConf[$key])
+      && (!isset($this->fieldConf[$key]['nullable']) || (isset($this->fieldConf[$key]['nullable']) && $this->fieldConf[$key]['nullable'] == true))
+      && is_string($val)
+      && trim($val) === ''
+    )
+      $val = null;
+    parent::set($key, $val);
+  } // set()
+
+  /**
+   * Overwrite insert function to set created timestamp with creation date
+   */
+  public function insert() {
+    if (!is_null($this->createdField) && array_key_exists($this->createdField, $this->fieldConf))
+      $this->touch($this->createdField);
+    return parent::insert();
+  } // insert()
+
+  /**
+   * Overwrite update function to set last modified timestamp with creation date
+   */
+  public function update() {
+    if (!is_null($this->updatedField) && array_key_exists($this->updatedField, $this->fieldConf))
+      $this->touch($this->updatedField);
+    return parent::update();
+  } // update()
 } // class
