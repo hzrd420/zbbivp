@@ -34,10 +34,18 @@ class Step extends Resource {
   } // listHook()
 
   protected function loadEditFormRecord(\Base $f3): void {
+    // Check that there are already some step types:
+    if ($this->model->rel('stepTypeId')->count() === 0)
+      throw new ControllerException($f3->get('lng.step.error.noStepTypes'));
     parent::loadEditFormRecord($f3);
     if ($this->model->dry()) {
       // Set id of NEW model to id in the route parameters
-      $this->model->interestedId = $f3->get('PARAMS.interestedId');
+      $interestedId = $f3->get('PARAMS.interestedId');
+      $this->model->interestedId = $interestedId;
+      // Check that interested id exists:
+      if ($this->model->rel('interestedId')->count(['_id = ?', $interestedId]) === 0)
+        throw new ControllerException($f3->get('lng.interested.error.noSuchResource'));
+      // If post is empty, copy model data to post (needed for interested id):
       if (!$this->checkPostFields())
         $this->model->copyto('POST');
     } // if
