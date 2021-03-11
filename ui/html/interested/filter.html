@@ -204,3 +204,52 @@
   <p><label for="filter_electives">{{@lng.interested.fields.electives}}</label>
   <input type="text" name="filter_electives" id="filter_electives" value="{{@@REQUEST.filter_electives}}"></p>
 </details>
+
+<details>
+  <summary>{{@lng.interested.sections.orientationWeek}}</summary>
+  <p><label for="filter_orientationWeekInterest">{{@lng.interested.fields.orientationWeekInterest}}</label>
+  <select name="filter_orientationWeekInterest" id="filter_orientationWeekInterest">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_orientationWeekInterest === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_orientationWeekInterest === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_orientationWeekFrom">{{@lng.interested.fields.orientationWeekFrom}}</label>
+  <input type="date" name="filter_orientationWeekFrom" id="filter_orientationWeekFrom" 
+  <check if="{{isset(@REQUEST.filter_orientationWeekFrom) && !empty(@REQUEST.filter_orientationWeekFrom)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_orientationWeekFrom) | format}}"
+  </check>></p>
+
+  <p><label for="filter_orientationWeekTo">{{@lng.interested.fields.orientationWeekTo}}</label>
+  <input type="date" name="filter_orientationWeekTo" id="filter_orientationWeekTo" 
+  <check if="{{isset(@REQUEST.filter_orientationWeekTo) && !empty(@REQUEST.filter_orientationWeekTo)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_orientationWeekTo) | format}}"
+  </check>></p>
+
+  <p><label for="filter_orientationWeekAccommodationRequired">{{@lng.interested.fields.orientationWeekAccommodationRequired}}</label>
+  <select name="filter_orientationWeekAccommodationRequired" id="filter_orientationWeekAccommodationRequired">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_orientationWeekAccommodationRequired === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_orientationWeekAccommodationRequired === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_orientationWeekPayer">{{@lng.interested.fields.orientationWeekPayer}}</label>
+  <input type="text" name="filter_orientationWeekPayer" id="filter_orientationWeekPayer" value="{{@@REQUEST.filter_orientationWeekPayer}}"></p>
+
+  <p><label for="filter_orientationWeekCostCommitmentRequested">{{@lng.interested.fields.orientationWeekCostCommitmentRequested}}</label>
+  <select name="filter_orientationWeekCostCommitmentRequested" id="filter_orientationWeekCostCommitmentRequested">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_orientationWeekCostCommitmentRequested === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_orientationWeekCostCommitmentRequested === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_orientationWeekCostCommitmentReceived">{{@lng.interested.fields.orientationWeekCostCommitmentReceived}}</label>
+  <select name="filter_orientationWeekCostCommitmentReceived" id="filter_orientationWeekCostCommitmentReceived">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_orientationWeekCostCommitmentReceived === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_orientationWeekCostCommitmentReceived === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+
+  <p><label for="filter_orientationWeekRemarks">{{@lng.interested.fields.orientationWeekRemarks}}</label>
+  <input type="text" name="filter_orientationWeekRemarks" id="filter_orientationWeekRemarks" value="{{@@REQUEST.filter_orientationWeekRemarks}}"></p>
+</details>

@@ -56,6 +56,8 @@ class Interested extends Base {
   public const PAYMENT_OF_SV_CONTRIBUTIONS = [
     'payer', 'administrationStaff'
   ];
+  public const PAYER_MIN_LENGTH = 1;
+  public const PAYER_MAX_LENGTH = 200;
 
   protected $fieldConf = [
     'firstName' => [
@@ -326,6 +328,54 @@ class Interested extends Base {
       'belongs-to-one' => '\Model\TrainingCourse',
       'accepted' => true,
       'necessaryPost' => true
+    ],
+    'orientationWeekInterest' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'orientationWeekFrom' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
+    ],
+    'orientationWeekTo' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
+    ],
+    'orientationWeekAccommodationRequired' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'orientationWeekCostCommitmentRequested' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'orientationWeekPayer' => [
+      'type' => 'varchar(' . self::PAYER_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::PAYER_MIN_LENGTH . '|max_len,' . self::PAYER_MAX_LENGTH
+    ],
+    'orientationWeekRemarks' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
+    'orientationWeekCostCommitmentReceived' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
     ],
     'steps' => [
       'has-many' => ['\Model\Step', 'interestedId']

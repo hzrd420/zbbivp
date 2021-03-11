@@ -107,3 +107,35 @@
     <a href="{{@BASE}}{{'listSteps', 'interestedId =' . @page.interested._id | alias}}">{{@page.interested.count_steps}}</a>
   </false>
 </check>
+
+<h2>{{@lng.interested.sections.orientationWeek}}</h2>
+<p>{{@lng.interested.fields.orientationWeekInterest}}: {{@page.interested.orientationWeekInterest ? @lng.main.true : @lng.main.false}}</p>
+<p>
+  {{@lng.interested.fields.orientationWeekFrom}}: 
+  <check if="{{is_null(@page.interested.orientationWeekFrom)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.orientationWeekFrom) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>
+  {{@lng.interested.fields.orientationWeekTo}}: 
+  <check if="{{is_null(@page.interested.orientationWeekTo)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.orientationWeekTo) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.interested.fields.orientationWeekAccommodationRequired}}: {{@page.interested.orientationWeekAccommodationRequired ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.interested.fields.orientationWeekPayer}}: {{@page.interested.orientationWeekPayer ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.orientationWeekCostCommitmentRequested}}: {{@page.interested.orientationWeekCostCommitmentRequested ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.interested.fields.orientationWeekCostCommitmentReceived}}: {{@page.interested.orientationWeekCostCommitmentReceived ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.interested.fields.orientationWeekRemarks}}</h3>
+<pre>{{@page.interested.orientationWeekRemarks ?? @lng.main.notSet | esc}}</pre>

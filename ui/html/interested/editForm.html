@@ -226,6 +226,44 @@
   <label for="electives">{{@lng.interested.fields.electives}}</label>
   <textarea name="electives" id="electives">{{@@POST.electives}}</textarea>
 
+  <h2>{{@lng.interested.sections.orientationWeek}}</h2>
+  <p><label for="orientationWeekInterest">{{@lng.interested.fields.orientationWeekInterest}}</label>
+    <input type="checkbox" {{@@POST.orientationWeekInterest ? 'checked' : ''}} name="orientationWeekInterest" id="orientationWeekInterest" value="true">
+  </p>
+
+  <p><label for="orientationWeekFrom">{{@lng.interested.fields.orientationWeekFrom}}</label>
+  <input type="date" name="orientationWeekFrom" id="orientationWeekFrom" 
+  <check if="{{isset(@POST.orientationWeekFrom)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.orientationWeekFrom) | format,esc}}"
+  </check>></p>
+
+  <p><label for="orientationWeekTo">{{@lng.interested.fields.orientationWeekTo}}</label>
+  <input type="date" name="orientationWeekTo" id="orientationWeekTo" 
+  <check if="{{isset(@POST.orientationWeekTo)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.orientationWeekTo) | format,esc}}"
+  </check>></p>
+
+  <p><label for="orientationWeekAccommodationRequired">{{@lng.interested.fields.orientationWeekAccommodationRequired}}</label>
+    <input type="checkbox" {{@@POST.orientationWeekAccommodationRequired ? 'checked' : ''}} name="orientationWeekAccommodationRequired" id="orientationWeekAccommodationRequired" value="true">
+  </p>
+
+  <p><label for="orientationWeekPayer">{{@lng.interested.fields.orientationWeekPayer}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PAYER_MIN_LENGTH, @page.modelConsts.PAYER_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="orientationWeekPayer" id="orientationWeekPayer" value="{{@@POST.orientationWeekPayer}}"
+    minlength="{{@page.modelConsts.PAYER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_MAX_LENGTH}}"></p>
+
+  <p><label for="orientationWeekCostCommitmentRequested">{{@lng.interested.fields.orientationWeekCostCommitmentRequested}}</label>
+    <input type="checkbox" {{@@POST.orientationWeekCostCommitmentRequested ? 'checked' : ''}} name="orientationWeekCostCommitmentRequested" id="orientationWeekCostCommitmentRequested" value="true">
+  </p>
+
+  <p><label for="orientationWeekCostCommitmentReceived">{{@lng.interested.fields.orientationWeekCostCommitmentReceived}}</label>
+    <input type="checkbox" {{@@POST.orientationWeekCostCommitmentReceived ? 'checked' : ''}} name="orientationWeekCostCommitmentReceived" id="orientationWeekCostCommitmentReceived" value="true">
+  </p>
+
+  <label for="orientationWeekRemarks">{{@lng.interested.fields.orientationWeekRemarks}}</label>
+  <textarea name="orientationWeekRemarks" id="orientationWeekRemarks">{{@@POST.orientationWeekRemarks}}</textarea>
+
   <input type="hidden" name="csrf" value="{{@CSRF}}">
   <button accesskey="s">{{@lng.interested.edit.save}}</button>
 </form>

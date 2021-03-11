@@ -161,6 +161,38 @@ class Interested extends Resource {
     if (array_key_exists('paymentOfSVContributions', $opts))
       $filters[] = ['paymentOfSVContributions = ?', $opts['paymentOfSVContributions'] === 'none' ? null : $opts['paymentOfSVContributions']];
 
+    // Orientation week interest:
+    if (array_key_exists('orientationWeekInterest', $opts))
+      $filters[] = ['orientationWeekInterest = ?', $opts['orientationWeekInterest'] === 'true'];
+
+    // Orientation week from:
+    if (array_key_exists('orientationWeekFrom', $opts))
+      $filters[] = ['orientationWeekFrom = ?', $opts['orientationWeekFrom']];
+
+    // Orientation week to:
+    if (array_key_exists('orientationWeekTo', $opts))
+      $filters[] = ['orientationWeekTo = ?', $opts['orientationWeekTo']];
+
+    // Orientation week accommodation required:
+    if (array_key_exists('orientationWeekAccommodationRequired', $opts))
+      $filters[] = ['orientationWeekAccommodationRequired = ?', $opts['orientationWeekAccommodationRequired'] === 'true'];
+
+    // Orientation week cost commitment requested:
+    if (array_key_exists('orientationWeekCostCommitmentRequested', $opts))
+      $filters[] = ['orientationWeekCostCommitmentRequested = ?', $opts['orientationWeekCostCommitmentRequested'] === 'true'];
+
+    // Orientation week cost commitment received:
+    if (array_key_exists('orientationWeekCostCommitmentReceived', $opts))
+      $filters[] = ['orientationWeekCostCommitmentReceived = ?', $opts['orientationWeekCostCommitmentReceived'] === 'true'];
+
+    // Orientation week payer:
+    if (array_key_exists('orientationWeekPayer', $opts))
+      $filters[] = ['orientationWeekPayer LIKE ?', '%' . $opts['orientationWeekPayer'] . '%'];
+
+    // Orientation week remakrs:
+    if (array_key_exists('orientationWeekRemarks', $opts))
+      $filters[] = ['orientationWeekRemarks LIKE ?', '%' . $opts['orientationWeekRemarks'] . '%'];
+
     return $filters;
   } // getFilters()
 
