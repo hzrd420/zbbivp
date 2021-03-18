@@ -157,41 +157,6 @@ Abstract class Resource extends Base {
   } // loadRecord()
 
   /**
-   * Export filtered resources to html
-   * @param Base $f3 The instance of F3
-   */
-  public function exportHtml(\Base $f3): void {
-    if (!$this->canExport) {
-      \Flash::instance()->addMessage($f3->get('lng.resource.noExport'), 'danger');
-      $f3->reroute($this->reroute);
-    } // if
-    $html = $this->createHtmlExport($f3);
-    if (is_null($html)) {
-      \Flash::instance()->addMessage($f3->get('lng.resource.noExportItems'), 'danger');
-      $f3->reroute($this->reroute);
-    } // if
-    $this->logger->info('Export: User exported list', ['username' => $f3->get('USER')->username, 'resource' => $this->resourceName]);
-    echo $html;
-  } // exportHtml()
-
-  /**
-   * Create html export of filtered resources
-   * @param Base $f3 The instance of F3
-   * @return string The generated html or null if no items to export
-   */
-  protected function createHtmlExport(\Base $f3): ?string {
-    $filter = $this->createListFilter($f3, $this->model);
-    $options = $this->createListOptions($f3, $this->model);
-    $list = $this->model->find($filter, $options);
-    if ($list === false)
-      return null;
-    $f3->copy('lng.' . $this->resourceName . '.exportHtml.title', 'page.title');
-    $f3->set('page.list', $list);
-    $f3->set('page.content', 'html/' . $this->resourceName . '/export.html');
-    return \Template::instance()->render('html/layouts/export.html');
-  } // createHtmlExport()
-
-  /**
    * Create the list filter from user specific input via REQUEST
    *
    * @param Base $f3 The instance of F3

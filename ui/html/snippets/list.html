@@ -2,9 +2,6 @@
 <check if="{{@page.permitNew}}">
   <p><a class="newItem" href="{{@BASE}}{{'add' . ucfirst(@page.resourceName) | alias}}">{{@lng[@page.resourceName].actions.add}}</a></p>
 </check>
-<check if="{{@page.canExport}}">
-  <p><a class="export" href="{{@BASE}}{{'export' . ucfirst(@page.resourceName) . 'sHtml' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.resource.exportHTML}}</a></p>
-</check>
 <include href="html/snippets/filterPanel.html" />
 <check if="{{empty(@page.resourceList.subset)}}">
   <true>
