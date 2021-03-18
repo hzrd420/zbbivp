@@ -473,10 +473,10 @@ class Interested extends Base {
   ];
   protected $table = 'interested';
   public $sortableFields = [
-    'firstName' => 'firstName',
-    'surname' => 'surname',
-    'birthDate' => 'birthDate',
-    'created' => 'created'
+    'firstName',
+    'surname',
+    'birthDate',
+    'created'
   ];
 
   /**

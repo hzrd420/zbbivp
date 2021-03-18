@@ -27,6 +27,6 @@ class TrainingCourse extends Base {
   ];
   protected $table = 'trainingCourse';
   public $sortableFields = [
-    'name' => 'name'
+    'name'
   ];
 } // class

@@ -29,6 +29,6 @@ class StepType extends Base {
   ];
   protected $table = 'stepType';
   public $sortableFields = [
-    'name' => 'name'
+    'name'
   ];
 } // class

@@ -30,6 +30,6 @@ class Step extends Base {
   ];
   protected $table = 'step';
   public $sortableFields = [
-    'created' => 'created'
+    'created'
   ];
 } // class
