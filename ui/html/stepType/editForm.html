@@ -1,7 +1,7 @@
 <h1>{{@lng.stepType.edit.heading}}</h1>
 <form method="post">
   <p><label for="name">{{@lng.stepType.fields.name}}
-    {{@lng.stepType.edit.betweenChars, @page.modelConsts.NAME_MIN_LENGTH, @page.modelConsts.NAME_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.NAME_MIN_LENGTH, @page.modelConsts.NAME_MAX_LENGTH | format}}
     </label>
   <input autofocus required type="text" name="name" id="name" value="{{@@POST.name}}"
     minlength="{{@page.modelConsts.NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NAME_MAX_LENGTH}}"></p>

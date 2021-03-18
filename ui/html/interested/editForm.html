@@ -2,13 +2,13 @@
 <form method="post">
   <h2>{{@lng.interested.sections.baseData}}</h2>
   <p><label for="firstName">{{@lng.interested.fields.firstName}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
     </label>
   <input autofocus required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
     minlength="{{@page.modelConsts.FIRST_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.FIRST_NAME_MAX_LENGTH}}"></p>
 
   <p><label for="surname">{{@lng.interested.fields.surname}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="surname" id="surname" value="{{@@POST.surname}}"
     minlength="{{@page.modelConsts.SURNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.SURNAME_MAX_LENGTH}}"></p>
@@ -20,37 +20,37 @@
   </check>></p>
 
   <p><label for="birthLocation">{{@lng.interested.fields.birthLocation}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.BIRTH_LOCATION_MIN_LENGTH, @page.modelConsts.BIRTH_LOCATION_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.BIRTH_LOCATION_MIN_LENGTH, @page.modelConsts.BIRTH_LOCATION_MAX_LENGTH | format}}
     </label>
   <input type="text" name="birthLocation" id="birthLocation" value="{{@@POST.birthLocation}}"
     minlength="{{@page.modelConsts.BIRTH_LOCATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.BIRTH_LOCATION_MAX_LENGTH}}"></p>
 
   <p><label for="nationality">{{@lng.interested.fields.nationality}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.NATIONALITY_MIN_LENGTH, @page.modelConsts.NATIONALITY_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.NATIONALITY_MIN_LENGTH, @page.modelConsts.NATIONALITY_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="nationality" id="nationality" value="{{@@POST.nationality}}"
     minlength="{{@page.modelConsts.NATIONALITY_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NATIONALITY_MAX_LENGTH}}"></p>
 
   <p><label for="address">{{@lng.interested.fields.address}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="address" id="address" value="{{@@POST.address}}"
     minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
 
   <p><label for="email">{{@lng.interested.fields.email}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.EMAIL_MIN_LENGTH, @page.modelConsts.EMAIL_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.EMAIL_MIN_LENGTH, @page.modelConsts.EMAIL_MAX_LENGTH | format}}
     </label>
   <input required type="email" name="email" id="email" value="{{@@POST.email}}"
     minlength="{{@page.modelConsts.EMAIL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_MAX_LENGTH}}"></p>
 
   <p><label for="phoneMobile">{{@lng.interested.fields.phoneMobile}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
     </label>
   <input required type="tel" name="phoneMobile" id="phoneMobile" value="{{@@POST.phoneMobile}}"
     minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
 
   <p><label for="phonePrivate">{{@lng.interested.fields.phonePrivate}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
     </label>
   <input type="tel" name="phonePrivate" id="phonePrivate" value="{{@@POST.phonePrivate}}"
     minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
@@ -68,26 +68,26 @@
     </select></p>
 
   <p><label for="legalRepresentative">{{@lng.interested.fields.legalRepresentative}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
     </label>
   <input type="text" name="legalRepresentative" id="legalRepresentative" value="{{@@POST.legalRepresentative}}"
     minlength="{{@page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH}}"></p>
 
   <p><label for="emailLegalRepresentative">{{@lng.interested.fields.emailLegalRepresentative}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
     </label>
   <input type="email" name="emailLegalRepresentative" id="emailLegalRepresentative" value="{{@@POST.emailLegalRepresentative}}"
     minlength="{{@page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH}}"></p>
 
   <p><label for="phoneLegalRepresentative">{{@lng.interested.fields.phoneLegalRepresentative}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
     </label>
   <input type="tel" name="phoneLegalRepresentative" id="phoneLegalRepresentative" value="{{@@POST.phoneLegalRepresentative}}"
     minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
 
   <h2>{{@lng.interested.sections.education}}</h2>
   <p><label for="lastGraduation">{{@lng.interested.fields.lastGraduation}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.LAST_GRADUATION_MIN_LENGTH, @page.modelConsts.LAST_GRADUATION_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.LAST_GRADUATION_MIN_LENGTH, @page.modelConsts.LAST_GRADUATION_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="lastGraduation" id="lastGraduation" value="{{@@POST.lastGraduation}}"
     minlength="{{@page.modelConsts.LAST_GRADUATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_GRADUATION_MAX_LENGTH}}"></p>
@@ -96,7 +96,7 @@
   <input type="number" name="graduationYear" id="graduationYear" value="{{@@POST.graduationYear ?? ''}}"></p>
 
   <p><label for="lastSchool">{{@lng.interested.fields.lastSchool}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.LAST_SCHOOL_MIN_LENGTH, @page.modelConsts.LAST_SCHOOL_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.LAST_SCHOOL_MIN_LENGTH, @page.modelConsts.LAST_SCHOOL_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="lastSchool" id="lastSchool" value="{{@@POST.lastSchool}}"
     minlength="{{@page.modelConsts.LAST_SCHOOL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_SCHOOL_MAX_LENGTH}}"></p>
@@ -291,19 +291,19 @@
     minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
 
   <p><label for="payerContactPerson">{{@lng.interested.fields.payerContactPerson}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH, @page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH, @page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH | format}}
     </label>
   <input type="text" name="payerContactPerson" id="payerContactPerson" value="{{@@POST.payerContactPerson}}"
     minlength="{{@page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH}}"></p>
 
   <p><label for="payerPhone">{{@lng.interested.fields.payerPhone}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
     </label>
   <input type="tel" name="payerPhone" id="payerPhone" value="{{@@POST.payerPhone}}"
     minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
 
   <p><label for="payerCustomerNumber">{{@lng.interested.fields.payerCustomerNumber}}
-    {{@lng.interested.edit.betweenChars, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH | format}}
     </label>
   <input type="text" name="payerCustomerNumber" id="payerCustomerNumber" value="{{@@POST.payerCustomerNumber}}"
     minlength="{{@page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH}}"></p>
