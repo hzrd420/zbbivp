@@ -78,6 +78,19 @@ CREATE OR REPLACE TABLE `interested` (
     `orientationWeekPayer` VARCHAR(200),
     `orientationWeekRemarks` LONGTEXT,
     `orientationWeekCostCommitmentReceived` BOOLEAN NOT NULL DEFAULT false,
+
+    `trainingFrom` DATE,
+    `trainingTo` DATE,
+
+    `payerName` VARCHAR(200),
+    `payerAddress` VARCHAR(500),
+    `payerContactPerson` VARCHAR(200),
+    `payerPhone` VARCHAR(100),
+    `payerCustomerNumber` VARCHAR(100),
+    `payerCostCommitment` VARCHAR(20),
+    `payerComments` LONGTEXT,
+    `accommodation` VARCHAR(20),
+    `youthProtectionExaminationReceived` BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`trainingCourse1Id`) REFERENCES `trainingCourse` (`id`)  ON DELETE CASCADE,
     FOREIGN KEY (`trainingCourse2Id`) REFERENCES `trainingCourse` (`id`) ON DELETE CASCADE

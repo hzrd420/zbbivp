@@ -1,6 +1,16 @@
 <h1>{{@lng.interested.show.heading, @page.interested.firstName, @page.interested.surname | format,esc}}</h1>
 <include href="{{'html/snippets/actions.html'}}" with="item={{@page.interested}}" />
 
+<h2>{{@lng.interested.show.steps}}</h2>
+<check if="{{is_null(@page.interested.count_steps)}}">
+  <true>
+    <p>{{@lng.interested.show.noSteps}}</p>
+  </true>
+  <false>
+    <a href="{{@BASE}}{{'listSteps', 'interestedId =' . @page.interested._id | alias}}">{{@page.interested.count_steps}}</a>
+  </false>
+</check>
+
 <h2>{{@lng.interested.sections.baseData}}</h2>
 <p>{{@lng.interested.fields.name}}: {{'{0} {1}', @page.interested.firstName, @page.interested.surname | format,esc}}</p>
 <p>{{@lng.interested.fields.birthDate}}: {{'{0,date}', strtotime(@page.interested.birthDate) | format,esc}}</p>
@@ -98,16 +108,6 @@
 <h3>{{@lng.interested.fields.electives}}</h3>
 <pre>{{@page.interested.electives ?? @lng.main.notSet | esc}}</pre>
 
-<h2>{{@lng.interested.show.steps}}</h2>
-<check if="{{is_null(@page.interested.count_steps)}}">
-  <true>
-    <p>{{@lng.interested.show.noSteps}}</p>
-  </true>
-  <false>
-    <a href="{{@BASE}}{{'listSteps', 'interestedId =' . @page.interested._id | alias}}">{{@page.interested.count_steps}}</a>
-  </false>
-</check>
-
 <h2>{{@lng.interested.sections.orientationWeek}}</h2>
 <p>{{@lng.interested.fields.orientationWeekInterest}}: {{@page.interested.orientationWeekInterest ? @lng.main.true : @lng.main.false}}</p>
 <p>
@@ -139,3 +139,39 @@
 
 <h3>{{@lng.interested.fields.orientationWeekRemarks}}</h3>
 <pre>{{@page.interested.orientationWeekRemarks ?? @lng.main.notSet | esc}}</pre>
+
+<h2>{{@lng.interested.sections.trainingStart}}</h2>
+<p>
+  {{@lng.interested.fields.trainingFrom}}: 
+  <check if="{{is_null(@page.interested.trainingFrom)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.trainingFrom) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>
+  {{@lng.interested.fields.trainingTo}}: 
+  <check if="{{is_null(@page.interested.trainingTo)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.trainingTo) | format,esc}}
+    </false>
+  </check>
+</p>
+
+<h2>{{@lng.interested.sections.payer}}</h2>
+<p>{{@lng.interested.fields.payerName}}: {{@page.interested.payerName ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.payerAddress}}: {{@page.interested.payerAddress ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.payerContactPerson}}: {{@page.interested.payerContactPerson ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.payerCustomerNumber}}: {{@page.interested.payerCustomerNumber ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.payerCostCommitment}}: {{@lng.interested.payerCostCommitment[@page.interested.payerCostCommitment]}}</p>
+<p>{{@lng.interested.fields.accommodation}}: {{@lng.interested.accommodation[@page.interested.accommodation] ?? @lng.interested.accommodation.none}}</p>
+<p>{{@lng.interested.fields.youthProtectionExaminationReceived}}: {{@page.interested.youthProtectionExaminationReceived ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.interested.fields.payerRemarks}}</h3>
+<pre>{{@page.interested.payerRemarks ?? @lng.main.notSet | esc}}</pre>

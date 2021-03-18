@@ -1,6 +1,6 @@
 <h1>{{@lng.interested.edit.heading}}</h1>
 <form method="post">
-<h2>{{@lng.interested.sections.baseData}}</h2>
+  <h2>{{@lng.interested.sections.baseData}}</h2>
   <p><label for="firstName">{{@lng.interested.fields.firstName}}
     {{@lng.interested.edit.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
     </label>
@@ -263,6 +263,72 @@
 
   <label for="orientationWeekRemarks">{{@lng.interested.fields.orientationWeekRemarks}}</label>
   <textarea name="orientationWeekRemarks" id="orientationWeekRemarks">{{@@POST.orientationWeekRemarks}}</textarea>
+
+  <h2>{{@lng.interested.sections.trainingStart}}</h2>
+  <p><label for="trainingFrom">{{@lng.interested.fields.trainingFrom}}</label>
+  <input type="date" name="trainingFrom" id="trainingFrom" 
+  <check if="{{isset(@POST.trainingFrom)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.trainingFrom) | format,esc}}"
+  </check>></p>
+
+  <p><label for="trainingTo">{{@lng.interested.fields.trainingTo}}</label>
+  <input type="date" name="trainingTo" id="trainingTo" 
+  <check if="{{isset(@POST.trainingTo)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.trainingTo) | format,esc}}"
+  </check>></p>
+
+  <h2>{{@lng.interested.sections.payer}}</h2>
+  <p><label for="payerName">{{@lng.interested.fields.payerName}}
+    {{@lng.resource.betweenChars, @page.modelConsts.PAYER_MIN_LENGTH, @page.modelConsts.PAYER_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="payerName" id="payerName" value="{{@@POST.payerName}}"
+    minlength="{{@page.modelConsts.PAYER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_MAX_LENGTH}}"></p>
+
+  <p><label for="payerAddress">{{@lng.interested.fields.payerAddress}}
+    {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="payerAddress" id="payerAddress" value="{{@@POST.payerAddress}}"
+    minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
+
+  <p><label for="payerContactPerson">{{@lng.interested.fields.payerContactPerson}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH, @page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="payerContactPerson" id="payerContactPerson" value="{{@@POST.payerContactPerson}}"
+    minlength="{{@page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH}}"></p>
+
+  <p><label for="payerPhone">{{@lng.interested.fields.payerPhone}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+  <input type="tel" name="payerPhone" id="payerPhone" value="{{@@POST.payerPhone}}"
+    minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+  <p><label for="payerCustomerNumber">{{@lng.interested.fields.payerCustomerNumber}}
+    {{@lng.interested.edit.betweenChars, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="payerCustomerNumber" id="payerCustomerNumber" value="{{@@POST.payerCustomerNumber}}"
+    minlength="{{@page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH}}"></p>
+
+  <p><label for="payerCostCommitment">{{@lng.interested.fields.payerCostCommitment}}</label>
+    <select required name="payerCostCommitment" id="payerCostCommitment">
+      <repeat group="{{@page.payerCostCommitmentList}}" value="{{@item}}">
+        <option {{@@POST.payerCostCommitment === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.payerCostCommitment[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <label for="payerRemarks">{{@lng.interested.fields.payerRemarks}}</label>
+  <textarea name="payerRemarks" id="payerRemarks">{{@@POST.payerRemarks}}</textarea>
+
+  <p><label for="accommodation">{{@lng.interested.fields.accommodation}}</label>
+    <select name="accommodation" id="accommodation">
+      <option {{is_null(@@POST.accommodation) ? 'selected' : ''}} value="">{{@lng.interested.accommodation.none}}</option>
+      <repeat group="{{@page.accommodationList}}" value="{{@item}}">
+        <option {{@@POST.accommodation === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.accommodation[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="youthProtectionExaminationReceived">{{@lng.interested.fields.youthProtectionExaminationReceived}}</label>
+    <input type="checkbox" {{@@POST.youthProtectionExaminationReceived ? 'checked' : ''}} name="youthProtectionExaminationReceived" id="youthProtectionExaminationReceived" value="true">
+  </p>
 
   <input type="hidden" name="csrf" value="{{@CSRF}}">
   <button accesskey="s">{{@lng.interested.edit.save}}</button>

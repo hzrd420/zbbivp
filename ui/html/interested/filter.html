@@ -253,3 +253,63 @@
   <p><label for="filter_orientationWeekRemarks">{{@lng.interested.fields.orientationWeekRemarks}}</label>
   <input type="text" name="filter_orientationWeekRemarks" id="filter_orientationWeekRemarks" value="{{@@REQUEST.filter_orientationWeekRemarks}}"></p>
 </details>
+
+<details>
+  <summary>{{@lng.interested.sections.trainingStart}}</summary>
+  <p><label for="filter_trainingFrom">{{@lng.interested.fields.trainingFrom}}</label>
+  <input type="date" name="filter_trainingFrom" id="filter_trainingFrom" 
+  <check if="{{isset(@REQUEST.filter_trainingFrom) && !empty(@REQUEST.filter_trainingFrom)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_trainingFrom) | format}}"
+  </check>></p>
+
+  <p><label for="filter_trainingTo">{{@lng.interested.fields.trainingTo}}</label>
+  <input type="date" name="filter_trainingTo" id="filter_trainingTo" 
+  <check if="{{isset(@REQUEST.filter_trainingTo) && !empty(@REQUEST.filter_trainingTo)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_trainingTo) | format}}"
+  </check>></p>
+</details>
+
+<details>
+  <summary>{{@lng.interested.sections.payer}}</summary>
+  <p><label for="filter_payerName">{{@lng.interested.fields.payerName}}</label>
+  <input type="text" name="filter_payerName" id="filter_payerName" value="{{@@REQUEST.filter_payerName}}"></p>
+
+  <p><label for="filter_payerAddress">{{@lng.interested.fields.payerAddress}}</label>
+  <input type="text" name="filter_payerAddress" id="filter_payerAddress" value="{{@@REQUEST.filter_payerAddress}}"></p>
+
+  <p><label for="filter_payerContactPerson">{{@lng.interested.fields.payerContactPerson}}</label>
+  <input type="text" name="filter_payerContactPerson" id="filter_payerContactPerson" value="{{@@REQUEST.filter_payerContactPerson}}"></p>
+
+  <p><label for="filter_payerPhone">{{@lng.interested.fields.payerPhone}}</label>
+  <input type="tel" name="filter_payerPhone" id="filter_payerPhone" value="{{@@REQUEST.filter_payerPhone}}"></p>
+
+  <p><label for="filter_payerCustomerNumber">{{@lng.interested.fields.payerCustomerNumber}}</label>
+  <input type="text" name="filter_payerCustomerNumber" id="filter_payerCustomerNumber" value="{{@@REQUEST.filter_payerCustomerNumber}}"></p>
+
+  <p><label for="filter_payerCostCommitment">{{@lng.interested.fields.payerCostCommitment}}</label>
+    <select name="filter_payerCostCommitment" id="filter_payerCostCommitment">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.payerCostCommitmentList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_payerCostCommitment === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.payerCostCommitment[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="filter_payerRemarks">{{@lng.interested.fields.payerRemarks}}</label>
+  <input type="text" name="filter_payerRemarks" id="filter_payerRemarks" value="{{@@REQUEST.filter_payerRemarks}}"></p>
+
+  <p><label for="filter_accommodation">{{@lng.interested.fields.accommodation}}</label>
+    <select name="filter_accommodation" id="filter_accommodation">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_accommodation === 'none' ? 'selected' : ''}} value="none">{{@lng.interested.accommodation.none}}</option>
+      <repeat group="{{@page.accommodationList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_accommodation === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.accommodation[@item]}}</option>
+      </repeat>
+    </select></p>
+
+  <p><label for="filter_youthProtectionExaminationReceived">{{@lng.interested.fields.youthProtectionExaminationReceived}}</label>
+  <select name="filter_youthProtectionExaminationReceived" id="filter_youthProtectionExaminationReceived">
+    <option value="">{{@lng.main.noChoice}}</option>
+    <option {{@@REQUEST.filter_youthProtectionExaminationReceived === 'true' ? 'selected' : ''}} value="true">{{@lng.main.true}}</option>
+    <option {{@@REQUEST.filter_youthProtectionExaminationReceived === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
+  </select></p>
+</details>

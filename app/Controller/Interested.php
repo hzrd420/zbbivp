@@ -189,9 +189,53 @@ class Interested extends Resource {
     if (array_key_exists('orientationWeekPayer', $opts))
       $filters[] = ['orientationWeekPayer LIKE ?', '%' . $opts['orientationWeekPayer'] . '%'];
 
-    // Orientation week remakrs:
+    // Orientation week remarks:
     if (array_key_exists('orientationWeekRemarks', $opts))
       $filters[] = ['orientationWeekRemarks LIKE ?', '%' . $opts['orientationWeekRemarks'] . '%'];
+
+    // Training from:
+    if (array_key_exists('trainingFrom', $opts))
+      $filters[] = ['trainingFrom = ?', $opts['trainingFrom']];
+
+    // Training to:
+    if (array_key_exists('trainingTo', $opts))
+      $filters[] = ['trainingTo = ?', $opts['trainingTo']];
+
+    // Payer name:
+    if (array_key_exists('payerName', $opts))
+      $filters[] = ['payerName LIKE ?', '%' . $opts['payerName'] . '%'];
+
+    // Payer address:
+    if (array_key_exists('payerAddress', $opts))
+      $filters[] = ['payerAddress LIKE ?', '%' . $opts['payerAddress'] . '%'];
+
+    // Payer contact person:
+    if (array_key_exists('payerContactPerson', $opts))
+      $filters[] = ['payerContactPerson LIKE ?', '%' . $opts['payerContactPerson'] . '%'];
+
+    // Payer phone:
+    if (array_key_exists('payerPhone', $opts))
+      $filters[] = ['payerPhone LIKE ?', '%' . $opts['payerPhone'] . '%'];
+
+    // Payer customer number:
+    if (array_key_exists('payerCustomerNumber', $opts))
+      $filters[] = ['payerCustomerNumber LIKE ?', '%' . $opts['payerCustomerNumber'] . '%'];
+
+    // Payer cost commitment:
+    if (array_key_exists('payerCostCommitment', $opts))
+      $filters[] = ['payerCostCommitment = ?', $opts['payerCostCommitment']];
+
+    // Payer remarks:
+    if (array_key_exists('payerRemarks', $opts))
+      $filters[] = ['payerRemarks LIKE ?', '%' . $opts['payerRemarks'] . '%'];
+
+    // Accommodation:
+    if (array_key_exists('accommodation', $opts))
+      $filters[] = ['accommodation = ?', $opts['accommodation'] === 'none' ? null : $opts['accommodation']];
+
+    // Youth protection examination received:
+    if (array_key_exists('youthProtectionExaminationReceived', $opts))
+      $filters[] = ['youthProtectionExaminationReceived = ?', $opts['youthProtectionExaminationReceived'] === 'true'];
 
     return $filters;
   } // getFilters()
@@ -207,19 +251,23 @@ class Interested extends Resource {
     // Load training courses:
     $list = $this->model->rel('trainingCourse1Id');
     $f3->set('page.trainingCourseList', $list->find());
-    // Load marital status list:
+    // Load marital status list
     $f3->set('page.maritalStatusList', $this->model::MARITAL_STATUS);
-    // Load german level list:
+    // Load german level list
     $f3->set('page.germanLevelList', $this->model::GERMAN_LEVEL);
-    // Load visual impairment list:
+    // Load visual impairment list
     $f3->set('page.degreeOfVisualImpairmentList', $this->model::DEGREE_OF_VISUAL_IMPAIRMENT);
-    // Load other disability list:
+    // Load other disability list
     $f3->set('page.otherDisabilityList', $this->model::OTHER_DISABILITY);
-    // Load tax class list:
+    // Load tax class list
     $f3->set('page.taxClassList', $this->model::TAX_CLASS);
-    // Load denomination list:
+    // Load denomination list
     $f3->set('page.denominationList', $this->model::DENOMINATION);
-    // Load payment of SV contributions list:
+    // Load payment of SV contributions list
     $f3->set('page.paymentOfSVContributionsList', $this->model::PAYMENT_OF_SV_CONTRIBUTIONS);
+    // Load cost commitment list
+    $f3->set('page.payerCostCommitmentList', $this->model::PAYER_COST_COMMITMENT);
+    // Load accommodation list
+    $f3->set('page.accommodationList', $this->model::ACCOMMODATION);
   } // loadLists()
 } // class

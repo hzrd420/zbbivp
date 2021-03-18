@@ -58,6 +58,17 @@ class Interested extends Base {
   ];
   public const PAYER_MIN_LENGTH = 1;
   public const PAYER_MAX_LENGTH = 200;
+  public const PAYER_CONTACT_PERSON_MIN_LENGTH = 1;
+  public const PAYER_CONTACT_PERSON_MAX_LENGTH = 200;
+
+  public const PAYER_CUSTOMER_NUMBER_MIN_LENGTH = 1;
+  public const PAYER_CUSTOMER_NUMBER_MAX_LENGTH = 100;
+  public const PAYER_COST_COMMITMENT = [
+    'notYetApplied', 'byPayer', 'received', 'notClear'
+  ];
+  public const ACCOMMODATION = [
+    'SWG', 'MJG', 'apartment'
+  ];
 
   protected $fieldConf = [
     'firstName' => [
@@ -372,6 +383,80 @@ class Interested extends Base {
       'filter' => 'trim'
     ],
     'orientationWeekCostCommitmentReceived' => [
+      'type' => \DB\SQL\Schema::DT_BOOLEAN,
+      'default' => false,
+      'nullable' => false,
+      'accepted' => true
+    ],
+    'trainingFrom' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
+    ],
+    'trainingTo' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
+    ],
+    'payerName' => [
+      'type' => 'varchar(' . self::PAYER_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::PAYER_MIN_LENGTH . '|max_len,' . self::PAYER_MAX_LENGTH
+    ],
+    'payerAddress' => [
+      'type' => 'varchar(' . self::ADDRESS_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::ADDRESS_MIN_LENGTH . '|max_len,' . self::ADDRESS_MAX_LENGTH
+    ],
+    'payerContactPerson' => [
+      'type' => 'varchar(' . self::PAYER_CONTACT_PERSON_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::PAYER_CONTACT_PERSON_MIN_LENGTH . '|max_len,' . self::PAYER_CONTACT_PERSON_MAX_LENGTH
+    ],
+    'payerPhone' => [
+      'type' => 'varchar(' . self::PHONE_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'phone_number|max_len,' . self::PHONE_MAX_LENGTH
+    ],
+    'payerCustomerNumber' => [
+      'type' => 'varchar(' . self::PAYER_CUSTOMER_NUMBER_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::PAYER_CUSTOMER_NUMBER_MIN_LENGTH . '|max_len,' . self::PAYER_CUSTOMER_NUMBER_MAX_LENGTH
+    ],
+    'payerCostCommitment' => [
+      'type' => 'varchar(20)',
+      'nullable' => false,
+      'passThrough' => true,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'item' => self::PAYER_COST_COMMITMENT
+    ],
+    'payerRemarks' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
+    'accommodation' => [
+      'type' => 'varchar(20)',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'item' => self::ACCOMMODATION
+    ],
+    'youthProtectionExaminationReceived' => [
       'type' => \DB\SQL\Schema::DT_BOOLEAN,
       'default' => false,
       'nullable' => false,
