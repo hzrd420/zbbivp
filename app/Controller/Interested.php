@@ -270,4 +270,130 @@ class Interested extends Resource {
     // Load accommodation list
     $f3->set('page.accommodationList', $this->model::ACCOMMODATION);
   } // loadLists()
+
+  /**
+   * Stream given array with rows as XLSX to the browser
+   * @param Base $f3 The instance of F3
+   * @param array $rows The rows to export
+   * @param string $name The name of the file to stream without extension (.xlsx)
+   */
+   public function streamXLSX(\Base $f3, array $rows, string $name):void {
+     if (empty($rows)) {
+       \Flash::instance()->addMessage($f3->get('lng.interested.export.noItems'), 'info');
+       $this->rerouteToLast();
+     } // if
+    \Spatie\SimpleExcel\SimpleExcelWriter::streamDownload($name . '.xlsx')
+    ->addRows($rows)
+    ->toBrowser();
+   } // streamXLSX()
+
+  /**
+   * Export filtered or all interested to XLS files
+   *
+   * Fields are given by customer (report 1)
+   */
+  public function export1(\Base $f3): void {
+    // Load all interested to export:
+    $filter = $this->createListFilter($f3, $this->model);
+    $options = $this->createListOptions($f3, $this->model);
+    $this->model->load($filter, $options);
+    $lng = $f3->get('lng');
+    $rows = [];
+    while (!$this->model->dry()) {
+      $surname = $this->model->surname;
+      $firstName = $this->model->firstName;
+      $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment];
+      $birthDate = $f3->format('{0,date}', strtotime($this->model->birthDate));
+      $trainingCourse1 = $this->model->trainingCourse1Id->name;
+      $trainingCourse2 = is_null($this->model->trainingCourse2Id) ? $lng['main']['notSet'] : $model->trainingCourse2Id->name;
+      $trainingType = $lng['interested']['export'][$this->model->retraining ? 'retraining' : 'training'];
+      $accommodation = $lng['interested']['accommodation'][$this->model->accommodation ?? 'none'];
+      $lastStep = $this->model->getNewestStep();
+      if (is_null($lastStep))
+        $lastStep = $lng['interested']['export']['noSteps'];
+      else
+        $lastStep = $lastStep->stepTypeId->name;
+      
+      $rows[] = [
+        $lng['interested']['fields']['surname'] => $surname,
+        $lng['interested']['fields']['firstName'] => $firstName,
+        $lng['interested']['fields']['degreeOfVisualImpairment'] => $degreeOfVisualImpairment,
+        $lng['interested']['fields']['birthDate'] => $birthDate,
+        $lng['interested']['fields']['trainingCourse1'] => $trainingCourse1,
+        $lng['interested']['fields']['trainingCourse2'] => $trainingCourse2,
+        $lng['interested']['export']['trainingType'] => $trainingType,
+        $lng['interested']['fields']['accommodation'] => $accommodation,
+        $lng['interested']['export']['lastStep'] => $lastStep,
+      ];
+      $this->model->next();
+    } // while
+    $this->streamXLSX($f3, $rows, 'Export');
+  } // export1()
+
+  /**
+   * Export filtered or all interested to XLS files
+   *
+   * Fields are given by customer (report 2)
+   */
+  public function export2(\Base $f3): void {
+    // Load all interested to export:
+    $filter = $this->createListFilter($f3, $this->model);
+    $options = $this->createListOptions($f3, $this->model);
+    $this->model->load($filter, $options);
+    $lng = $f3->get('lng');
+    $rows = [];
+    while (!$this->model->dry()) {
+      $surname = $this->model->surname;
+      $firstName = $this->model->firstName;
+      $birthLocation = $this->model->birthLocation;
+      $birthDate = $f3->format('{0,date}', strtotime($this->model->birthDate));
+      $address = $this->model->address;
+      $phoneMobile = $this->model->phoneMobile;
+      $nationality = $this->model->nationality;
+      $payerCustomerNumber = $this->model->payerCustomerNumber ?? $lng['main']['notSet'];
+      $trainingFrom = $f3->format('{0,date}', strtotime($this->model->trainingFrom));
+      $trainingTo = $f3->format('{0,date}', strtotime($this->model->trainingTo));
+      $payerName = $this->model->payerName ?? $lng['main']['notSet'];
+      $payerAddress = $this->model->payerAddress ?? $lng['main']['notSet'];
+      $payerContactPerson = $this->model->payerContactPerson ?? $lng['main']['notSet'];
+      $payerPhone = $this->model->payerPhone ?? $lng['main']['notSet'];
+      $pensionInsuranceNumber = $this->model->pensionInsuranceNumber ?? $lng['main']['notSet'];
+      $taxID = $this->model->taxID ?? $lng['main']['notSet'];
+      $healthInsuranceName = $this->model->healthInsuranceName ?? $lng['main']['notSet'];
+      $paymentOfSVContributions = $lng['interested']['paymentOfSVContributions'][$this->model->paymentOfSVContributions ?? 'none'];
+      $handicappedIdAvailable = $lng['main'][$this->model->handicappedIdAvailable ? 'true' : 'false'];
+      $trainingCourse1 = $this->model->trainingCourse1Id->name;
+      $denomination = $lng['interested']['denomination'][$this->model->denomination ?? 'none'];
+      $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment];
+      $otherDisability = $lng['interested']['otherDisability'][$this->model->otherDisability ?? 'none'];
+
+      $rows[] = [
+        $lng['interested']['fields']['surname'] => $surname,
+        $lng['interested']['fields']['firstName'] => $firstName,
+        $lng['interested']['fields']['birthLocation'] => $birthLocation,
+        $lng['interested']['fields']['birthDate'] => $birthDate,
+        $lng['interested']['fields']['address'] => $address,
+        $lng['interested']['fields']['phoneMobile'] => $phoneMobile,
+        $lng['interested']['fields']['nationality'] => $nationality,
+        $lng['interested']['fields']['payerCustomerNumber'] => $payerCustomerNumber,
+        $lng['interested']['fields']['trainingCourse1'] => $trainingCourse1,
+        $lng['interested']['fields']['trainingFrom'] => $trainingFrom,
+        $lng['interested']['fields']['trainingTo'] => $trainingTo,
+        $lng['interested']['fields']['payerName'] => $payerName,
+        $lng['interested']['fields']['payerAddress'] => $payerAddress,
+        $lng['interested']['fields']['payerContactPerson'] => $payerContactPerson,
+        $lng['interested']['fields']['payerPhone'] => $payerPhone,
+        $lng['interested']['fields']['pensionInsuranceNumber'] => $pensionInsuranceNumber,
+        $lng['interested']['fields']['taxID'] => $taxID,
+        $lng['interested']['fields']['healthInsuranceName'] => $healthInsuranceName,
+        $lng['interested']['fields']['paymentOfSVContributions'] => $paymentOfSVContributions,
+        $lng['interested']['fields']['handicappedIdAvailable'] => $handicappedIdAvailable,
+        $lng['interested']['fields']['denomination'] => $denomination,
+        $lng['interested']['fields']['degreeOfVisualImpairment'] => $degreeOfVisualImpairment,
+        $lng['interested']['fields']['otherDisability'] => $otherDisability
+      ];
+      $this->model->next();
+    } // while
+    $this->streamXLSX($f3, $rows, 'Export');
+  } // export()
 } // class
