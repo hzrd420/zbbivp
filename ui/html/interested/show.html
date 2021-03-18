@@ -1,5 +1,6 @@
 <h1>{{@lng.interested.show.heading, @page.interested.firstName, @page.interested.surname | format,esc}}</h1>
 <include href="{{'html/snippets/actions.html'}}" with="item={{@page.interested}}" />
+<p>{{@lng.interested.fields.created}}: {{'{0,date}, {0,time}', strtotime(@page.interested.created) | format,esc}}</p>
 
 <h2>{{@lng.interested.show.steps}}</h2>
 <check if="{{is_null(@page.interested.count_steps)}}">

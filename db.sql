@@ -19,7 +19,7 @@ CREATE OR REPLACE TABLE `securitytoken` (
     `userId` bigint unsigned NOT NULL,
     `identifier` varchar(256) NOT NULL,
     `token` varchar(256) NOT NULL,
-    `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `created` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB;
@@ -91,6 +91,7 @@ CREATE OR REPLACE TABLE `interested` (
     `payerComments` LONGTEXT,
     `accommodation` VARCHAR(20),
     `youthProtectionExaminationReceived` BOOLEAN NOT NULL DEFAULT false,
+    `created` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`trainingCourse1Id`) REFERENCES `trainingCourse` (`id`)  ON DELETE CASCADE,
     FOREIGN KEY (`trainingCourse2Id`) REFERENCES `trainingCourse` (`id`) ON DELETE CASCADE
@@ -108,6 +109,7 @@ CREATE OR REPLACE TABLE `step` (
   `interestedId` BIGINT UNSIGNED NOT NULL,
   `stepTypeId` BIGINT UNSIGNED NOT NULL,
   `comment` LONGTEXT,
+  `created` timestamp NULL DEFAULT NULL,
   FOREIGN KEY(`interestedId`) REFERENCES `interested`(`id`) ON DELETE CASCADE,
   FOREIGN KEY(`stepTypeId`) REFERENCES `stepType`(`id`) ON DELETE CASCADE,
   PRIMARY KEY (`id`)

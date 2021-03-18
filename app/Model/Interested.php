@@ -4,6 +4,7 @@ namespace Model;
 
 class Interested extends Base {
   use \Validation\Traits\CortexTrait;
+  protected $createdField = 'created';
   public const FIRST_NAME_MIN_LENGTH = 1;
   public const FIRST_NAME_MAX_LENGTH = 200;
   public const SURNAME_MIN_LENGTH = 1;
@@ -462,6 +463,10 @@ class Interested extends Base {
       'nullable' => false,
       'accepted' => true
     ],
+    'created' => [
+      'type' => \DB\SQL\Schema::DT_TIMESTAMP,
+      'nullable' => false
+    ],
     'steps' => [
       'has-many' => ['\Model\Step', 'interestedId']
     ]
@@ -471,7 +476,7 @@ class Interested extends Base {
     'firstName' => 'firstName',
     'surname' => 'surname',
     'birthDate' => 'birthDate',
-    'birthLocation' => 'birthLocation'
+    'created' => 'created'
   ];
 
   /**

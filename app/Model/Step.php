@@ -4,7 +4,7 @@ namespace Model;
 
 class Step extends Base {
   use \Validation\Traits\CortexTrait;
-
+  protected $createdField = 'created';
   protected $fieldConf = [
     'comment' => [
       'type' => \DB\SQL\Schema::DT_LONGTEXT,
@@ -22,7 +22,14 @@ class Step extends Base {
       'nullable' => false,
       'accepted' => true,
       'necessaryPost' => true
+    ],
+    'created' => [
+      'type' => \DB\SQL\Schema::DT_TIMESTAMP,
+      'nullable' => false
     ]
   ];
   protected $table = 'step';
+  public $sortableFields = [
+    'created' => 'created'
+  ];
 } // class

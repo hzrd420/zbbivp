@@ -1,16 +1,16 @@
 <table>
   <thead>
     <tr>
-      <th>{{@lng.step.list.number}}</th>
+      <th>{{@lng.step.fields.created}}</th>
       <th>{{@lng.step.fields.stepType}}</th>
       <th>{{@lng.step.fields.comment}}</th>
       <th>{{@lng.resource.actions}}</th>
     </tr>
   </thead>
   <tbody>
-    <repeat group="{{@list}}" value="{{@item}}" counter="{{@count}}">
+    <repeat group="{{@list}}" value="{{@item}}">
       <tr>
-        <th><a href="{{@BASE}}{{'showStep', 'id =' . @item._id | alias}}">{{@count}}</a></th>
+        <th><a href="{{@BASE}}{{'showStep', 'id =' . @item._id | alias}}">{{'{0,date} {0,time}', strtotime(@item.created) | format,esc}}</a></th>
         <td>{{@item.stepTypeId.name | esc}}</td>
         <td>{{H::shortenString(@item.comment, 50) ?? @lng.main.notSet | esc}}</td>
         <td>
