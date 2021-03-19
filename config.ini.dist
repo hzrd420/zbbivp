@@ -25,14 +25,8 @@ range = 2
 ; Development mode, set this setting to false in the productive use!
 DEV = false
 
-; logging settings:
 ; Path to the logs folder
 LOGS = logs/
-; Destination of logs
-LOG_DESTINATION = zbb-ivp.log
-; Log level: Use: NONE, DEBUG, INFO, NOTICE, WARNING, ERROR, CRITICAL, ALERT or EMERGENCY (UPPER CASE!)
-LOG_LEVEL = DEBUG
-
 ; Path to the templates for html output and emails
 UI = ui/
 ; Path to the uploads of files

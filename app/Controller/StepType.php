@@ -13,8 +13,8 @@ class StepType extends Resource {
   protected $reroute = '@listStepTypes';
   protected $hasFilter = true;
 
-  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\StepType $model) {
-    parent::__construct($logger, $authentication, $model);
+  public function __construct(\AuthenticationHelper $authentication, \Model\StepType $model) {
+    parent::__construct($authentication, $model);
     // Set some counters
     $this->model->countRel('steps');
   } // constructor

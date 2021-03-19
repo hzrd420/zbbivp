@@ -12,8 +12,8 @@ class Step extends Resource {
   ];
   protected $reroute = '@listInterested';
 
-  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\Step $model) {
-    parent::__construct($logger, $authentication, $model);
+  public function __construct(\AuthenticationHelper $authentication, \Model\Step $model) {
+    parent::__construct($authentication, $model);
   } // constructor
 
   protected function listHook(\Base $f3, \Model\Base $model, ?array &$filter, ?array &$options): void {

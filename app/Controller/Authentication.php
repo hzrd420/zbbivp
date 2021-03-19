@@ -3,18 +3,6 @@ declare(strict_types=1);
 namespace Controller;
 
 class Authentication extends Base {
-  protected $authentication;
-
-  /**
-   * Initialize Controller
-   * @param \Monolog\Logger $logger the logger
-   * @param \Authentication The authentication object
-   */
-  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication) {
-    parent::__construct($logger, $authentication);
-    $this->authentication = $authentication;
-  } // constructor
-
   /**
    * Show the login page
    */

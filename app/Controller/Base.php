@@ -10,15 +10,13 @@ namespace Controller;
 abstract class Base {
   // Route to reroute on errors, overwrite in other controllers if necessary
   protected $reroute = '/';
-  protected $logger = null;
   protected $authentication = null;
 
   /**
    * Initialize Base Controller
    * @param \Monolog\Logger $logger The logger
    */
-  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication) {
-    $this->logger = $logger;
+  public function __construct(\AuthenticationHelper $authentication) {
     $this->authentication = $authentication;
   } // constructor
 

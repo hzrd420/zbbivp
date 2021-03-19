@@ -3,13 +3,11 @@ declare(strict_types=1);
 class AuthenticationHelper {
   protected $user;
   protected $token;
-  protected $logger;
 
   /**
    * Initialize Authentication class
    */
-  public function __construct(\Monolog\Logger $logger, \Model\User $user, \Model\SecurityToken $token) {
-    $this->logger = $logger;
+  public function __construct(\Model\User $user, \Model\SecurityToken $token) {
     $this->user = $user;
     $this->token = $token;
   } // __construct
@@ -25,23 +23,20 @@ class AuthenticationHelper {
     $f3 = \Base::instance();
     $this->user->load(['username = ?', $username]);
     if ($this->user->dry() || !password_verify($password, $this->user->password))
-      return $this->failedLogin($username);
+      return $this->failedLogin();
     // Log in user:
     $f3->set('SESSION.userId', $this->user->_id);
     if ($stayLoggedIn)
       $this->setRememberCookies($this->user->_id);
-    $this->logger->info('Authentication: Successful login', ['username' => $username]);
     return true;
   } // logInUser()
 
   /**
    * Call this method if a login is failed
-   * Log failed authentication, clear session and return false
-   * @param string $userName The username of the failed user
+   * Clear session and return false
    */
-  protected function failedLogin(string $username): bool {
+  protected function failedLogin(): bool {
     \Base::instance()->clear('SESSION');
-    $this->logger->notice('Authentication: Wrong credentials to log in', ['username' => $username]);
     return false;
   } // failedLogin
 
@@ -57,7 +52,6 @@ class AuthenticationHelper {
       // Delete obsolete token from database
       $this->token->erase(['identifier = ?', $identifier]);
     } // if
-    $this->logger->info('Authentication: Successful logout', ['username' => $this->user->username]);
     $this->user->reset();
   } // logoutUser()
 

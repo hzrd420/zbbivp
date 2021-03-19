@@ -34,11 +34,10 @@ Abstract class Resource extends Base {
    * Constructor
    *
    * Load the specific model, will be overwritten in inherited classes and use parent::__construct()
-   * @param \Monolog\Logger $logger The logger
    * @param Model $model the model to use
    */
-  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\Base $model) {
-    parent::__construct($logger, $authentication);
+  public function __construct(\AuthenticationHelper $authentication, \Model\Base $model) {
+    parent::__construct($authentication);
     $this->model = $model;
     $f3 = \Base::instance();
     $f3->set('page.resourceName', $this->resourceName);
@@ -353,7 +352,6 @@ Abstract class Resource extends Base {
 
       // Commit transaction:
       $this->model->commitTransaction();
-      $this->logger->info($f3->format('Edit: User {0} edited {1}, {2} = {3}', $f3->get('USER')->username, $this->resourceName, $this->model->getPrimary(), $this->model->_id));
       \Flash::instance()->addMessage($f3->get('lng.' . $this->resourceName . '.edit.success'), 'success');
       $this->rerouteToLast();
     } catch (ControllerException $e) {
@@ -430,7 +428,6 @@ Abstract class Resource extends Base {
         $this->checkCsrf();
         $this->model->erase();
         \Flash::instance()->addMessage($f3->get('lng.' . $this->resourceName . '.delete.success'), 'success');
-        $this->logger->notice($f3->format('Delete: User {0} deleted {1}, {2} = {3}', $f3->get('USER')->username, $this->resourceName, $this->model->getPrimary(), $this->model->_id));
         $f3->reroute($this->reroute);
       } else {
         // Keep Resource:

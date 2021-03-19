@@ -25,31 +25,11 @@ $f3->set('LOGGABLE', [400, 401, 403, 500, 501, 502, 503]);
 // Set up Dice and dependencies:
 $dice = new \Dice\Dice();
 $rules = [
-  \Monolog\Logger::class => [
-    'shared' => true,
-    'constructParams' => ['ZBB_IVP', [], [], null]
-  ],
   \AuthenticationHelper::class => [
     'shared' => true
   ]
 ];
 $dice = $dice->addRules($rules);
-
-// Set up Logger:
-try {
-  $logger = $dice->create(\Monolog\Logger::class);
-  if ($f3->get('LOG_LEVEL') == 'NONE') {
-    $handler = new \Monolog\Handler\NullHandler();
-  } else {
-    $handler = new \Monolog\Handler\StreamHandler($f3->get('LOGS') . $f3->get('LOG_DESTINATION'), $f3->get('LOG_LEVEL'));
-    $formatter = new \Monolog\Formatter\LineFormatter(null, null, true, true);
-    $formatter->includeStacktraces(true);
-    $handler->setFormatter($formatter);
-  } // else
-  $logger->pushHandler($handler);
-} catch (\Psr\Log\InvalidArgumentException $e) {
-  exit($e->getMessage());
-} // catch
 
 $f3->set('CONTAINER', function($class) use ($dice) {
   return $dice->create($class);

@@ -14,8 +14,8 @@ class Interested extends Resource {
   protected $reroute = '@listInterested';
   protected $hasFilter = true;
 
-  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\Interested $model) {
-    parent::__construct($logger, $authentication, $model);
+  public function __construct(\AuthenticationHelper $authentication, \Model\Interested $model) {
+    parent::__construct($authentication, $model);
     // Add some counters:
     $this->model->countRel('steps');
   } // constructor
