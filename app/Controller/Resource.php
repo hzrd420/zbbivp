@@ -37,7 +37,7 @@ Abstract class Resource extends Base {
    * @param \Monolog\Logger $logger The logger
    * @param Model $model the model to use
    */
-  public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\Base $model) {
+  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\Base $model) {
     parent::__construct($logger, $authentication);
     $this->model = $model;
     $f3 = \Base::instance();

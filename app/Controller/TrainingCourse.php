@@ -13,7 +13,7 @@ class TrainingCourse extends Resource {
   protected $reroute = '@listTrainingCourses';
   protected $hasFilter = true;
 
-  public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\TrainingCourse $model) {
+  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\TrainingCourse $model) {
     parent::__construct($logger, $authentication, $model);
     // Set some counters
     $this->model->countRel('interested1');

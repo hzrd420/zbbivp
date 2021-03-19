@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-class Authentication {
+class AuthenticationHelper {
   protected $user;
   protected $token;
   protected $logger;

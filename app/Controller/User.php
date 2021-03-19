@@ -13,7 +13,7 @@ class User extends Resource {
   protected $hasFilter = true;
   protected $reroute = '@listUsers';
 
-  public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\User $model) {
+  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\User $model) {
     parent::__construct($logger, $authentication, $model);
   } // constructor
 

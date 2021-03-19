@@ -12,7 +12,7 @@ class Step extends Resource {
   ];
   protected $reroute = '@listInterested';
 
-  public function __construct(\Monolog\Logger $logger, \Authentication $authentication, \Model\Step $model) {
+  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication, \Model\Step $model) {
     parent::__construct($logger, $authentication, $model);
   } // constructor
 

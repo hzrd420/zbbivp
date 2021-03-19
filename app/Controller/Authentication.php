@@ -10,7 +10,7 @@ class Authentication extends Base {
    * @param \Monolog\Logger $logger the logger
    * @param \Authentication The authentication object
    */
-  public function __construct(\Monolog\Logger $logger, \Authentication $authentication) {
+  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication) {
     parent::__construct($logger, $authentication);
     $this->authentication = $authentication;
   } // constructor

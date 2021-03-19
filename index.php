@@ -29,7 +29,7 @@ $rules = [
     'shared' => true,
     'constructParams' => ['ZBB_IVP', [], [], null]
   ],
-  \Authentication::class => [
+  \AuthenticationHelper::class => [
     'shared' => true
   ]
 ];
@@ -113,7 +113,7 @@ if (!$f3->get('CLI')) {
   // Setup session:
   new DB\SQL\Session($f3->get('db'), 'sessions', true, null, 'CSRF');
 
-  $user = $dice->create('\Authentication')->getUser();
+  $user = $dice->create('\AuthenticationHelper')->getUser();
   $f3->set('USER', $user);
 
   // Route access control:

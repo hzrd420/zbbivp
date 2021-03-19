@@ -17,7 +17,7 @@ abstract class Base {
    * Initialize Base Controller
    * @param \Monolog\Logger $logger The logger
    */
-  public function __construct(\Monolog\Logger $logger, \Authentication $authentication) {
+  public function __construct(\Monolog\Logger $logger, \AuthenticationHelper $authentication) {
     $this->logger = $logger;
     $this->authentication = $authentication;
   } // constructor
