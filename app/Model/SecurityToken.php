@@ -27,16 +27,16 @@ class SecurityToken extends Base {
   protected $db = 'db';
 
   /**
-   * Delete old tokens
+   * Delete old tokens of specific user
    *
    * All tokens older than configured token lifetime
    */
-  public function eraseOldTokens() {
+  public function eraseOldTokens($userId) {
     $lifetime = \Base::instance()->get('authentication.tokenLifetime');
     // Get maximum date:
     $date = new \DateTime();
     $date->sub(new \DateInterval('P' . $lifetime . 'D'));
     $lifetimeDate = $date->format('Y-m-d');
-    $this->erase(['created < ?', $lifetimeDate]);
+    $this->erase(['userId = ? and created < ?', $userId, $lifetimeDate]);
   } // eraseOldTokens()
 } // class

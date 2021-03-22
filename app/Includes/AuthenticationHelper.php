@@ -28,6 +28,8 @@ class AuthenticationHelper {
     $f3->set('SESSION.userId', $this->user->_id);
     if ($stayLoggedIn)
       $this->setRememberCookies($this->user->_id);
+    // Erase old token of this user
+    $this->token->eraseOldTokens($this->user->_id);
     return true;
   } // logInUser()
 
