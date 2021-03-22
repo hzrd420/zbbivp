@@ -245,7 +245,13 @@ class Interested extends Resource {
     if ($this->model->rel('trainingCourse1Id')->count() === 0)
       throw new ControllerException($f3->get('lng.interested.error.noTrainingCourses'));
     parent::loadEditFormRecord($f3);
-  } // showEditForm()
+  } // loadEditFormRecord()
+
+  protected function editHook(\Base $f3, \Model\Base $model): void {
+    // Check that training courses are different:
+    if ($this->model->trainingCourse1Id->_id == $this->model->trainingCourse2Id->_id)
+      throw new ControllerException($f3->get('lng.interested.error.sameTrainingCourses'));
+  } // beforeEditHook()
 
   protected function loadLists(\Base $f3): void {
     // Load training courses:
@@ -395,5 +401,5 @@ class Interested extends Resource {
       $this->model->next();
     } // while
     $this->streamXLSX($f3, $rows, 'Export');
-  } // export()
+  } // export2()
 } // class
