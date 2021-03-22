@@ -17,13 +17,13 @@
   <input type="password" name="password2" id="password2" minlength="{{@page.modelConsts.PASSWORD_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PASSWORD_MAX_LENGTH}}"></p>
 
   <p><label for="firstName">{{@lng.user.fields.firstName}} 
-    {{@lng.user.edit.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
     minlength="{{@page.modelConsts.FIRST_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.FIRST_NAME_MAX_LENGTH}}"></p>
 
   <p><label for="surname">{{@lng.user.fields.surname}} 
-    {{@lng.user.edit.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
+    {{@lng.resource.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
     </label>
   <input required type="text" name="surname" id="surname" value="{{@@POST.surname}}"
     minlength="{{@page.modelConsts.SURNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.SURNAME_MAX_LENGTH}}"></p>

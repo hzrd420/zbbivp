@@ -1,6 +1,5 @@
 <h1>{{@lng.user.delete.heading}}</h1>
 <p>{{@lng.user.delete.question, @page.user.username, @page.user.firstName, @page.user.surname |format,esc}}</p>
-<p>{{@lng.user.delete.warning}}</p>
 <form method="post">
   <input type="hidden" name="csrf" value="{{@CSRF}}">
   <button name="decision" value="true">{{@lng.user.delete.delete}}</button>

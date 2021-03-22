@@ -46,4 +46,10 @@ class User extends Resource {
         $model->password = $password;
     } // if
   } // editHook()
+
+  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+    // Prohibit deleting of last user:
+    if ($this->model->count() === 1)
+      throw new ControllerException($f3->get('lng.user.error.lastUser'));
+  } // deleteHook()
 } // class

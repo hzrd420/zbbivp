@@ -14,14 +14,14 @@ CREATE OR REPLACE TABLE `user` (
 INSERT INTO user (username, password, surname, firstName) VALUES
     ('admin', '$2y$10$P6.Hp/NcWeLWuV53NsV9X.BLbJQ2w1IxVulDJ2pI8cKCi.OgErNz.', 'User', 'Administrator');
 
-CREATE OR REPLACE TABLE `securitytoken` (
+CREATE OR REPLACE TABLE `SecurityToken` (
     `id` bigint unsigned AUTO_INCREMENT,
     `userId` bigint unsigned NOT NULL,
     `identifier` varchar(256) NOT NULL,
     `token` varchar(256) NOT NULL,
     `created` timestamp NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`userId`) REFERENCES `user` (`id`)
+    FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE OR REPLACE TABLE `trainingCourse` (
