@@ -309,7 +309,7 @@ class Interested extends Resource {
       $surname = $this->model->surname;
       $firstName = $this->model->firstName;
       $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment];
-      $birthDate = $f3->format('{0,date}', strtotime($this->model->birthDate));
+      $birthDate = $this->replaceNotSetTime($this->model->birthDate, '{0,date}');
       $trainingCourse1 = $this->model->trainingCourse1Id->name;
       $trainingCourse2 = is_null($this->model->trainingCourse2Id) ? $lng['main']['notSet'] : $model->trainingCourse2Id->name;
       $trainingType = $lng['interested']['export'][$this->model->retraining ? 'retraining' : 'training'];
@@ -352,13 +352,13 @@ class Interested extends Resource {
       $surname = $this->model->surname;
       $firstName = $this->model->firstName;
       $birthLocation = $this->model->birthLocation;
-      $birthDate = $f3->format('{0,date}', strtotime($this->model->birthDate));
+      $birthDate = $this->replaceNotSetTime($this->model->birthDate, '{0,date}');
       $address = $this->model->address;
       $phoneMobile = $this->model->phoneMobile;
       $nationality = $this->model->nationality;
       $payerCustomerNumber = $this->model->payerCustomerNumber ?? $lng['main']['notSet'];
-      $trainingFrom = $f3->format('{0,date}', strtotime($this->model->trainingFrom));
-      $trainingTo = $f3->format('{0,date}', strtotime($this->model->trainingTo));
+      $trainingFrom = $this->replaceNotSetTime($this->model->trainingFrom, '{0,date}');
+      $trainingTo = $this->replaceNotSetTime($this->model->trainingTo, '{0,date}');
       $payerName = $this->model->payerName ?? $lng['main']['notSet'];
       $payerAddress = $this->model->payerAddress ?? $lng['main']['notSet'];
       $payerContactPerson = $this->model->payerContactPerson ?? $lng['main']['notSet'];
@@ -402,4 +402,16 @@ class Interested extends Resource {
     } // while
     $this->streamXLSX($f3, $rows, 'Export');
   } // export2()
+
+  /**
+   * Replace time / dates null with not set
+   *
+   * Used for XLSX export methods
+   */
+  protected function replaceNotSetTime(?string $timeString, string $format): string {
+    $f3 = \Base::instance();
+    if (is_null($timeString))
+      return $f3->get('lng.main.notSet');
+    return $f3->format($format, strtotime($timeString));
+  } // replaceNotSetTime()
 } // class
