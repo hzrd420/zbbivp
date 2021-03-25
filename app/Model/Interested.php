@@ -5,6 +5,12 @@ namespace Model;
 class Interested extends Base {
   use \Validation\Traits\CortexTrait;
   protected $createdField = 'created';
+
+  public const GENDER = [
+    'f',
+    'm',
+    'd'
+  ];
   public const FIRST_NAME_MIN_LENGTH = 1;
   public const FIRST_NAME_MAX_LENGTH = 200;
   public const SURNAME_MIN_LENGTH = 1;
@@ -34,10 +40,10 @@ class Interested extends Base {
   public const LAST_SCHOOL_MIN_LENGTH = 1;
   public const LAST_SCHOOL_MAX_LENGTH = 200;
   public const GERMAN_LEVEL = [
-    'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'
+    'M', 'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'
   ];
   public const DEGREE_OF_VISUAL_IMPAIRMENT = [
-    1, 2, 5
+    '1', '2', '5'
   ];
   public const OTHER_DISABILITY = [
     'K', 'P'
@@ -72,6 +78,15 @@ class Interested extends Base {
   ];
 
   protected $fieldConf = [
+    'gender' => [
+      'type' => 'char(1)',
+      'passThrough' => true,
+      'nullable' => false,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'item' => self::GENDER
+    ],
     'firstName' => [
       'type' => 'varchar(' . self::FIRST_NAME_MAX_LENGTH . ')',
       'passThrough' => true,
@@ -90,40 +105,46 @@ class Interested extends Base {
       'filter' => 'trim',
       'validate' => 'required|min_len,' . self::SURNAME_MIN_LENGTH . '|max_len,' . self::SURNAME_MAX_LENGTH
     ],
-    'address' => [
+    'street' => [
       'type' => 'varchar(' . self::ADDRESS_MAX_LENGTH . ')',
       'passThrough' => true,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|min_len,' . self::ADDRESS_MIN_LENGTH . '|max_len,' . self::ADDRESS_MAX_LENGTH
+      'validate' => 'street_address|max_len,' . self::ADDRESS_MAX_LENGTH
+    ],
+    'postCode' => [
+      'type' => 'char(5)',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'exact_len,5'
+    ],
+    'location' => [
+      'type' => 'varchar(' . self::ADDRESS_MAX_LENGTH . ')',
+      'passThrough' => true,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'min_len,' . self::ADDRESS_MIN_LENGTH . '|max_len,' . self::ADDRESS_MAX_LENGTH
     ],
     'nationality' => [
       'type' => 'varchar(' . self::NATIONALITY_MAX_LENGTH . ')',
       'passThrough' => true,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|min_len,' . self::NATIONALITY_MIN_LENGTH . '|max_len,' . self::NATIONALITY_MAX_LENGTH
+      'validate' => 'min_len,' . self::NATIONALITY_MIN_LENGTH . '|max_len,' . self::NATIONALITY_MAX_LENGTH
     ],
     'birthDate' => [
       'type' => \DB\SQL\Schema::DT_DATE,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|date',
+      'validate' => 'date',
     ],
     'email' => [
       'type' => 'varchar(' . self::EMAIL_MAX_LENGTH . ')',
       'passThrough' => true,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|valid_email|max_len,' . self::EMAIL_MAX_LENGTH
+      'validate' => 'valid_email|max_len,' . self::EMAIL_MAX_LENGTH
     ],
     'birthLocation' => [
       'type' => 'varchar(' . self::BIRTH_LOCATION_MAX_LENGTH . ')',
@@ -185,11 +206,9 @@ class Interested extends Base {
     'lastGraduation' => [
       'type' => 'varchar(' . self::LAST_GRADUATION_MAX_LENGTH . ')',
       'passThrough' => true,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|min_len,' . self::LAST_GRADUATION_MIN_LENGTH . '|max_len,' . self::LAST_GRADUATION_MAX_LENGTH
+      'validate' => 'min_len,' . self::LAST_GRADUATION_MIN_LENGTH . '|max_len,' . self::LAST_GRADUATION_MAX_LENGTH
     ],
     'graduationYear' => [
       'type' => \DB\SQL\Schema::DT_INT,
@@ -200,11 +219,10 @@ class Interested extends Base {
     'lastSchool' => [
       'type' => 'varchar(' . self::LAST_SCHOOL_MAX_LENGTH . ')',
       'passThrough' => true,
-      'nullable' => false,
+      'nullable' => true,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|min_len,' . self::LAST_SCHOOL_MIN_LENGTH . '|max_len,' . self::LAST_SCHOOL_MAX_LENGTH
+      'validate' => 'min_len,' . self::LAST_SCHOOL_MIN_LENGTH . '|max_len,' . self::LAST_SCHOOL_MAX_LENGTH
     ],
     'schoolFrom' => [
       'type' => \DB\SQL\Schema::DT_DATE,
@@ -225,7 +243,7 @@ class Interested extends Base {
       'accepted' => true
     ],
     'germanLevel' => [
-      'type' => 'char(2)',
+      'type' => 'varchar(2)',
       'passThrough' => true,
       'nullable' => false,
       'accepted' => true,
@@ -234,10 +252,9 @@ class Interested extends Base {
       'item' => self::GERMAN_LEVEL
     ],
     'degreeOfVisualImpairment' => [
-      'type' => \DB\SQL\Schema::DT_INT,
-      'nullable' => false,
+      'type' => 'char(1)',
+      'passThrough' => true,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
       'item' => self::DEGREE_OF_VISUAL_IMPAIRMENT
     ],
@@ -332,9 +349,7 @@ class Interested extends Base {
     ],
     'trainingCourse1Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true
     ],
     'trainingCourse2Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',
@@ -480,12 +495,14 @@ class Interested extends Base {
   ];
 
   /**
-   * Check foreign Key of trainingCourse1Id
+   * Check optional foreign Key of trainingCourse1
    * @param string $value The value
    */
   protected function set_trainingCourse1Id($value) {
+    if ($value === 'none')
+      return null;
     return $this->checkForeignKey($this->rel('trainingCourse1Id'), $value, 'trainingCourse1Id');
-  } // set_trainingCourse2Id()
+  } // set_trainingCourse1Id()
 
   /**
    * Check optional foreign Key of trainingCourse2

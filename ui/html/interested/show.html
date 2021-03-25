@@ -13,20 +13,37 @@
 </check>
 
 <h2>{{@lng.interested.sections.baseData}}</h2>
+<p>{{@lng.interested.fields.gender}}: {{@lng.interested.gender[@page.interested.gender] | esc}}</p>
 <p>{{@lng.interested.fields.name}}: {{'{0} {1}', @page.interested.firstName, @page.interested.surname | format,esc}}</p>
-<p>{{@lng.interested.fields.birthDate}}: {{'{0,date}', strtotime(@page.interested.birthDate) | format,esc}}</p>
-<check if="{{!is_null(@page.interested.birthLocation)}}">
-  <p>{{@lng.interested.fields.birthLocation}}: {{@page.interested.birthLocation | esc}}</p>
-</check>
-<p>{{@lng.interested.fields.address}}: {{@page.interested.address | esc}}</p>
-<p>{{@lng.interested.fields.nationality}}: {{@page.interested.nationality | esc}}</p>
-<p>{{@lng.interested.fields.email}}: 
-  <a href="mailto:{{@page.interested.email | esc}}">{{@page.interested.email | esc}}</a>
+<p>
+  {{@lng.interested.fields.birthDate}}: 
+  <check if="{{is_null(@page.interested.birthDate)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.interested.birthDate) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.interested.fields.birthLocation}}: {{@page.interested.birthLocation ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.street}}: {{@page.interested.street ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.postCode}}: {{@page.interested.postCode ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.location}}: {{@page.interested.location ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.interested.fields.nationality}}: {{@page.interested.nationality ?? @lng.main.notSet | esc}}</p>
+<p>
+  {{@lng.interested.fields.email}}: 
+  <check if="{{is_null(@page.interested.email)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+      <a href="mailto:{{@page.interested.email | esc}}">{{@page.interested.email | esc}}</a>
+    </false>
+  </check>
 </p>
 <p>{{@lng.interested.fields.phoneMobile}}: {{@page.interested.phoneMobile | esc}}</p>
-<check if="{{!is_null(@page.interested.phonePrivate)}}">
-  <p>{{@lng.interested.fields.phonePrivate}}: {{@page.interested.phonePrivate | esc}}</p>
-</check>
+<p>{{@lng.interested.fields.phonePrivate}}: {{@page.interested.phonePrivate ?? @lng.main.notSet | esc}}</p>
 <p>{{@lng.interested.fields.maritalStatus}}: {{@lng.interested.maritalStatus[@page.interested.maritalStatus] ?? @lng.interested.maritalStatus.none}}</p>
 <p>{{@lng.interested.fields.hasChilds}}: {{@page.interested.hasChilds ? @lng.main.true : @lng.main.false}}</p>
 
@@ -41,9 +58,9 @@
 </check>
 
 <h2>{{@lng.interested.sections.education}}</h2>
-<p>{{@lng.interested.fields.lastGraduation}}: {{@page.interested.lastGraduation | esc}}</p>
+<p>{{@lng.interested.fields.lastGraduation}}: {{@page.interested.lastGraduation ?? @lng.main.notSet | esc}}</p>
 <p>{{@lng.interested.fields.graduationYear}}: {{@page.interested.graduationYear ?? @lng.main.notSet | esc}}</p>
-<p>{{@lng.interested.fields.lastSchool}}: {{@page.interested.lastSchool| esc}}</p>
+<p>{{@lng.interested.fields.lastSchool}}: {{@page.interested.lastSchool ?? @lng.main.notSet | esc}}</p>
 <p>
   {{@lng.interested.fields.schoolFrom}}: 
   <check if="{{is_null(@page.interested.schoolFrom)}}">
@@ -70,7 +87,7 @@
 <p>{{@lng.interested.fields.germanLevel}}: {{@page.interested.germanLevel | esc}}</p>
 
 <h2>{{@lng.interested.sections.medicalData}}</h2>
-<p>{{@lng.interested.fields.degreeOfVisualImpairment}}: {{'{0} ({1})', @page.interested.degreeOfVisualImpairment, @lng.interested.degreeOfVisualImpairment[@page.interested.degreeOfVisualImpairment] | format,esc}}</p>
+<p>{{@lng.interested.fields.degreeOfVisualImpairment}}: {{@lng.interested.degreeOfVisualImpairment[@page.interested.degreeOfVisualImpairment] ?? @lng.interested.degreeOfVisualImpairment.none}}</p>
 <p>{{@lng.interested.fields.otherDisability}}: 
   <check if="{{is_null(@page.interested.otherDisability)}}">
     <true>
@@ -101,10 +118,15 @@
 
 <h2>{{@lng.interested.sections.training}}</h2>
 <p>{{@lng.interested.fields.retraining}}: {{@page.interested.retraining ? @lng.main.true : @lng.main.false}}</p>
-<p>{{@lng.interested.fields.trainingCourse1}}: {{@page.interested.trainingCourse1Id.name | esc}}</p>
-<check if="{{!is_null(@page.interested.trainingCourse2Id)}}">
-  <p>{{@lng.interested.fields.trainingCourse2}}: {{@page.interested.trainingCourse2Id.name | esc}}</p>
-</check>
+<p>
+  {{@lng.interested.fields.trainingCourse1}}: 
+  {{is_null(@page.interested.trainingCourse1Id) ? @lng.main.notSet : @page.trainingCourse1Id.name | esc}}
+</p>
+
+<p>
+  {{@lng.interested.fields.trainingCourse2}}: 
+  {{is_null(@page.interested.trainingCourse2Id) ? @lng.main.notSet : @page.trainingCourse2Id.name | esc}}
+</p>
 
 <h3>{{@lng.interested.fields.electives}}</h3>
 <pre>{{@page.interested.electives ?? @lng.main.notSet | esc}}</pre>

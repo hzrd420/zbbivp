@@ -177,4 +177,21 @@ abstract class Base extends \DB\Cortex {
       $this->touch($this->updatedField);
     return parent::update();
   } // update()
+
+  public function defaults($set = false) {
+    if (!$set)
+      return parent::defaults($set);
+    $created = null;
+    $updated = null;
+    if (!is_null($this->createdField) && array_key_exists($this->createdField, $this->fieldConf))
+      $created = $this->get($this->createdField);
+    if (!is_null($this->updatedField) && array_key_exists($this->updatedField, $this->fieldConf))
+      $updated = $this->get($this->updatedField);
+    $result = parent::defaults($set);
+    if (!is_null($created))
+      $this->set($this->createdField, $created);
+    if (!is_null($updated))
+      $this->set($this->updatedField, $updated);
+    return $result;
+  } // defaults()
 } // class

@@ -18,8 +18,14 @@
   <p><label for="filter_nationality">{{@lng.interested.fields.nationality}}</label>
   <input type="text" name="filter_nationality" id="filter_nationality" value="{{@@REQUEST.filter_nationality}}"></p>
 
-  <p><label for="filter_address">{{@lng.interested.fields.address}}</label>
-  <input type="text" name="filter_address" id="filter_address" value="{{@@REQUEST.filter_address}}"></p>
+  <p><label for="filter_street">{{@lng.interested.fields.street}}</label>
+  <input type="text" name="filter_street" id="filter_street" value="{{@@REQUEST.filter_street}}"></p>
+
+  <p><label for="filter_postCode">{{@lng.interested.fields.postCode}}</label>
+  <input type="text" name="filter_postCode" id="filter_postCode" value="{{@@REQUEST.filter_postCode}}"></p>
+
+  <p><label for="filter_location">{{@lng.interested.fields.location}}</label>
+  <input type="text" name="filter_location" id="filter_location" value="{{@@REQUEST.filter_location}}"></p>
 
   <p><label for="filter_email">{{@lng.interested.fields.email}}</label>
   <input type="email" name="filter_email" id="filter_email" value="{{@@REQUEST.filter_email}}"</p>
@@ -100,6 +106,8 @@
   <p><label for="filter_degreeOfVisualImpairment">{{@lng.interested.fields.degreeOfVisualImpairment}}</label>
     <select name="filter_degreeOfVisualImpairment" id="filter_degreeOfVisualImpairment">
       <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_degreeOfVisualImpairment === 'none' ? 'selected' : ''}} value="none">{{@lng.interested.degreeOfVisualImpairment.none}}</option>
+
       <repeat group="{{@page.degreeOfVisualImpairmentList}}" value="{{@item}}">
       <option {{@@REQUEST.filter_degreeOfVisualImpairment == @item ? 'selected' : ''}} value="{{@item}}">{{'{0} ({1})', @item, @lng.interested.degreeOfVisualImpairment[@item] | format,esc}}</option>
       </repeat>

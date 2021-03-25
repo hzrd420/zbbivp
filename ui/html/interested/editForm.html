@@ -1,10 +1,16 @@
 <h1>{{@lng.interested.edit.heading}}</h1>
 <form method="post">
   <h2>{{@lng.interested.sections.baseData}}</h2>
+  <p><label for="gender">{{@lng.interested.fields.gender}}</label>
+    <select autofocus required name="gender" id="gender">
+      <repeat group="{{@page.genderList}}" value="{{@item}}">
+        <option {{@@POST.gender === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.gender[@item]}}</option>
+      </repeat>
+    </select></p>  
   <p><label for="firstName">{{@lng.interested.fields.firstName}}
     {{@lng.resource.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
     </label>
-  <input autofocus required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
+  <input required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
     minlength="{{@page.modelConsts.FIRST_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.FIRST_NAME_MAX_LENGTH}}"></p>
 
   <p><label for="surname">{{@lng.interested.fields.surname}}
@@ -14,7 +20,7 @@
     minlength="{{@page.modelConsts.SURNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.SURNAME_MAX_LENGTH}}"></p>
 
   <p><label for="birthDate">{{@lng.interested.fields.birthDate}}</label>
-  <input required type="date" name="birthDate" id="birthDate" 
+  <input type="date" name="birthDate" id="birthDate" 
   <check if="{{isset(@POST.birthDate)}}">
     value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.birthDate) | format,esc}}"
   </check>></p>
@@ -28,19 +34,29 @@
   <p><label for="nationality">{{@lng.interested.fields.nationality}}
     {{@lng.resource.betweenChars, @page.modelConsts.NATIONALITY_MIN_LENGTH, @page.modelConsts.NATIONALITY_MAX_LENGTH | format}}
     </label>
-  <input required type="text" name="nationality" id="nationality" value="{{@@POST.nationality}}"
+  <input type="text" name="nationality" id="nationality" value="{{@@POST.nationality}}"
     minlength="{{@page.modelConsts.NATIONALITY_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NATIONALITY_MAX_LENGTH}}"></p>
 
-  <p><label for="address">{{@lng.interested.fields.address}}
+  <p><label for="street">{{@lng.interested.fields.street}}
     {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
     </label>
-  <input required type="text" name="address" id="address" value="{{@@POST.address}}"
+  <input type="text" name="street" id="street" value="{{@@POST.street}}"
+    minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
+
+  <p><label for="postCode">{{@lng.interested.fields.postCode}}</label>
+  <input type="text" name="postCode" id="postCode" value="{{@@POST.postCode}}"
+    minlength="5" maxlength="5"></p>
+
+  <p><label for="location">{{@lng.interested.fields.location}}
+    {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    </label>
+  <input type="text" name="location" id="location" value="{{@@POST.location}}"
     minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
 
   <p><label for="email">{{@lng.interested.fields.email}}
     {{@lng.resource.betweenChars, @page.modelConsts.EMAIL_MIN_LENGTH, @page.modelConsts.EMAIL_MAX_LENGTH | format}}
     </label>
-  <input required type="email" name="email" id="email" value="{{@@POST.email}}"
+  <input type="email" name="email" id="email" value="{{@@POST.email}}"
     minlength="{{@page.modelConsts.EMAIL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_MAX_LENGTH}}"></p>
 
   <p><label for="phoneMobile">{{@lng.interested.fields.phoneMobile}}
@@ -89,7 +105,7 @@
   <p><label for="lastGraduation">{{@lng.interested.fields.lastGraduation}}
     {{@lng.resource.betweenChars, @page.modelConsts.LAST_GRADUATION_MIN_LENGTH, @page.modelConsts.LAST_GRADUATION_MAX_LENGTH | format}}
     </label>
-  <input required type="text" name="lastGraduation" id="lastGraduation" value="{{@@POST.lastGraduation}}"
+  <input type="text" name="lastGraduation" id="lastGraduation" value="{{@@POST.lastGraduation}}"
     minlength="{{@page.modelConsts.LAST_GRADUATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_GRADUATION_MAX_LENGTH}}"></p>
 
   <p><label for="graduationYear">{{@lng.interested.fields.graduationYear}}</label>
@@ -98,7 +114,7 @@
   <p><label for="lastSchool">{{@lng.interested.fields.lastSchool}}
     {{@lng.resource.betweenChars, @page.modelConsts.LAST_SCHOOL_MIN_LENGTH, @page.modelConsts.LAST_SCHOOL_MAX_LENGTH | format}}
     </label>
-  <input required type="text" name="lastSchool" id="lastSchool" value="{{@@POST.lastSchool}}"
+  <input type="text" name="lastSchool" id="lastSchool" value="{{@@POST.lastSchool}}"
     minlength="{{@page.modelConsts.LAST_SCHOOL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_SCHOOL_MAX_LENGTH}}"></p>
 
   <p><label for="schoolFrom">{{@lng.interested.fields.schoolFrom}}</label>
@@ -126,7 +142,8 @@
 
 <h2>{{@lng.interested.sections.medicalData}}</h2>
   <p><label for="degreeOfVisualImpairment">{{@lng.interested.fields.degreeOfVisualImpairment}}</label>
-    <select required name="degreeOfVisualImpairment" id="degreeOfVisualImpairment">
+    <select name="degreeOfVisualImpairment" id="degreeOfVisualImpairment">
+      <option {{is_null(@@POST.degreeOfVisualImpairment) ? 'selected' : ''}} value="">{{@lng.interested.maritalStatus.none}}</option>
       <repeat group="{{@page.degreeOfVisualImpairmentList}}" value="{{@item}}">
       <option {{@@POST.degreeOfVisualImpairment === @item ? 'selected' : ''}} value="{{@item}}">{{'{0} ({1})', @item, @lng.interested.degreeOfVisualImpairment[@item] | format}}</option>
       </repeat>
@@ -210,6 +227,7 @@
 
   <p><label for="trainingCourse1Id">{{@lng.interested.fields.trainingCourse1}}</label>
     <select required name="trainingCourse1Id" id="trainingCourse1Id">
+      <option {{@@POST.trainingCourse1Id === null ? 'selected' : ''}} value="none">{{@lng.main.noChoice}}</option>
       <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
         <option {{@@POST.trainingCourse1Id === @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
       </repeat>

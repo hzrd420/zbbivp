@@ -22,9 +22,10 @@ class Interested extends Resource {
 
   protected function getFilters(\Model\Base $model, array $opts): array {
     $filters = [];
+
     // Training course 1:
     if (array_key_exists('trainingCourse1', $opts))
-      $filters[] = ['trainingCourse1Id = ?', $opts['trainingCourse1']];
+      $filters[] = ['trainingCourse1Id = ?', $opts['trainingCourse2']];
 
     // Training course 2:
     if (array_key_exists('trainingCourse2', $opts))
@@ -38,9 +39,17 @@ class Interested extends Resource {
     if (array_key_exists('surname', $opts))
       $filters[] = ['surname LIKE ?', '%' . $opts['surname'] . '%'];
 
-    // Address:
-    if (array_key_exists('address', $opts))
-      $filters[] = ['address LIKE ?', '%' . $opts['address'] . '%'];
+    // Street:
+    if (array_key_exists('street', $opts))
+      $filters[] = ['street LIKE ?', '%' . $opts['street'] . '%'];
+
+    // Post code:
+    if (array_key_exists('postCode', $opts))
+      $filters[] = ['postCode LIKE ?', '%' . $opts['postCode'] . '%'];
+
+    // Location:
+    if (array_key_exists('location', $opts))
+      $filters[] = ['location LIKE ?', '%' . $opts['location'] . '%'];
 
     // Birth date:
     if (array_key_exists('birthDate', $opts))
@@ -104,7 +113,7 @@ class Interested extends Resource {
 
     // Degree of visual impairment:
     if (array_key_exists('degreeOfVisualImpairment', $opts))
-      $filters[] = ['degreeOfVisualImpairment = ?', $opts['degreeOfVisualImpairment']];
+      $filters[] = ['degreeOfVisualImpairment = ?', $opts['degreeOfVisualImpairment'] === 'none' ? null : $opts['degreeOfVisualImpairment']];
 
     // Other disability:
     if (array_key_exists('otherDisability', $opts))
@@ -249,7 +258,11 @@ class Interested extends Resource {
 
   protected function editHook(\Base $f3, \Model\Base $model): void {
     // Check that training courses are different:
-    if ($this->model->trainingCourse1Id->_id == $this->model->trainingCourse2Id->_id)
+      if (
+        !is_null($this->model->trainingCourse1Id)
+        && !is_null($this->model->trainingCourse1Id)
+        && $this->model->trainingCourse1Id->_id == $this->model->trainingCourse2Id->_id
+      )
       throw new ControllerException($f3->get('lng.interested.error.sameTrainingCourses'));
   } // beforeEditHook()
 
@@ -275,6 +288,8 @@ class Interested extends Resource {
     $f3->set('page.payerCostCommitmentList', $this->model::PAYER_COST_COMMITMENT);
     // Load accommodation list
     $f3->set('page.accommodationList', $this->model::ACCOMMODATION);
+    // Load gender list
+    $f3->set('page.genderList', $this->model::GENDER);
   } // loadLists()
 
   /**

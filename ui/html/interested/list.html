@@ -1,5 +1,5 @@
-    <p><a class="export" href="{{@BASE}}{{'exportInterested1' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.interested.list.export1}}</a></p>
-    <p><a class="export" href="{{@BASE}}{{'exportInterested2' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.interested.list.export2}}</a></p>
+<p><a class="export" href="{{@BASE}}{{'exportInterested1' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.interested.list.export1}}</a></p>
+<p><a class="export" href="{{@BASE}}{{'exportInterested2' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.interested.list.export2}}</a></p>
 <table>
   <thead>
     <tr>
@@ -19,16 +19,32 @@
       <tr>
         <th><a href="{{@BASE}}{{'showInterested', 'id =' . @item._id | alias}}">{{'{0} {1}', @item.firstName, @item.surname | format,esc}}</a></th>
         <td>{{'{0,date} {0,time}', strtotime(@item.created) | format,esc}}</td>
-        <td>{{'{0,date}', strtotime(@item.birthDate) | format,esc}}</td>
         <td>
-          <a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item.trainingCourse1Id._id | alias}}">
-            {{@item.trainingCourse1Id.name | esc}}
-          </a>
+          <check if="{{is_null(@item.birthDate)}}">
+            <true>
+              {{@lng.main.notSet}}
+            </true>
+            <false>
+              {{'{0,date}', strtotime(@item.birthDate) | format,esc}}
+            </false>
+          </check>
+        </td>
+        <td>
+          <check if="{{is_null(@item.trainingCourse1Id)}}">
+            <true>
+              {{@lng.interested.list.noTrainingCourse}}
+            </true>
+            <false>
+              <a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item.trainingCourse1Id._id | alias}}">
+                {{@item.trainingCourse1Id.name | esc}}
+              </a>
+            </false>
+          </check>
         </td>
         <td>
           <check if="{{is_null(@item.trainingCourse2Id)}}">
             <true>
-              {{@lng.interested.list.noTrainingCourse2}}
+              {{@lng.interested.list.noTrainingCourse}}
             </true>
             <false>
               <a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item.trainingCourse2Id._id | alias}}">
