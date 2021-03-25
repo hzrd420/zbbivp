@@ -260,7 +260,7 @@ class Interested extends Resource {
     // Check that training courses are different:
       if (
         !is_null($this->model->trainingCourse1Id)
-        && !is_null($this->model->trainingCourse1Id)
+        && !is_null($this->model->trainingCourse2Id)
         && $this->model->trainingCourse1Id->_id == $this->model->trainingCourse2Id->_id
       )
       throw new ControllerException($f3->get('lng.interested.error.sameTrainingCourses'));
@@ -323,9 +323,9 @@ class Interested extends Resource {
     while (!$this->model->dry()) {
       $surname = $this->model->surname;
       $firstName = $this->model->firstName;
-      $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment];
+      $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
       $birthDate = $this->replaceNotSetTime($this->model->birthDate, '{0,date}');
-      $trainingCourse1 = $this->model->trainingCourse1Id->name;
+      $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $model->trainingCourse1Id->name;
       $trainingCourse2 = is_null($this->model->trainingCourse2Id) ? $lng['main']['notSet'] : $model->trainingCourse2Id->name;
       $trainingType = $lng['interested']['export'][$this->model->retraining ? 'retraining' : 'training'];
       $accommodation = $lng['interested']['accommodation'][$this->model->accommodation ?? 'none'];
@@ -348,7 +348,7 @@ class Interested extends Resource {
       ];
       $this->model->next();
     } // while
-    $this->streamXLSX($f3, $rows, 'Export');
+    $this->streamXLSX($f3, $rows, $lng['interested']['export']['export1']);
   } // export1()
 
   /**
@@ -366,11 +366,13 @@ class Interested extends Resource {
     while (!$this->model->dry()) {
       $surname = $this->model->surname;
       $firstName = $this->model->firstName;
-      $birthLocation = $this->model->birthLocation;
+      $birthLocation = $this->model->birthLocation ?? $lng['main']['notSet'];
       $birthDate = $this->replaceNotSetTime($this->model->birthDate, '{0,date}');
-      $address = $this->model->address;
+      $street = $this->model->street ?? $lng['main']['notSet'];
+      $postCode = $this->model->postCode ?? $lng['main']['notSet'];
+      $location = $this->model->location ?? $lng['main']['notSet'];
       $phoneMobile = $this->model->phoneMobile;
-      $nationality = $this->model->nationality;
+      $nationality = $this->model->nationality ?? $lng['main']['notSet'];
       $payerCustomerNumber = $this->model->payerCustomerNumber ?? $lng['main']['notSet'];
       $trainingFrom = $this->replaceNotSetTime($this->model->trainingFrom, '{0,date}');
       $trainingTo = $this->replaceNotSetTime($this->model->trainingTo, '{0,date}');
@@ -383,9 +385,9 @@ class Interested extends Resource {
       $healthInsuranceName = $this->model->healthInsuranceName ?? $lng['main']['notSet'];
       $paymentOfSVContributions = $lng['interested']['paymentOfSVContributions'][$this->model->paymentOfSVContributions ?? 'none'];
       $handicappedIdAvailable = $lng['main'][$this->model->handicappedIdAvailable ? 'true' : 'false'];
-      $trainingCourse1 = $this->model->trainingCourse1Id->name;
+      $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $model->trainingCourse1Id->name;
       $denomination = $lng['interested']['denomination'][$this->model->denomination ?? 'none'];
-      $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment];
+      $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
       $otherDisability = $lng['interested']['otherDisability'][$this->model->otherDisability ?? 'none'];
 
       $rows[] = [
@@ -393,7 +395,9 @@ class Interested extends Resource {
         $lng['interested']['fields']['firstName'] => $firstName,
         $lng['interested']['fields']['birthLocation'] => $birthLocation,
         $lng['interested']['fields']['birthDate'] => $birthDate,
-        $lng['interested']['fields']['address'] => $address,
+        $lng['interested']['fields']['street'] => $street,
+        $lng['interested']['fields']['postCode'] => $postCode,
+        $lng['interested']['fields']['location'] => $location,
         $lng['interested']['fields']['phoneMobile'] => $phoneMobile,
         $lng['interested']['fields']['nationality'] => $nationality,
         $lng['interested']['fields']['payerCustomerNumber'] => $payerCustomerNumber,
@@ -415,7 +419,7 @@ class Interested extends Resource {
       ];
       $this->model->next();
     } // while
-    $this->streamXLSX($f3, $rows, 'Export');
+    $this->streamXLSX($f3, $rows, $lng['interested']['export']['export2']);
   } // export2()
 
   /**

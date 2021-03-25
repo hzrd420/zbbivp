@@ -350,6 +350,7 @@ class Interested extends Base {
     'trainingCourse1Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',
       'accepted' => true,
+      'necessaryPost' => true
     ],
     'trainingCourse2Id' => [
       'belongs-to-one' => '\Model\TrainingCourse',

@@ -120,12 +120,12 @@
 <p>{{@lng.interested.fields.retraining}}: {{@page.interested.retraining ? @lng.main.true : @lng.main.false}}</p>
 <p>
   {{@lng.interested.fields.trainingCourse1}}: 
-  {{is_null(@page.interested.trainingCourse1Id) ? @lng.main.notSet : @page.trainingCourse1Id.name | esc}}
+  {{is_null(@page.interested.trainingCourse1Id) ? @lng.main.notSet : @page.interested.trainingCourse1Id.name | esc}}
 </p>
 
 <p>
   {{@lng.interested.fields.trainingCourse2}}: 
-  {{is_null(@page.interested.trainingCourse2Id) ? @lng.main.notSet : @page.trainingCourse2Id.name | esc}}
+  {{is_null(@page.interested.trainingCourse2Id) ? @lng.main.notSet : @page.interested.trainingCourse2Id.name | esc}}
 </p>
 
 <h3>{{@lng.interested.fields.electives}}</h3>
