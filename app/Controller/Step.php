@@ -8,6 +8,7 @@ class Step extends Resource {
   protected $resourceName = 'step';
   protected $uiActions = [
     ['edit', 'editStep', ['interestedId' => 'interestedId', 'id' => '_id'], []],
+    ['finish', 'finishStep', ['id' => '_id'], ['!due' => null]],
     ['delete', 'deleteStep', ['id' => '_id'], []],
   ];
   protected $reroute = '@listInterested';
@@ -61,4 +62,20 @@ class Step extends Resource {
     $list = $this->model->rel('stepTypeId');
     $f3->set('page.stepTypeList', $list->find());
   } // loadLists()
+
+  /**
+   * Finish a step
+   *
+   * Set due to null and show message
+   */
+  public function finish($f3, $params) {
+    // Load step:
+    $result = $this->loadRecord($params['id']);
+    if (!$result) // Model could not be loaded
+      throw new ControllerException($f3->get('lng.step.error.noSuchResource'));
+    $this->model->due = null;
+    $this->model->save();
+    \Flash::instance()->addMessage($f3->get('lng.step.isFinished'), 'success');
+    $this->rerouteToLast();
+  } // finish()
 } // class

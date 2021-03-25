@@ -12,6 +12,11 @@
   <label for="comment">{{@lng.step.fields.comment}}</label>
   <textarea name="comment" id="comment">{{@@POST.comment}}</textarea>
 
+  <p><label for="due">{{@lng.step.fields.due}}</label>
+  <input type="date" name="due" id="due" 
+  <check if="{{isset(@POST.due)}}">
+    value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.due) | format,esc}}"
+  </check>></p>
   <input type="hidden" name="csrf" value="{{@CSRF}}">
   <button accesskey="s">{{@lng.step.edit.save}}</button>
 </form>

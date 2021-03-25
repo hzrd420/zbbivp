@@ -77,7 +77,12 @@ Abstract class Resource extends Base {
         $actions = [];
         foreach ($this->uiActions as $action) {
           foreach ($action['conditions'] as $key => $value) {
-            if ($item->getRaw($key) != $value)
+            if (
+              $key[0] == '!'
+              && $item->getRaw(substr($key, 1)) == $value
+            )
+              continue 2;
+            else if ($item->getRaw($key) != $value)
               continue 2;
           } // foreach
           $params = $action['params'];

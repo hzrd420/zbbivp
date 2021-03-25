@@ -112,6 +112,7 @@ CREATE OR REPLACE TABLE `step` (
   `interestedId` BIGINT UNSIGNED NOT NULL,
   `stepTypeId` BIGINT UNSIGNED NOT NULL,
   `comment` LONGTEXT,
+  `due` DATE,
   `created` timestamp NULL DEFAULT NULL,
   FOREIGN KEY(`interestedId`) REFERENCES `interested`(`id`) ON DELETE CASCADE,
   FOREIGN KEY(`stepTypeId`) REFERENCES `stepType`(`id`) ON DELETE CASCADE,

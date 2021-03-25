@@ -26,6 +26,12 @@ class Step extends Base {
     'created' => [
       'type' => \DB\SQL\Schema::DT_TIMESTAMP,
       'nullable' => false
+    ],
+    'due' => [
+      'type' => \DB\SQL\Schema::DT_DATE,
+      'accepted' => true,
+      'filter' => 'trim',
+      'validate' => 'date',
     ]
   ];
   protected $table = 'step';
