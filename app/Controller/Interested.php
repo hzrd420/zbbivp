@@ -31,6 +31,10 @@ class Interested extends Resource {
     if (array_key_exists('trainingCourse2', $opts))
       $filters[] = ['trainingCourse2Id = ?', $opts['trainingCourse2']];
 
+    // Gender:
+    if (array_key_exists('gender', $opts))
+      $filters[] = ['gender = ?', $opts['gender']];
+
     // First name:
     if (array_key_exists('firstName', $opts))
       $filters[] = ['firstName LIKE ?', '%' . $opts['firstName'] . '%'];

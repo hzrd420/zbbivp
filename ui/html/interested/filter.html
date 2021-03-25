@@ -1,5 +1,13 @@
 <details>
   <summary>{{@lng.interested.sections.baseData}}</summary>
+  <p><label for="filter_gender">{{@lng.interested.fields.gender}}</label>
+    <select name="filter_gender" id="filter_gender">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.genderList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_gender === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.gender[@item]}}</option>
+      </repeat>
+    </select></p>
+
   <p><label for="filter_firstName">{{@lng.interested.fields.firstName}}</label>
   <input type="text" name="filter_firstName" id="filter_firstName" value="{{@@REQUEST.filter_firstName}}"></p>
 
