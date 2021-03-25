@@ -23,7 +23,7 @@ class SecurityToken extends Base {
       'nullable' => false
     ]
   ];
-  protected $table = 'SecurityToken';
+  protected $table = 'securityToken';
   protected $db = 'db';
 
   /**

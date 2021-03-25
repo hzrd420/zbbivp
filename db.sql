@@ -14,7 +14,7 @@ CREATE OR REPLACE TABLE `user` (
 INSERT INTO user (username, password, surname, firstName) VALUES
     ('admin', '$2y$10$P6.Hp/NcWeLWuV53NsV9X.BLbJQ2w1IxVulDJ2pI8cKCi.OgErNz.', 'User', 'Administrator');
 
-CREATE OR REPLACE TABLE `SecurityToken` (
+CREATE OR REPLACE TABLE `securityToken` (
     `id` bigint unsigned AUTO_INCREMENT,
     `userId` bigint unsigned NOT NULL,
     `identifier` varchar(256) NOT NULL,
