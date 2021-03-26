@@ -20,6 +20,21 @@ limit = 30
 ; Number of previous and next pages from the current page
 range = 2
 
+; Email specific settings
+[mailer]
+; Enter email to send reminders, seperate with | to use more than one
+email = test.example.com|hello@test.com
+
+; SMTP settings, please enter your own smtp server settings
+smtp.host = smtp.example.com
+smtp.port = 587
+; Sheme means sheme of security, use SSL or TLS, no unencrypted connections!
+smtp.scheme = TLS
+smtp.user = testuser
+smtp.pw = Passw0rd!
+from_mail = zbbivp@test.com
+from_name = ZBB Interessentenportal
+
 ; Other settings, only change if necessary or your are a developer!:
 [globals]
 ; Development mode, set this setting to false in the productive use!
