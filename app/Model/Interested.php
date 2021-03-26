@@ -516,11 +516,13 @@ class Interested extends Base {
   } // set_trainingCourse2Id()
 
   /**
-   * Get newest step of loaded interest
+   * Get newest step of loaded interested
    */
   public function getNewestStep() {
-    if ($this->dry() || is_null($this->steps))
+    $step = $this->rel('steps');
+    $finishedSteps = $step->find(['interestedId = ? AND due = ?', $this->get('_id'), null]);
+    if ($finishedSteps === false)
       return null;
-    return $this->steps[count($this->steps)-1];
+    return $finishedSteps[count($finishedSteps) - 1];
   } // getNewestStep()
 } // class
