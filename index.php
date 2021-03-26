@@ -63,10 +63,6 @@ try {
       $dsn = 'mysql:host=' . $db['host'] . ';port=' . $db['port'] . ';dbname=' . $db['name'];
       $f3->set('db', new \DB\SQL($dsn, $db['user'], $db['password'], [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]));
     break;
-    case 'pgsql':
-      $dsn = 'pgsql:host=' . $db['host'] . ';port=' . $db['port'] . ';dbname=' . $db['name'];
-      $f3->set('db', new \DB\SQL($dsn, $db['user'], $db['password'], [\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION]));
-    break;
     default:
       exit('<p>' . $f3->get('lng.error.dbType', $f3->get('database.type')) . '</p>');
     break;
