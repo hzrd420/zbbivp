@@ -83,7 +83,7 @@ class Step extends Resource {
    * Cron: Send reminders for due and over due steps
    */
   public function remind($f3) {
-    $due = $this->model->findDue();
+    $due = $this->model->findTodayDue();
     $overDue = $this->model->findOverDue();
     if ($due !== false) {
       $f3->set('page.dueSteps', $due);
@@ -104,4 +104,30 @@ class Step extends Resource {
     } // if
   echo 'Finished';
   } // remind()
+
+  /**
+   * List due steps (today)
+   * @param Base $f3 The instance of F3
+   */
+  public function listDue(\Base $f3): void {
+    $f3->set('page.list', $this->model->findDue());
+
+    // Render page:
+    $f3->copy('lng.step.list.dueTitle', 'page.title');
+    $f3->copy('lng.step.list.dueHeading', 'page.heading');
+    $f3->set('page.content', 'html/step/singleList.html');
+  } // listDue()
+
+  /**
+   * List over due steps
+   * @param Base $f3 The instance of F3
+   */
+  public function listOverDue(\Base $f3): void {
+    $f3->set('page.list', $this->model->findOverDue());
+
+    // Render page:
+    $f3->copy('lng.step.list.overDueTitle', 'page.title');
+    $f3->copy('lng.step.list.overDueHeading', 'page.heading');
+    $f3->set('page.content', 'html/step/singleList.html');
+  } // listOverDue()
 } // class

@@ -40,15 +40,26 @@ class Step extends Base {
   ];
 
   /**
-   * Find all due (today)
+   * Find all due
    */
   public function findDue() {
+    // Get current date
+    $today = date('Y-m-d');
+    $filter = ['due >= ?', $today];
+    $this->reset();
+    return $this->find($filter);
+  } // findDue()
+
+  /**
+   * Find all due (today)
+   */
+  public function findTodayDue() {
     // Get current date
     $today = date('Y-m-d');
     $filter = ['due = ?', $today];
     $this->reset();
     return $this->find($filter);
-  } // findDue()
+  } // findTodayDue()
 
   /**
    * Find all over due
