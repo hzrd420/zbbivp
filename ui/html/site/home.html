@@ -1,2 +1,10 @@
 <h1>{{@lng.home.heading}}</h1>
 <p>{{@lng.home.welcome, @USER.firstName, @USER.surname | format,esc}}</p>
+
+<h2>{{@lng.home.costCommitmentReceivedList}}</h2>
+<include href="{{'html/site/interestedList.html'}}"
+  with="list={{@page.costCommitmentReceivedList}}" />
+
+<h2>{{@lng.home.costCommitmentNotReceivedList}}</h2>
+<include href="{{'html/site/interestedList.html'}}"
+  with="list={{@page.costCommitmentNotReceivedList}}" />
