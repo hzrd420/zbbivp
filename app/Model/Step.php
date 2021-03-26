@@ -36,7 +36,8 @@ class Step extends Base {
   ];
   protected $table = 'step';
   public $sortableFields = [
-    'created'
+    'created',
+    'due'
   ];
 
   /**
@@ -47,7 +48,7 @@ class Step extends Base {
     $today = date('Y-m-d');
     $filter = ['due >= ?', $today];
     $this->reset();
-    return $this->find($filter);
+    return $this->find($filter, ['order' => 'due']);
   } // findDue()
 
   /**
@@ -58,7 +59,7 @@ class Step extends Base {
     $today = date('Y-m-d');
     $filter = ['due = ?', $today];
     $this->reset();
-    return $this->find($filter);
+    return $this->find($filter, ['order' => 'due']);
   } // findTodayDue()
 
   /**
@@ -69,6 +70,6 @@ class Step extends Base {
     $today = date('Y-m-d');
     $filter = ['due < ?', $today];
     $this->reset();
-    return $this->find($filter);
+    return $this->find($filter, ['order' => 'due']);
   } // findOverDue()
 } // class
