@@ -1,8 +1,8 @@
 <h1>{{@lng.step.show.heading, strtotime(@page.step.created) | format,esc}}</h1>
 <include href="{{'html/snippets/actions.html'}}" with="item={{@page.step}}" />
 <p>{{@lng.step.fields.stepType}}: {{@page.step.stepTypeId.name | esc}}</p>
-<check if={{is_null(@page.step.due)}}">
-<p>{{@lng.interested.fields.birthDate}}: {{'{0,date}', strtotime(@page.step.due) | format,esc}}</p>
+<check if="{{!is_null(@page.step.due)}}">
+<p>{{@lng.step.fields.due}}: {{'{0,date}', strtotime(@page.step.due) | format,esc}}</p>
 </check>
 <check if="{{!is_null(@page.step.comment)}}">
   <h2>{{@lng.step.fields.comment}}</h2>
