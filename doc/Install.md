@@ -1,20 +1,19 @@
-# Install ZBB-IVP
+# Installationsanleitung für das Programm ZBB-IVP (ZBB Interessentenportal)
 
-## Requirements:
+## Systemvoraussetzungen:
 
-+ PHP 8 (tested with PHP 8.0)
++ PHP 8
 + Apache2
-+ Composer
-+ PDO with MySQL driver
-+ MySQL or MariaDB
++ PDO mit MySQL-Treiber
++ MySQL oder MariaDB
 
 ## Installation
 
-1. Import dump from file db.sql into your MySQL installation.
-2. Place the content of the project folder in your webroot directory.
-3. Copy "app/config.ini.dist" to "app/config.ini".
-4. Edit "app/config.ini" (database, pagination, email settings). Read comments in the ini file for further information.
-5. Add cron job one per day to the route /steps/remind to allow sending reminder emails
-6. Run and test the functions.
-7. To log in, use 'admin' as username and 'Test123!' as password.
-  Note: Change the data and the password immediately after first login!
+1. Importieren Sie den SQL-Dump aus der Datei "db.sql" im Hauptverzeichnis der Anwendung in eine Datenbank (MySQL oder MariaDB).
+2. Platzieren Sie den Inhalt des Hauptverzeichnisses in das Wurzelverzeichnis ihres Servers (web root).
+3. Kopieren Sie die Datei "app/config.ini.dist" nach "app/config.ini".
+4. Bearbeiten Sie die Datei "app/config.ini", um Datenbankparameter, Anmeldeeinstellungen, Paginierungseinstellungen und die notwendigen Daten für das Versenden von E-Mails (SMTP, E-Mail-Adressen) zu konfigurieren.
+5. Erstellen Sie einen Cronjob, welcher einmal Täglich, am besten vor Arbeitsbeginn, die Route /steps/remind aufruft. Dies wird für das Senden von E-Mail-Erinnerungen benötigt (fällige / überfällige Schritte)
+6. Rufen Sie die Web-Adresse Ihres Servers auf und Testen Sie, ob das Programm erfolgreich startet.
+7. Um sich anzumelden, verwenden sie Folgende Benutzerdaten (ohne Anführungszeichen): Benutzername: "admin", Passwort: "Test123!"
+  Achtung: Bitte ändern Sie sofort nach der ersten erfolgreichen Anmeldung das Passwort und den Benutzernamen über die Benutzerverwaltung, dort können Sie auch zusätzliche Benutzer anlegen.
