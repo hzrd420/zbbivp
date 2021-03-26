@@ -18,6 +18,7 @@
 		"ikkez/f3-validation-engine": "^1.6",
 		"xfra35/f3-access": "^1.1",
 		"level-2/dice": "dev-master",
-		"spatie/simple-excel": "^1.13"
+		"spatie/simple-excel": "^1.13",
+		"ikkez/f3-mailer": "^1.2"
 	}
 }

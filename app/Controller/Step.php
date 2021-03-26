@@ -78,4 +78,30 @@ class Step extends Resource {
     \Flash::instance()->addMessage($f3->get('lng.step.isFinished'), 'success');
     $this->rerouteToLast();
   } // finish()
+
+  /**
+   * Cron: Send reminders for due and over due steps
+   */
+  public function remind($f3) {
+    $due = $this->model->findDue();
+    $overDue = $this->model->findOverDue();
+    if ($due !== false) {
+      $f3->set('page.dueSteps', $due);
+      \TemplateMailer::send(
+        $f3->get('mailer.email'),
+        $f3->get('lng.mail.dueStepsTitle'),
+        'email/dueSteps.html'
+      );
+    } // if
+
+    if ($overDue !== false) {
+      $f3->set('page.overDueSteps', $overDue);
+      \TemplateMailer::send(
+        $f3->get('mailer.email'),
+        $f3->get('lng.mail.overDueStepsTitle'),
+        'email/overDueSteps.html'
+      );
+    } // if
+  echo 'Finished';
+  } // remind()
 } // class

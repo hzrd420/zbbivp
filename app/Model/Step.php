@@ -38,4 +38,26 @@ class Step extends Base {
   public $sortableFields = [
     'created'
   ];
+
+  /**
+   * Find all due (today)
+   */
+  public function findDue() {
+    // Get current date
+    $today = date('Y-m-d');
+    $filter = ['due = ?', $today];
+    $this->reset();
+    return $this->find($filter);
+  } // findDue()
+
+  /**
+   * Find all over due
+   */
+  public function findOverDue() {
+    // Get current date
+    $today = date('Y-m-d');
+    $filter = ['due < ?', $today];
+    $this->reset();
+    return $this->find($filter);
+  } // findOverDue()
 } // class
