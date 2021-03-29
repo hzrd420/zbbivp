@@ -24,6 +24,6 @@ class ErrorHandler {
       $f3->set('page.error.text', $errorText);
     } // else
     $f3->set('page.content', 'html/snippets/error.html');
-    echo(\Template::instance()->render('html/layout.html'));
+    echo(\Template::instance()->render('html/layouts/main.html'));
   } // handle()
 } // class
