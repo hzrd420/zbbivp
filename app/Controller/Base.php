@@ -8,23 +8,24 @@ namespace Controller;
  * Just a few basics
  */
 abstract class Base {
-  // Route to reroute on errors, overwrite in other controllers if necessary
+  // Route to reroute on errors and some actions, overwrite in other controllers if necessary
   protected $reroute = '/';
+
   protected $authentication = null;
 
   /**
    * Initialize Base Controller
-   * @param \Monolog\Logger $logger The logger
+   * @param \AuthenticationHelper $authentication A instance of the Authentication Helper class
    */
   public function __construct(\AuthenticationHelper $authentication) {
     $this->authentication = $authentication;
   } // constructor
 
   /**
-   * Function is called before routing to a new route
+   * Method is called before routing to a new route
    *
-   * Store last visited route, used for functions in the future
-   * @param $f3 instance of f3
+   * Store last visited route, used for method rerouteToLast
+   * @param \Base $f3 Instance of f3
    */
   public function beforeroute(\Base $f3): void {
     // Add current route and last route to the session:
@@ -39,23 +40,28 @@ abstract class Base {
   } // beforeroute()
 
   /**
-   * Function is called after the routing to a new route
+   * Method is called after the routing to a new route
    *
    * If is set, show the content of a f3-template
-   * @param $f3 the instance of f3
+   * @param \Base $f3 The instance of f3
    */
   public function afterroute(\Base $f3): void {
     // If the variable page.content exists, render the view:
-    if ($f3->exists('page.content')) {
+    if ($f3->exists('page.content'))
       echo(\Template::instance()->render('html/layouts/main.html'));
-    } // if
   } // afterroute()
 
+  /**
+   * Save the CSRF token in the session
+   */
   protected function saveCsrf(): void {
     $f3 = \Base::instance();
     $f3->copy('CSRF', 'SESSION.csrf');
   } // saveCsrf()
 
+  /**
+   * Check that sended CSRF token is the same like the token in the session
+   */
   protected function checkCsrf(): void {
     $f3 = \Base::instance();
     $result = true;
@@ -76,7 +82,7 @@ abstract class Base {
   } // checkCsrf()
 
   /**
-   * Route to last route
+   * Route to last route stored in session
    *
    * If no last route or last route is the same like the current, use $this->reroute
    * @param Base $f3 The instance of f3
