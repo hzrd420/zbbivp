@@ -20,7 +20,7 @@ class Interested extends Resource {
     $this->model->countRel('steps');
   } // constructor
 
-  protected function getFilters(\Model\Base $model, array $opts): array {
+  protected function getFilters(array $opts): array {
     $filters = [];
 
     // Training course 1:
@@ -260,7 +260,7 @@ class Interested extends Resource {
     parent::loadEditFormRecord($f3);
   } // loadEditFormRecord()
 
-  protected function editHook(\Base $f3, \Model\Base $model): void {
+  protected function editHook(\Base $f3): void {
     // Check that training courses are different:
       if (
         !is_null($this->model->trainingCourse1Id)
@@ -268,7 +268,7 @@ class Interested extends Resource {
         && $this->model->trainingCourse1Id->_id == $this->model->trainingCourse2Id->_id
       )
       throw new ControllerException($f3->get('lng.interested.error.sameTrainingCourses'));
-  } // beforeEditHook()
+  } // editHook()
 
   protected function loadLists(\Base $f3): void {
     // Load training courses:
@@ -329,8 +329,8 @@ class Interested extends Resource {
       $firstName = $this->model->firstName;
       $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
       $birthDate = $this->replaceNotSetTime($this->model->birthDate, '{0,date}');
-      $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $model->trainingCourse1Id->name;
-      $trainingCourse2 = is_null($this->model->trainingCourse2Id) ? $lng['main']['notSet'] : $model->trainingCourse2Id->name;
+      $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $this->model->trainingCourse1Id->name;
+      $trainingCourse2 = is_null($this->model->trainingCourse2Id) ? $lng['main']['notSet'] : $this->model->trainingCourse2Id->name;
       $trainingType = $lng['interested']['export'][$this->model->retraining ? 'retraining' : 'training'];
       $accommodation = $lng['interested']['accommodation'][$this->model->accommodation ?? 'none'];
       $lastStep = $this->model->getNewestStep();
@@ -389,7 +389,7 @@ class Interested extends Resource {
       $healthInsuranceName = $this->model->healthInsuranceName ?? $lng['main']['notSet'];
       $paymentOfSVContributions = $lng['interested']['paymentOfSVContributions'][$this->model->paymentOfSVContributions ?? 'none'];
       $handicappedIdAvailable = $lng['main'][$this->model->handicappedIdAvailable ? 'true' : 'false'];
-      $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $model->trainingCourse1Id->name;
+      $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $this->model->trainingCourse1Id->name;
       $denomination = $lng['interested']['denomination'][$this->model->denomination ?? 'none'];
       $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
       $otherDisability = $lng['interested']['otherDisability'][$this->model->otherDisability ?? 'none'];

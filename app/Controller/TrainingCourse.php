@@ -20,7 +20,7 @@ class TrainingCourse extends Resource {
     $this->model->countRel('interested2');
   } // constructor
 
-  protected function getFilters(\Model\Base $model, array $opts): array {
+  protected function getFilters(array $opts): array {
     $filters = [];
     // name:
     if (array_key_exists('name', $opts))
@@ -29,11 +29,11 @@ class TrainingCourse extends Resource {
     return $filters;
   } // getFilters()
 
-  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+  protected function deleteHook(\Base $f3): void {
     // Only delete if training course isn't already in use:
     if (
-      (!is_null($model->count_interested1) && $model->count_interested1 > 0)
-      || (!is_null($model->count_interested2) && $model->count_interested2 > 0)
+      (!is_null($this->model->count_interested1) && $this->model->count_interested1 > 0)
+      || (!is_null($this->model->count_interested2) && $this->model->count_interested2 > 0)
     )
       throw new ControllerException($f3->get('lng.trainingCourse.error.alreadyInUse'));
   } // deleteHook()

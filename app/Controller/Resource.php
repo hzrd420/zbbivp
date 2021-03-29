@@ -109,7 +109,7 @@ Abstract class Resource extends Base {
     $options = $this->createListOptions($f3, $this->model);
     $this->loadLists($f3); // Load lists if method is used for the filter
     // Execute list hook to load additional data or change the model before loading it
-    $this->listHook($f3, $this->model, $filter, $options);
+    $this->listHook($f3, $filter, $options);
     $resourceList = $this->model->paginate($page, $limit, $filter, $options);
     $f3->set('page.resourceList', $resourceList);
 
@@ -138,7 +138,7 @@ Abstract class Resource extends Base {
    * @param array|null $filter The created list filter
    * @param array|null $options The created list options
    */
-  protected function listHook(\Base $f3, \Model\Base $model, ?array &$filter, ?array &$options): void {
+  protected function listHook(\Base $f3, ?array &$filter, ?array &$options): void {
     // Do nothing, overwrite in inherited controller if you need the hook
   } // listHook()
 
@@ -165,15 +165,15 @@ Abstract class Resource extends Base {
    * @param Model $model The model to change
    * @return ?array Array with cortex specific filters
    */
-  protected function createListFilter(\Base $f3, \Model\Base $model): ?array {
+  protected function createListFilter(\Base $f3): ?array {
     // Get possible filter options from REQUEST
     $options = $this->getOptionFields($f3, 'filter_');
     if (is_null($options))
       return null;
     $f3->scrub($options); // Filter user values
-    $filters = $this->getFilters($model, $options);
+    $filters = $this->getFilters($options);
     // Build filters, merge with "and"
-    return !count($filters) ? null : $model->mergeFilter($filters);
+    return !count($filters) ? null : $this->model->mergeFilter($filters);
   } // createListFilter()
 
   /**
@@ -183,7 +183,7 @@ Abstract class Resource extends Base {
    * @param $opts
    * @return array Array of cortex filters
    */
-  protected function getFilters(\Model\Base $model, array $opts): array {
+  protected function getFilters(array $opts): array {
     return [];
   } // getFilters()
 
@@ -210,18 +210,19 @@ Abstract class Resource extends Base {
    * Create options for model find options
    *
    * Get sorting and sorting order from GET
-   * @param returns array Options, null if no params in GET
+   * @param \Base $f3 The instance of F3
+   * @return array Options, null if no params in GET
    */
-  protected function createListOptions(\Base $f3, \Model\Base $model): ?array {
+  protected function createListOptions(\Base $f3): ?array {
     // Standard ordering:
-    if (count($model->sortableFields))
-      $orderBy = $model->sortableFields[0];
+    if (count($this->model->sortableFields))
+      $orderBy = $this->model->sortableFields[0];
     else
       $orderBy = $this->model->getPrimary();
     $orderArg = 'ASC'; // Standard order argument
     if ($f3->exists('GET.sort', $sortBy)) {
       // Check if sort field is in sortable fields of model
-      if ($sortBy !== '' && in_array($sortBy, $model->sortableFields))
+      if ($sortBy !== '' && in_array($sortBy, $this->model->sortableFields))
         $orderBy = $sortBy;
       // Get sorting order:
       if ($f3->exists('GET.order', $sortingOrder) && $sortingOrder == 'DESC')
@@ -260,7 +261,7 @@ Abstract class Resource extends Base {
         $f3->error(404);
 
       // Run show hook for certain tasks like permissions or loading additional data
-      $this->showHook($f3, $this->model);
+      $this->showHook($f3);
 
       $f3->set('page.' . $this->resourceName, $this->model);
       $f3->copy('lng.' . $this->resourceName . '.show.title', 'page.title');
@@ -273,10 +274,9 @@ Abstract class Resource extends Base {
 
   /**
    * Overwrite this method for certain tasks before it will be shown by the show function without errors
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model to change
+   * @param \Base $f3 The instance of F3
    */
-  protected function showHook(\Base $f3, \Model\Base $model): void {
+  protected function showHook(\Base $f3): void {
     // Do nothing, only to overwrite optional
   } // showHook()
 
@@ -339,19 +339,19 @@ Abstract class Resource extends Base {
       } // if
 
       // Run before edit hook for certain tasks like permissions or loading additional data
-      $this->beforeEditHook($f3, $this->model);
+      $this->beforeEditHook($f3);
 
       // Start transaction and set fields into the model:
       $this->model->startTransaction();
       $this->model->defaults(true); // Useful for check boxes without values like booleans)
       $this->model->copyfrom('POST');
       // Run optional function with model as parameter, may be overwridden by class to change model individually
-      $this->editHook($f3, $this->model);
+      $this->editHook($f3);
       if (!$this->model->validate())
         throw new ValidationException($f3->get('validationError.text'));
-      $result = $this->model->save();
+      $this->model->save();
       // Run optional function with model as parameter, may be overwridden by class to do something after the edit
-      $this->afterEditHook($f3, $result);
+      $this->afterEditHook($f3);
 
       // Commit transaction:
       $this->model->commitTransaction();
@@ -378,28 +378,25 @@ Abstract class Resource extends Base {
 
   /**
    * Overwrite this method for certain tasks before model will be edited
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model that will be edited
+   * @param \Base $f3 The instance of F3
    */
-  protected function beforeEditHook(\Base $f3, \Model\Base $model): void {
+  protected function beforeEditHook(\Base $f3): void {
     // Do nothing, only to overwrite optional
   } // beforeEditHook()
 
   /**
    * Overwrite this method to change the model before it will be saved by the edit function without errors
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model to change
+   * @param \Base $f3 The instance of F3
    */
-  protected function editHook(\Base $f3, \Model\Base $model): void {
+  protected function editHook(\Base $f3): void {
     // Do nothing, only to overwrite optional
   } // editCallback()
 
   /**
    * Overwrite this method to do something after the resource is saved successfully
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model to change
+   * @param \Base $f3 The instance of F3
    */
-  protected function afterEditHook(\Base $f3, \Model\Base $model) {
+  protected function afterEditHook(\Base $f3) {
     // Do nothing, only to overwrite optional
   } // afterEditCallback()
 
@@ -418,7 +415,7 @@ Abstract class Resource extends Base {
         throw new ControllerException($f3->get('lng.' . $this->resourceName . '.error.noSuchResource'));
 
       // Run delete hook for certain tasks like permission checks
-      $this->deleteHook($f3, $this->model);
+      $this->deleteHook($f3);
       // If get, show delete form, otherwise check post and delete the resource
       if ($f3->get('VERB') == 'GET') {
         // Show form:
@@ -445,10 +442,9 @@ Abstract class Resource extends Base {
 
   /**
    * Overwrite this method for certain tasks before deleting a resource
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model to change
+   * @param \Base $f3 The instance of F3
    */
-  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+  protected function deleteHook(\Base $f3): void {
     // Do nothing, only to overwrite optional
   } // deleteHook()
 

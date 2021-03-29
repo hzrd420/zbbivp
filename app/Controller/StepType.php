@@ -19,7 +19,7 @@ class StepType extends Resource {
     $this->model->countRel('steps');
   } // constructor
 
-  protected function getFilters(\Model\Base $model, array $opts): array {
+  protected function getFilters(array $opts): array {
     $filters = [];
     // Name:
     if (array_key_exists('name', $opts))
@@ -32,9 +32,9 @@ class StepType extends Resource {
     return $filters;
   } // getFilters()
 
-  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+  protected function deleteHook(\Base $f3): void {
     // Only delete if step type isn't already in use:
-    if (!is_null($model->count_steps) && $model->count_steps > 0)
+    if (!is_null($this->model->count_steps) && $this->model->count_steps > 0)
       throw new ControllerException($f3->get('lng.stepType.error.alreadyInUse'));
   } // deleteHook()
 } // class

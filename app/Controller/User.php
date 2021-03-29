@@ -17,7 +17,7 @@ class User extends Resource {
     parent::__construct($authentication, $model);
   } // constructor
 
-  protected function getFilters(\Model\Base $model, array $opts): array {
+  protected function getFilters(array $opts): array {
     $filters = [];
     // username:
     if (array_key_exists('username', $opts))
@@ -34,7 +34,7 @@ class User extends Resource {
     return $filters;
   } // getFilters()
 
-  protected function editHook(\Base $f3, \Model\Base $model): void {
+  protected function editHook(\Base $f3): void {
     // Check if passwords matches:
     if ($f3->exists('POST.password', $password) && !empty($password)) {
       if (
@@ -43,11 +43,11 @@ class User extends Resource {
       ) // Passwords do not match
         throw new ControllerException($f3->get('lng.user.error.wrongPasswords'));
       else // Passwords match, update in model
-        $model->password = $password;
+        $this->model->password = $password;
     } // if
   } // editHook()
 
-  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+  protected function deleteHook(\Base $f3): void {
     // Prohibit deleting of last user:
     if ($this->model->count() === 1)
       throw new ControllerException($f3->get('lng.user.error.lastUser'));

@@ -17,17 +17,17 @@ class Step extends Resource {
     parent::__construct($authentication, $model);
   } // constructor
 
-  protected function listHook(\Base $f3, \Model\Base $model, ?array &$filter, ?array &$options): void {
+  protected function listHook(\Base $f3, ?array &$filter, ?array &$options): void {
     $interestedId = $f3->get('PARAMS.interestedId');
     // Only show steps of specific interest:
     $interestedFilter = ['interestedId = ?', $interestedId];
     if (is_null($filter))
       $filter = $interestedFilter;
     else
-      $filter = $model->mergeFilter([$filter, $interestedFilter]);
+      $filter = $this->model->mergeFilter([$filter, $interestedFilter]);
 
     // Load specific interested:
-    $interested = $model->rel('interestedId');
+    $interested = $this->model->rel('interestedId');
     $interested = $interested->findone(['_id = ?', $interestedId]);
     if ($interested === false)
       throw new ControllerException($f3->get('lng.interested.error.noSuchResource'));
@@ -52,9 +52,9 @@ class Step extends Resource {
     } // if
   } // loadEditFormRecord()
 
-  protected function deleteHook(\Base $f3, \Model\Base $model): void {
+  protected function deleteHook(\Base $f3): void {
     // Change reroute member to reroute to interested with deleted step
-    $this->reroute = $f3->alias('listSteps', ['interestedId' => $model->getRaw('interestedId')]);
+    $this->reroute = $f3->alias('listSteps', ['interestedId' => $this->model->getRaw('interestedId')]);
   } // deleteHook()
 
   protected function loadLists(\Base $f3): void {
