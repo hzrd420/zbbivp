@@ -72,14 +72,6 @@ main input {
   border: 0;
   padding: 5px 10px;
 }
-main input[type="submit"] {
-  background-color: #ccc;
-  cursor: pointer;
-}
-main input[type="submit"]:hover {
-  background-color: #222;
-  color: #fff;
-}
 main button {
   background-color: #ccc;
   border: 0;
@@ -105,7 +97,6 @@ ul.actionList li {
   list-style-type: none;
   background-color: #297ACC;
 }
-
 ul.actionList a {
   color: white;
 }
