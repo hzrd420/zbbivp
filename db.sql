@@ -1,7 +1,3 @@
-DROP DATABASE IF EXISTS zbbivp;
-CREATE DATABASE zbbivp;
-USE zbbivp;
-
 CREATE OR REPLACE TABLE `user` (
     `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` varchar(250) NOT NULL,
