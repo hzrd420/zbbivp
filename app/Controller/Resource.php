@@ -133,8 +133,7 @@ Abstract class Resource extends Base {
 
   /**
    * Overwrite this method for certain tasks before list is loaded
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model to change
+   * @param \Base $f3 The instance of F3
    * @param array|null $filter The created list filter
    * @param array|null $options The created list options
    */
@@ -161,8 +160,7 @@ Abstract class Resource extends Base {
   /**
    * Create the list filter from user specific input via REQUEST
    *
-   * @param Base $f3 The instance of F3
-   * @param Model $model The model to change
+   * @param \Base $f3 The instance of F3
    * @return ?array Array with cortex specific filters
    */
   protected function createListFilter(\Base $f3): ?array {
