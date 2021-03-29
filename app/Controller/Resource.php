@@ -26,7 +26,6 @@ Abstract class Resource extends Base {
    */
   protected $uiActions = [];
   protected $hasFilter = false;
-  protected $canExport = false;
   protected $permitNew = true;
   protected $resourceName = '';
 
@@ -34,6 +33,7 @@ Abstract class Resource extends Base {
    * Constructor
    *
    * Load the specific model, will be overwritten in inherited classes and use parent::__construct()
+   * @param \AuthenticationHelper $authentication A instance of the Authentication Helper class
    * @param Model $model the model to use
    */
   public function __construct(\AuthenticationHelper $authentication, \Model\Base $model) {
@@ -43,8 +43,6 @@ Abstract class Resource extends Base {
     $f3->set('page.resourceName', $this->resourceName);
     // Set page.hasFilter to specific value to allow templates to show filters if they exist
     $f3->set('page.hasFilter', $this->hasFilter);
-    // Set property canExport to page templates to show or hide export buttons
-    $f3->set('page.canExport', $this->canExport);
     // Show templates if current user can do specific actions:
     $access = \Access::instance();
     $subject = 'user';
