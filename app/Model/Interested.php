@@ -54,7 +54,7 @@ class Interested extends Base {
     'I', 'II', 'III', 'IV', 'V', 'VI'
   ];
   public const DENOMINATION = [
-    'evangelical', 'catholic', 'muslim', 'budgetary', 'jewish'
+    'evangelical', 'catholic', 'muslim', 'Buddhist', 'jewish'
   ];
   public const HEALTH_INSURANCE_NAME_MIN_LENGTH = 1;
   public const HEALTH_INSURANCE_NAME_MAX_LENGTH = 200;
