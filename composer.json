@@ -11,9 +11,9 @@
 		}
 	],
 	"require": {
-		"bcosca/fatfree-core": "dev-master as 3.7.3",
+		"bcosca/fatfree-core": "^3.7.3",
 		"ikkez/f3-flash": "^1.0",
-		"ikkez/f3-cortex": "dev-master",
+		"ikkez/f3-cortex": "^1.7.3",
 		"ikkez/f3-pagination": "^1.4",
 		"ikkez/f3-validation-engine": "^1.6",
 		"xfra35/f3-access": "^1.1",
