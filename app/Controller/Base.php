@@ -10,7 +10,6 @@ namespace Controller;
 abstract class Base {
   // Route to reroute on errors and some actions, overwrite in other controllers if necessary
   protected $reroute = '/';
-
   protected $authentication = null;
 
   /**
@@ -29,14 +28,14 @@ abstract class Base {
    */
   public function beforeroute(\Base $f3): void {
     // Add current route and last route to the session:
-    if ($f3->exists('SESSION.currentRoute')) {
-      if ($f3->get('SESSION.currentRoute') != $f3->get('PARAMS.0')) {
+    $currentRoute = $this->getCurrentRoute();
+    if ($f3->exists('SESSION.currentRoute', $sessionCurrentRoute)) {
+      if ($sessionCurrentRoute != $currentRoute)
         $f3->copy('SESSION.currentRoute', 'SESSION.lastRoute');
-      } // if
     } else {
       $f3->set('SESSION.lastRoute', '/');
     } // else
-    $f3->set('SESSION.currentRoute', $f3->get('PARAMS.0'));
+    $f3->set('SESSION.currentRoute', $currentRoute);
   } // beforeroute()
 
   /**
@@ -89,13 +88,26 @@ abstract class Base {
    */
   protected function rerouteToLast(): void {
     $f3 = \Base::instance();
+    $currentRoute = $this->getCurrentRoute();
     if (
       !$f3->exists('SESSION.lastRoute', $lastRoute)
       || empty($lastRoute)
-      || $lastRoute == $f3->get('PARAMS.0')
-    ) {
+      || $lastRoute == $currentRoute
+    )
       $f3->reroute($this->reroute);
-    } // if
     $f3->reroute($lastRoute);
   } // rerouteToLast()
+
+  /**
+   * Get the current Route with the current query if it exists
+   * @return string The current route
+   */
+  protected function getCurrentRoute(): string {
+    $f3 = \Base::instance();
+    $route = $f3->get('PARAMS.0');
+    $query = $f3->get('QUERY');
+    if (!empty($query))
+      $route .= '?' . $query;
+    return $route;
+  } // getCurrentRoute()
 } // class

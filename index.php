@@ -102,7 +102,7 @@ if (!$f3->get('CLI')) {
       if (preg_match('/.* (.*)/', $route, $matches) === 1)
         $route = $matches[1];
       $query = $f3->get('QUERY');
-      if ($query !== '')
+      if (!empty($query))
         $route .= '?' . $query;
       $f3->reroute($f3->alias('login', [], ['origin' => $route]));
     } // if
