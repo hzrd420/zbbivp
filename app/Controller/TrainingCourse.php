@@ -5,7 +5,6 @@ namespace Controller;
  * Controller for training courses
  */
 class TrainingCourse extends Resource {
-  protected $resourceName = 'trainingCourse';
   protected $uiActions = [
     ['edit', 'editTrainingCourse', ['id' => '_id'], []],
     ['delete', 'deleteTrainingCourse', ['id' => '_id'], []],

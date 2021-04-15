@@ -39,6 +39,7 @@ Abstract class Resource extends Base {
   public function __construct(\AuthenticationHelper $authentication, \Model\Base $model) {
     parent::__construct($authentication);
     $this->model = $model;
+    $this->resourceName = lcfirst((new \ReflectionClass($this))->getShortName());
     $f3 = \Base::instance();
     $f3->set('page.resourceName', $this->resourceName);
     // Set page.hasFilter to specific value to allow templates to show filters if they exist

@@ -5,7 +5,6 @@ namespace Controller;
  * Controller for interested people
  */
 class Interested extends Resource {
-  protected $resourceName = 'interested';
   protected $uiActions = [
     ['addStep', 'addStep', ['interestedId' => '_id'], []],
     ['edit', 'editInterested', ['id' => '_id'], []],

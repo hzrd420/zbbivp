@@ -5,7 +5,6 @@ namespace Controller;
  * Controller for step types
  */
 class StepType extends Resource {
-  protected $resourceName = 'stepType';
   protected $uiActions = [
     ['edit', 'editStepType', ['id' => '_id'], []],
     ['delete', 'deleteStepType', ['id' => '_id'], []],

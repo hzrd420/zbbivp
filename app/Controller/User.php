@@ -5,7 +5,6 @@ namespace Controller;
  * Controller to administrate users
  */
 class User extends Resource {
-  protected $resourceName = 'user';
   protected $uiActions = [
     ['edit', 'editUser', ['id' => '_id'], []],
     ['delete', 'deleteUser', ['id' => '_id'], []]
