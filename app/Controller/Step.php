@@ -67,7 +67,7 @@ class Step extends Resource {
    *
    * Set due to null and show message
    */
-  public function finish($f3, $params) {
+  public function finish(\Base $f3, array $params): void {
     // Load step:
     $result = $this->loadRecord($params['id']);
     if (!$result) // Model could not be loaded
@@ -81,7 +81,7 @@ class Step extends Resource {
   /**
    * Cron: Send reminders for due and over due steps
    */
-  public function remind($f3) {
+  public function remind(\Base $f3): void {
     $due = $this->model->findTodayDue();
     $overDue = $this->model->findOverDue();
     if ($due !== false) {
