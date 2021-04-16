@@ -301,7 +301,7 @@ class Interested extends Resource {
    * @param array $rows The rows to export
    * @param string $name The name of the file to stream without extension (.xlsx)
    */
-  public function streamXLSX(\Base $f3, array $rows, string $name):void {
+  protected function streamXLSX(\Base $f3, array $rows, string $name):void {
     if (empty($rows)) {
       \Flash::instance()->addMessage($f3->get('lng.interested.export.noItems'), 'info');
       $this->rerouteToLast();
