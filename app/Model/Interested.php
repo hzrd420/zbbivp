@@ -516,7 +516,7 @@ class Interested extends Base {
   } // set_trainingCourse2Id()
 
   /**
-   * Get newest step of loaded interested
+   * Get newest and finished step of loaded interested
    */
   public function getNewestStep() {
     $step = $this->rel('steps');
