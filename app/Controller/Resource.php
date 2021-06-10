@@ -216,13 +216,13 @@ Abstract class Resource extends Base {
   protected function createListOptions(\Base $f3): ?array {
     // Standard ordering:
     if (count($this->model->sortableFields))
-      $orderBy = $this->model->sortableFields[0];
+      $orderBy = array_key_first($this->model->sortableFields);
     else
       $orderBy = $this->model->getPrimary();
     $orderArg = 'ASC'; // Standard order argument
     if ($f3->exists('GET.sort', $sortBy)) {
       // Check if sort field is in sortable fields of model
-      if ($sortBy !== '' && in_array($sortBy, $this->model->sortableFields))
+      if ($sortBy !== '' && array_key_exists($sortBy, $this->model->sortableFields))
         $orderBy = $sortBy;
       // Get sorting order:
       if ($f3->exists('GET.order', $sortingOrder) && $sortingOrder == 'DESC')

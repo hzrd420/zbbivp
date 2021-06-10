@@ -8,8 +8,8 @@
   <p>
     <label for="sort">{{@lng.filter.sortBy}}</label>
     <select name="sort" id="sort">
-      <repeat group="{{@page.sortableFields}}" value="{{@field}}">
-        <option {{(@@GET.sort) == @field ? 'selected' : ''}} value="{{@field}}">{{@lng[@page.resourceName].fields[@field]}}</option>
+      <repeat group="{{@page.sortableFields}}" key="@field" value="{{@lngString}}">
+        <option {{(@@GET.sort) == @field ? 'selected' : ''}} value="{{@field}}">{{@lng[@page.resourceName].fields[@lngString]}}</option>
       </repeat>
     </select>
   </p>
