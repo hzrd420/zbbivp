@@ -76,6 +76,9 @@ class Interested extends Base {
   public const ACCOMMODATION = [
     'SWG', 'MJG', 'apartment'
   ];
+  public const TRAINING_CONTRACT = [
+    'sentToParticipant', 'backFromParticipant', 'completelyDoneToIHK'
+  ];
 
   protected $fieldConf = [
     'gender' => [
@@ -416,6 +419,15 @@ class Interested extends Base {
       'accepted' => true,
       'filter' => 'trim',
       'validate' => 'date',
+    ],
+    'trainingContract' => [
+      'type' => 'varchar(20)',
+      'passThrough' => true,
+      'nullable' => false,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+      'item' => self::TRAINING_CONTRACT
     ],
     'payerName' => [
       'type' => 'varchar(' . self::PAYER_MAX_LENGTH . ')',

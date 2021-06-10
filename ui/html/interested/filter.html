@@ -283,6 +283,14 @@
   <check if="{{isset(@REQUEST.filter_trainingTo) && !empty(@REQUEST.filter_trainingTo)}}">
     value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@@REQUEST.filter_trainingTo) | format}}"
   </check>></p>
+
+  <p><label for="filter_trainingContract">{{@lng.interested.fields.trainingContract}}</label>
+    <select name="filter_trainingContract" id="filter_trainingContract">
+      <option value="">{{@lng.main.noChoice}}</option>
+      <repeat group="{{@page.trainingContractList}}" value="{{@item}}">
+        <option {{@@REQUEST.filter_trainingContract === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.trainingContract[@item]}}</option>
+      </repeat>
+    </select></p>
 </details>
 
 <details>

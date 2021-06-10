@@ -141,6 +141,10 @@ class Interested extends Resource {
     if (array_key_exists('electives', $opts))
       $filters[] = ['electives LIKE ?', '%' . $opts['electives'] . '%'];
 
+    // Training contract:
+    if (array_key_exists('trainingContract', $opts))
+      $filters[] = ['trainingContract = ?', $opts['trainingContract']];
+
     // Pension insurance number:
     if (array_key_exists('pensionInsuranceNumber', $opts))
       $filters[] = ['pensionInsuranceNumber LIKE ?', '%' . $opts['pensionInsuranceNumber'] . '%'];
@@ -281,6 +285,8 @@ class Interested extends Resource {
     $f3->set('page.degreeOfVisualImpairmentList', $this->model::DEGREE_OF_VISUAL_IMPAIRMENT);
     // Load other disability list
     $f3->set('page.otherDisabilityList', $this->model::OTHER_DISABILITY);
+    // Load training contract list
+    $f3->set('page.trainingContractList', $this->model::TRAINING_CONTRACT);
     // Load tax class list
     $f3->set('page.taxClassList', $this->model::TAX_CLASS);
     // Load denomination list

@@ -307,6 +307,13 @@
     <check if="{{isset(@POST.trainingTo)}}">
       value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.trainingTo) | format,esc}}"
     </check>></p>
+
+    <p><label for="trainingContract">{{@lng.interested.fields.trainingContract}}</label>
+      <select required name="trainingContract" id="trainingContract">
+        <repeat group="{{@page.trainingContractList}}" value="{{@item}}">
+          <option {{@@POST.trainingContract === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.trainingContract[@item]}}</option>
+        </repeat>
+      </select></p>
   </fieldset>
 
   <fieldset>

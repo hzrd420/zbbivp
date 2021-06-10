@@ -80,6 +80,8 @@ CREATE OR REPLACE TABLE `interested` (
 
     `trainingFrom` DATE,
     `trainingTo` DATE,
+    `trainingContract` VARCHAR(20) NOT NULL,
+
 
     `payerName` VARCHAR(200),
     `payerAddress` VARCHAR(500),
