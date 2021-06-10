@@ -56,6 +56,8 @@ CREATE OR REPLACE TABLE `interested` (
     `otherDisability` CHAR(1),
     `requiredAccessibilityTools` LONGTEXT,
     `handicappedIdAvailable` BOOLEAN DEFAULT false NOT NULL,
+    `lpf` LONGTEXT,
+    `oAndM` LONGTEXT,
     `medicalRemarks` LONGTEXT,
     `pensionInsuranceNumber` CHAR(12),
     `taxID` CHAR(11),

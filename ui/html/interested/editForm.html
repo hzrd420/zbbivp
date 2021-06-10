@@ -169,6 +169,12 @@
       <input type="checkbox" {{@@POST.handicappedIdAvailable ? 'checked' : ''}} name="handicappedIdAvailable" id="handicappedIdAvailable" value="true">
     </p>
 
+    <label for="lpf">{{@lng.interested.fields.lpf}}</label>
+    <textarea name="lpf" id="lpf">{{@@POST.lpf}}</textarea>
+
+    <label for="oAndM">{{@lng.interested.fields.oAndM}}</label>
+    <textarea name="oAndM" id="oAndM">{{@@POST.oAndM}}</textarea>
+
     <label for="medicalRemarks">{{@lng.interested.fields.medicalRemarks}}</label>
     <textarea name="medicalRemarks" id="medicalRemarks">{{@@POST.medicalRemarks}}</textarea>
   </fieldset>

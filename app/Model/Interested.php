@@ -279,6 +279,16 @@ class Interested extends Base {
       'nullable' => false,
       'accepted' => true
     ],
+    'lpf' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
+    'oAndM' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
     'medicalRemarks' => [
       'type' => \DB\SQL\Schema::DT_LONGTEXT,
       'accepted' => true,

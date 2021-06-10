@@ -139,6 +139,12 @@
     <option {{@@REQUEST.filter_handicappedIdAvailable === 'false' ? 'selected' : ''}} value="false">{{@lng.main.false}}</option>
   </select></p>
 
+  <p><label for="filter_lpf">{{@lng.interested.fields.lpf}}</label>
+  <input type="text" name="filter_lpf" id="filter_lpf" value="{{@@REQUEST.filter_lpf}}"></p>
+
+  <p><label for="filter_oAndM">{{@lng.interested.fields.oAndM}}</label>
+  <input type="text" name="filter_oAndM" id="filter_oAndM" value="{{@@REQUEST.filter_oAndM}}"></p>
+
   <p><label for="filter_medicalRemarks">{{@lng.interested.fields.medicalRemarks}}</label>
   <input type="text" name="filter_medicalRemarks" id="filter_medicalRemarks" value="{{@@REQUEST.filter_medicalRemarks}}"></p>
 </details>

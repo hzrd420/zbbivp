@@ -129,6 +129,14 @@ class Interested extends Resource {
     if (array_key_exists('requiredAccessibilityTools', $opts))
       $filters[] = ['requiredAccessibilityTools LIKE ?', '%' . $opts['requiredAccessibilityTools'] . '%'];
 
+    // LPF:
+    if (array_key_exists('lpf', $opts))
+      $filters[] = ['lpf LIKE ?', '%' . $opts['lpf'] . '%'];
+
+    // O&M:
+    if (array_key_exists('oAndM', $opts))
+      $filters[] = ['oAndM LIKE ?', '%' . $opts['oAndM'] . '%'];
+
     // Medical remarks:
     if (array_key_exists('medicalRemarks', $opts))
       $filters[] = ['medicalRemarks LIKE ?', '%' . $opts['medicalRemarks'] . '%'];
