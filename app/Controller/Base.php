@@ -73,7 +73,6 @@ abstract class Base {
 
     if (!$result) {
       // Log out user and show error
-      $this->logger->notice('Wrong CSRF token, logged out', ['username' => $this->authentication->getUser()->username]);
       $this->authentication->logOutUser();
       \Flash::instance()->addMessage($f3->get('lng.error.invalidCsrf'), 'danger');
       $f3->reroute('@login');
