@@ -139,7 +139,7 @@
     <p><label for="germanLevel">{{@lng.interested.fields.germanLevel}}</label>
       <select required name="germanLevel" id="germanLevel">
         <repeat group="{{@page.germanLevelList}}" value="{{@item}}">
-          <option {{@@POST.germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+          <option {{@@POST.germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.germanLevel[@item]}}</option>
         </repeat>
       </select></p>
   </fieldset>

@@ -40,7 +40,7 @@ class Interested extends Base {
   public const LAST_SCHOOL_MIN_LENGTH = 1;
   public const LAST_SCHOOL_MAX_LENGTH = 200;
   public const GERMAN_LEVEL = [
-    'M', 'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'
+    'NK', 'M', 'A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3'
   ];
   public const DEGREE_OF_VISUAL_IMPAIRMENT = [
     '1', '2', '5'

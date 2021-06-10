@@ -84,7 +84,7 @@
   </check>
 </p>
 <p>{{@lng.interested.fields.hasBoardingSchoolExperience}}: {{@page.interested.hasBoardingSchoolExperience ? @lng.main.true : @lng.main.false}}</p>
-<p>{{@lng.interested.fields.germanLevel}}: {{@page.interested.germanLevel | esc}}</p>
+<p>{{@lng.interested.fields.germanLevel}}: {{@lng.interested.germanLevel[@page.interested.germanLevel] | esc}}</p>
 
 <h2>{{@lng.interested.sections.medicalData}}</h2>
 <p>{{@lng.interested.fields.degreeOfVisualImpairment}}: {{@lng.interested.degreeOfVisualImpairment[@page.interested.degreeOfVisualImpairment] ?? @lng.interested.degreeOfVisualImpairment.none}}</p>

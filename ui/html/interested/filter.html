@@ -104,7 +104,7 @@
     <select name="filter_germanLevel" id="filter_germanLevel">
       <option value="">{{@lng.main.noChoice}}</option>
       <repeat group="{{@page.germanLevelList}}" value="{{@item}}">
-        <option {{@@REQUEST.filter_germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+        <option {{@@REQUEST.filter_germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.germanLevel[@item]}}</option>
       </repeat>
     </select></p>
 </details>
