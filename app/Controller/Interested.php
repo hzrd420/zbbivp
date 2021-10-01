@@ -9,6 +9,7 @@ class Interested extends Resource {
     ['addStep', 'addStep', ['interestedId' => '_id'], []],
     ['edit', 'editInterested', ['id' => '_id'], []],
     ['delete', 'deleteInterested', ['id' => '_id'], []],
+    ['moveInterested', 'moveInterested', ['id' => '_id'], []],
   ];
   protected $reroute = '@listInterested';
   protected $hasFilter = true;
@@ -141,6 +142,10 @@ class Interested extends Resource {
     if (array_key_exists('medicalRemarks', $opts))
       $filters[] = ['medicalRemarks LIKE ?', '%' . $opts['medicalRemarks'] . '%'];
 
+    // Source of first contact:
+    if (array_key_exists('sourceOfFirstContact', $opts))
+      $filters[] = ['sourceOfFirstContact LIKE ?', '%' . $opts['sourceOfFirstContact'] . '%'];
+
     // Retraining:
     if (array_key_exists('retraining', $opts))
       $filters[] = ['retraining = ?', $opts['retraining'] === 'true'];
@@ -151,7 +156,11 @@ class Interested extends Resource {
 
     // Training contract:
     if (array_key_exists('trainingContract', $opts))
-      $filters[] = ['trainingContract = ?', $opts['trainingContract']];
+      $filters[] = ['trainingContract = ?', $opts['trainingContract'] === 'none' ? null : $opts['trainingContract']];
+
+    // Training start remarks:
+    if (array_key_exists('trainingStartRemarks', $opts))
+      $filters[] = ['trainingStartRemarks LIKE ?', '%' . $opts['trainingStartRemarks'] . '%'];
 
     // Pension insurance number:
     if (array_key_exists('pensionInsuranceNumber', $opts))
@@ -200,6 +209,10 @@ class Interested extends Resource {
     // Orientation week accommodation required:
     if (array_key_exists('orientationWeekAccommodationRequired', $opts))
       $filters[] = ['orientationWeekAccommodationRequired = ?', $opts['orientationWeekAccommodationRequired'] === 'true'];
+
+    // Remarks about accommodation:
+    if (array_key_exists('remarksInt', $opts))
+      $filters[] = ['remarksInt LIKE ?', '%' . $opts['remarksInt'] . '%'];
 
     // Orientation week cost commitment requested:
     if (array_key_exists('orientationWeekCostCommitmentRequested', $opts))

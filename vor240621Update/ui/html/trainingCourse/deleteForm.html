@@ -1,0 +1,8 @@
+<h1>{{@lng.trainingCourse.delete.heading}}</h1>
+<p>{{@lng.trainingCourse.delete.question, @page.trainingCourse.name | format,esc}}</p>
+<p>{{@lng.trainingCourse.delete.warning}}</p>
+<form method="post">
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button name="decision" value="true">{{@lng.trainingCourse.delete.delete}}</button>
+  <button name="decision" value="false">{{@lng.trainingCourse.delete.cancel}}</button>
+</form>

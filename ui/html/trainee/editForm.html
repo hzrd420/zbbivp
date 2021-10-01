@@ -1,0 +1,393 @@
+<h1>{{@lng.trainee.edit.heading}}</h1>
+<form method="post">
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.baseData}}</h2></legend>
+    <p><label for="gender">{{@lng.trainee.fields.gender}}</label>
+      <select autofocus required name="gender" id="gender">
+        <repeat group="{{@page.genderList}}" value="{{@item}}">
+          <option {{@@POST.gender === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.gender[@item]}}</option>
+        </repeat>
+      </select></p>  
+    <p><label for="firstName">{{@lng.trainee.fields.firstName}}
+      {{@lng.resource.betweenChars, @page.modelConsts.FIRST_NAME_MIN_LENGTH, @page.modelConsts.FIRST_NAME_MAX_LENGTH | format}}
+    </label>
+    <input required type="text" name="firstName" id="firstName" value="{{@@POST.firstName}}"
+      minlength="{{@page.modelConsts.FIRST_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.FIRST_NAME_MAX_LENGTH}}"></p>
+
+    <p><label for="surname">{{@lng.trainee.fields.surname}}
+      {{@lng.resource.betweenChars, @page.modelConsts.SURNAME_MIN_LENGTH, @page.modelConsts.SURNAME_MAX_LENGTH | format}}
+    </label>
+    <input required type="text" name="surname" id="surname" value="{{@@POST.surname}}"
+      minlength="{{@page.modelConsts.SURNAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.SURNAME_MAX_LENGTH}}"></p>
+
+    <p><label for="birthDate">{{@lng.trainee.fields.birthDate}}</label>
+    <input type="date" name="birthDate" id="birthDate" 
+      <check if="{{isset(@POST.birthDate)}}">
+        value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.birthDate) | format,esc}}"
+      </check>></p>
+
+    <p><label for="birthLocation">{{@lng.trainee.fields.birthLocation}}
+      {{@lng.resource.betweenChars, @page.modelConsts.BIRTH_LOCATION_MIN_LENGTH, @page.modelConsts.BIRTH_LOCATION_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="birthLocation" id="birthLocation" value="{{@@POST.birthLocation}}"
+      minlength="{{@page.modelConsts.BIRTH_LOCATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.BIRTH_LOCATION_MAX_LENGTH}}"></p>
+
+    <p><label for="nationality">{{@lng.trainee.fields.nationality}}
+      {{@lng.resource.betweenChars, @page.modelConsts.NATIONALITY_MIN_LENGTH, @page.modelConsts.NATIONALITY_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="nationality" id="nationality" value="{{@@POST.nationality}}"
+      minlength="{{@page.modelConsts.NATIONALITY_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NATIONALITY_MAX_LENGTH}}"></p>
+
+    <p><label for="street">{{@lng.trainee.fields.street}}
+      {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="street" id="street" value="{{@@POST.street}}"
+      minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
+
+    <p><label for="postCode">{{@lng.trainee.fields.postCode}}</label>
+    <input type="text" name="postCode" id="postCode" value="{{@@POST.postCode}}"
+      minlength="{{@page.modelConsts.POST_CODE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.POST_CODE_MAX_LENGTH}}"></p>
+
+    <p><label for="location">{{@lng.trainee.fields.location}}
+      {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="location" id="location" value="{{@@POST.location}}"
+      minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
+
+    <p><label for="email">{{@lng.trainee.fields.email}}
+      {{@lng.resource.betweenChars, @page.modelConsts.EMAIL_MIN_LENGTH, @page.modelConsts.EMAIL_MAX_LENGTH | format}}
+    </label>
+    <input type="email" name="email" id="email" value="{{@@POST.email}}"
+      minlength="{{@page.modelConsts.EMAIL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_MAX_LENGTH}}"></p>
+
+    <p><label for="phoneMobile">{{@lng.trainee.fields.phoneMobile}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+    <input type="tel" name="phoneMobile" id="phoneMobile" value="{{@@POST.phoneMobile}}"
+      minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+    <p><label for="phonePrivate">{{@lng.trainee.fields.phonePrivate}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+    <input type="tel" name="phonePrivate" id="phonePrivate" value="{{@@POST.phonePrivate}}"
+      minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+    <p><label for="hasChilds">{{@lng.trainee.fields.hasChilds}}</label>
+      <input type="checkbox" {{@@POST.hasChilds ? 'checked' : ''}} name="hasChilds" id="hasChilds" value="true">
+    </p>
+
+    <p><label for="maritalStatus">{{@lng.trainee.fields.maritalStatus}}</label>
+      <select name="maritalStatus" id="maritalStatus">
+        <option {{is_null(@@POST.maritalStatus) ? 'selected' : ''}} value="">{{@lng.trainee.maritalStatus.none}}</option>
+        <repeat group="{{@page.maritalStatusList}}" value="{{@item}}">
+          <option {{@@POST.maritalStatus === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.maritalStatus[@item]}}</option>
+        </repeat>
+      </select></p>
+
+    <p><label for="legalRepresentative">{{@lng.trainee.fields.legalRepresentative}}
+      {{@lng.resource.betweenChars, @page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="legalRepresentative" id="legalRepresentative" value="{{@@POST.legalRepresentative}}"
+      minlength="{{@page.modelConsts.LEGAL_REPRESENTATIVE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LEGAL_REPRESENTATIVE_MAX_LENGTH}}"></p>
+
+    <p><label for="emailLegalRepresentative">{{@lng.trainee.fields.emailLegalRepresentative}}
+      {{@lng.resource.betweenChars, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH, @page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH | format}}
+    </label>
+    <input type="email" name="emailLegalRepresentative" id="emailLegalRepresentative" value="{{@@POST.emailLegalRepresentative}}"
+      minlength="{{@page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.EMAIL_LEGAL_REPRESENTATIVE_MAX_LENGTH}}"></p>
+
+    <p><label for="phoneLegalRepresentative">{{@lng.trainee.fields.phoneLegalRepresentative}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+    <input type="tel" name="phoneLegalRepresentative" id="phoneLegalRepresentative" value="{{@@POST.phoneLegalRepresentative}}"
+      minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.education}}</h2></legend>
+    <p><label for="lastGraduation">{{@lng.trainee.fields.lastGraduation}}
+      {{@lng.resource.betweenChars, @page.modelConsts.LAST_GRADUATION_MIN_LENGTH, @page.modelConsts.LAST_GRADUATION_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="lastGraduation" id="lastGraduation" value="{{@@POST.lastGraduation}}"
+      minlength="{{@page.modelConsts.LAST_GRADUATION_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_GRADUATION_MAX_LENGTH}}"></p>
+
+    <p><label for="graduationYear">{{@lng.trainee.fields.graduationYear}}</label>
+    <input type="number" name="graduationYear" id="graduationYear" value="{{@@POST.graduationYear ?? ''}}"></p>
+
+    <p><label for="lastSchool">{{@lng.trainee.fields.lastSchool}}
+      {{@lng.resource.betweenChars, @page.modelConsts.LAST_SCHOOL_MIN_LENGTH, @page.modelConsts.LAST_SCHOOL_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="lastSchool" id="lastSchool" value="{{@@POST.lastSchool}}"
+      minlength="{{@page.modelConsts.LAST_SCHOOL_MIN_LENGTH}}" maxlength="{{@page.modelConsts.LAST_SCHOOL_MAX_LENGTH}}"></p>
+
+    <p><label for="schoolFrom">{{@lng.trainee.fields.schoolFrom}}</label>
+    <input type="date" name="schoolFrom" id="schoolFrom" 
+    <check if="{{isset(@POST.schoolFrom)}}">
+      value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.schoolFrom) | format,esc}}"
+    </check>></p>
+
+    <p><label for="schoolTo">{{@lng.trainee.fields.schoolTo}}</label>
+    <input type="date" name="schoolTo" id="schoolTo" 
+    <check if="{{isset(@POST.schoolTo)}}">
+      value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.schoolTo) | format,esc}}"
+    </check>></p>
+
+    <p><label for="hasBoardingSchoolExperience">{{@lng.trainee.fields.hasBoardingSchoolExperience}}</label>
+      <input type="checkbox" {{@@POST.hasBoardingSchoolExperience ? 'checked' : ''}} name="hasBoardingSchoolExperience" id="hasBoardingSchoolExperience" value="true">
+    </p>
+
+    <p><label for="germanLevel">{{@lng.trainee.fields.germanLevel}}</label>
+      <select required name="germanLevel" id="germanLevel">
+        <repeat group="{{@page.germanLevelList}}" value="{{@item}}">
+          <option {{@@POST.germanLevel === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.germanLevel[@item]}}</option>
+        </repeat>
+      </select></p>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.medicalData}}</h2></legend>
+    <p><label for="degreeOfVisualImpairment">{{@lng.trainee.fields.degreeOfVisualImpairment}}</label>
+      <select name="degreeOfVisualImpairment" id="degreeOfVisualImpairment">
+        <option {{is_null(@@POST.degreeOfVisualImpairment) ? 'selected' : ''}} value="">{{@lng.trainee.maritalStatus.none}}</option>
+        <repeat group="{{@page.degreeOfVisualImpairmentList}}" value="{{@item}}">
+          <option {{@@POST.degreeOfVisualImpairment === @item ? 'selected' : ''}} value="{{@item}}">{{'{0} ({1})', @item, @lng.trainee.degreeOfVisualImpairment[@item] | format}}</option>
+        </repeat>
+      </select></p>
+
+    <p><label for="otherDisability">{{@lng.trainee.fields.otherDisability}}</label>
+      <select name="otherDisability" id="otherDisability">
+        <option {{is_null(@@POST.otherDisability) ? 'selected' : ''}} value="">{{@lng.trainee.otherDisability.none}}</option>
+        <repeat group="{{@page.otherDisabilityList}}" value="{{@item}}">
+          <option {{@@POST.otherDisability === @item ? 'selected' : ''}} value="{{@item}}">{{'{0} ({1})', @item, @lng.trainee.otherDisability[@item] | format}}</option>
+        </repeat>
+      </select></p>
+
+    <label for="requiredAccessibilityTools">{{@lng.trainee.fields.requiredAccessibilityTools}}</label>
+    <textarea name="requiredAccessibilityTools" id="requiredAccessibilityTools">{{@@POST.requiredAccessibilityTools}}</textarea>
+
+    <p><label for="handicappedIdAvailable">{{@lng.trainee.fields.handicappedIdAvailable}}</label>
+      <input type="checkbox" {{@@POST.handicappedIdAvailable ? 'checked' : ''}} name="handicappedIdAvailable" id="handicappedIdAvailable" value="true">
+    </p>
+
+    <label for="lpf">{{@lng.trainee.fields.lpf}}</label>
+    <textarea name="lpf" id="lpf">{{@@POST.lpf}}</textarea>
+
+    <label for="oAndM">{{@lng.trainee.fields.oAndM}}</label>
+    <textarea name="oAndM" id="oAndM">{{@@POST.oAndM}}</textarea>
+
+    <label for="medicalRemarks">{{@lng.trainee.fields.medicalRemarks}}</label>
+    <textarea name="medicalRemarks" id="medicalRemarks">{{@@POST.medicalRemarks}}</textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.otherInformation}}</h2></legend>
+    <p><label for="pensionInsuranceNumber">{{@lng.trainee.fields.pensionInsuranceNumber}}
+      {{@lng.resource.exactLength, @page.modelConsts.PENSION_INSURANCE_NUMBER_LENGTH | format}}
+    </label>
+    <input type="text" name="pensionInsuranceNumber" id="pensionInsuranceNumber" value="{{@@POST.pensionInsuranceNumber}}"
+      minlength="{{@page.modelConsts.PENSION_INSURANCE_NUMBER_LENGTH}}" maxlength="{{@page.modelConsts.PENSION_INSURANCE_NUMBER_LENGTH}}"></p>
+
+    <p><label for="taxID">{{@lng.trainee.fields.taxID}}
+      {{@lng.resource.exactLength, @page.modelConsts.TAX_ID_LENGTH | format}}
+    </label>
+    <input type="text" name="taxID" id="taxID" value="{{@@POST.taxID}}"
+      minlength="{{@page.modelConsts.TAX_ID_LENGTH}}" maxlength="{{@page.modelConsts.TAX_ID_LENGTH}}"></p>
+
+    <p><label for="taxClass">{{@lng.trainee.fields.taxClass}}</label>
+      <select name="taxClass" id="taxClass">
+        <option {{is_null(@@POST.taxClass) ? 'selected' : ''}} value="">{{@lng.main.notSet}}</option>
+        <repeat group="{{@page.taxClassList}}" value="{{@item}}">
+          <option {{@@POST.taxClass === @item ? 'selected' : ''}} value="{{@item}}">{{@item}}</option>
+        </repeat>
+      </select></p>
+
+    <p><label for="denomination">{{@lng.trainee.fields.denomination}}</label>
+      <select name="denomination" id="denomination">
+        <option {{is_null(@@POST.denomination) ? 'selected' : ''}} value="">{{@lng.trainee.denomination.none}}</option>
+        <repeat group="{{@page.denominationList}}" value="{{@item}}">
+          <option {{@@POST.denomination=== @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.denomination[@item]}}</option>
+        </repeat>
+      </select></p>
+
+    <p><label for="healthInsuranceName">{{@lng.trainee.fields.healthInsuranceName}}
+      {{@lng.resource.betweenChars, @page.modelConsts.HEALTH_INSURANCE_NAME_MIN_LENGTH, @page.modelConsts.HEALTH_INSURANCE_NAME_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="healthInsuranceName" id="healthInsuranceName" value="{{@@POST.healthInsuranceName}}"
+      minlength="{{@page.modelConsts.HEALTH_INSURANCE_NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.HEALTH_INSURANCE_NAME_MAX_LENGTH}}"></p>
+
+    <p><label for="healthInsuranceNumber">{{@lng.trainee.fields.healthInsuranceNumber}}
+      {{@lng.resource.betweenChars, @page.modelConsts.HEALTH_INSURANCE_NUMBER_MIN_LENGTH, @page.modelConsts.HEALTH_INSURANCE_NUMBER_MAX_LENGTH | format}}
+      </label>
+    <input type="text" name="healthInsuranceNumber" id="healthInsuranceNumber" value="{{@@POST.healthInsuranceNumber}}"
+      minlength="{{@page.modelConsts.HEALTH_INSURANCE_NUMBER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.HEALTH_INSURANCE_NUMBER_MAX_LENGTH}}"></p>
+
+    <p><label for="membershipCertificateForHealthInsuranceAvailable">{{@lng.trainee.fields.membershipCertificateForHealthInsuranceAvailable}}</label>
+      <input type="checkbox" {{@@POST.membershipCertificateForHealthInsuranceAvailable ? 'checked' : ''}} name="membershipCertificateForHealthInsuranceAvailable" id="membershipCertificateForHealthInsuranceAvailable" value="true">
+    </p>
+
+    <p><label for="paymentOfSVContributions">{{@lng.trainee.fields.paymentOfSVContributions}}</label>
+      <select name="paymentOfSVContributions" id="paymentOfSVContributions">
+        <option {{is_null(@@POST.paymentOfSVContributions) ? 'selected' : ''}} value="">{{@lng.trainee.paymentOfSVContributions.none}}</option>
+        <repeat group="{{@page.paymentOfSVContributionsList}}" value="{{@item}}">
+        <option {{@@POST.paymentOfSVContributions=== @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.paymentOfSVContributions[@item]}}</option>
+        </repeat>
+      </select></p>
+
+    <label for="sourceOfFirstContact">{{@lng.trainee.fields.sourceOfFirstContact}}</label>
+    <textarea name="sourceOfFirstContact" id="sourceOfFirstContact">{{@@POST.sourceOfFirstContact}}</textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.training}}</h2></legend>
+    <p><label for="retraining">{{@lng.trainee.fields.retraining}}</label>
+      <input type="checkbox" {{@@POST.retraining ? 'checked' : ''}} name="retraining" id="retraining" value="true">
+    </p>
+
+    <p><label for="trainingCourse1Id">{{@lng.trainee.fields.trainingCourse1}}</label>
+      <select required name="trainingCourse1Id" id="trainingCourse1Id">
+        <option {{@@POST.trainingCourse1Id === null ? 'selected' : ''}} value="none">{{@lng.main.noChoice}}</option>
+        <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
+          <option {{@@POST.trainingCourse1Id === @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+        </repeat>
+      </select></p>
+
+    <p><label for="trainingCourse2Id">{{@lng.trainee.fields.trainingCourse2}}</label>
+      <select required name="trainingCourse2Id" id="trainingCourse2Id">
+        <option {{@@POST.trainingCourse2Id === null ? 'selected' : ''}} value="none">{{@lng.main.noChoice}}</option>
+        <repeat group="{{@page.trainingCourseList}}" value="{{@item}}">
+          <option {{@@POST.trainingCourse2Id == @item._id ? 'selected' : ''}} value="{{@item._id}}">{{@item.name}}</option>
+        </repeat>
+      </select></p>
+
+    <label for="electives">{{@lng.trainee.fields.electives}}</label>
+    <textarea name="electives" id="electives">{{@@POST.electives}}</textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.orientationWeek}}</h2></legend>
+    <p><label for="orientationWeekInterest">{{@lng.trainee.fields.orientationWeekInterest}}</label>
+      <input type="checkbox" {{@@POST.orientationWeekInterest ? 'checked' : ''}} name="orientationWeekInterest" id="orientationWeekInterest" value="true">
+    </p>
+
+    <p><label for="orientationWeekFrom">{{@lng.trainee.fields.orientationWeekFrom}}</label>
+    <input type="date" name="orientationWeekFrom" id="orientationWeekFrom" 
+    <check if="{{isset(@POST.orientationWeekFrom)}}">
+      value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.orientationWeekFrom) | format,esc}}"
+    </check>></p>
+
+    <p><label for="orientationWeekTo">{{@lng.trainee.fields.orientationWeekTo}}</label>
+    <input type="date" name="orientationWeekTo" id="orientationWeekTo" 
+    <check if="{{isset(@POST.orientationWeekTo)}}">
+      value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.orientationWeekTo) | format,esc}}"
+    </check>></p>
+
+    <p><label for="orientationWeekAccommodationRequired">{{@lng.trainee.fields.orientationWeekAccommodationRequired}}</label>
+      <input type="checkbox" {{@@POST.orientationWeekAccommodationRequired ? 'checked' : ''}} name="orientationWeekAccommodationRequired" id="orientationWeekAccommodationRequired" value="true">
+    </p>
+
+    <p><label for="orientationWeekPayer">{{@lng.trainee.fields.orientationWeekPayer}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PAYER_MIN_LENGTH, @page.modelConsts.PAYER_MAX_LENGTH | format}}
+      </label>
+    <input type="text" name="orientationWeekPayer" id="orientationWeekPayer" value="{{@@POST.orientationWeekPayer}}"
+      minlength="{{@page.modelConsts.PAYER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_MAX_LENGTH}}"></p>
+
+    <p><label for="orientationWeekCostCommitmentRequested">{{@lng.trainee.fields.orientationWeekCostCommitmentRequested}}</label>
+      <input type="checkbox" {{@@POST.orientationWeekCostCommitmentRequested ? 'checked' : ''}} name="orientationWeekCostCommitmentRequested" id="orientationWeekCostCommitmentRequested" value="true">
+    </p>
+
+    <p><label for="orientationWeekCostCommitmentReceived">{{@lng.trainee.fields.orientationWeekCostCommitmentReceived}}</label>
+      <input type="checkbox" {{@@POST.orientationWeekCostCommitmentReceived ? 'checked' : ''}} name="orientationWeekCostCommitmentReceived" id="orientationWeekCostCommitmentReceived" value="true">
+    </p>
+
+    <label for="orientationWeekRemarks">{{@lng.trainee.fields.orientationWeekRemarks}}</label>
+    <textarea name="orientationWeekRemarks" id="orientationWeekRemarks">{{@@POST.orientationWeekRemarks}}</textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.trainingStart}}</h2></legend>
+    <p><label for="trainingFrom">{{@lng.trainee.fields.trainingFrom}}</label>
+    <input type="date" name="trainingFrom" id="trainingFrom" 
+    <check if="{{isset(@POST.trainingFrom)}}">
+      value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.trainingFrom) | format,esc}}"
+    </check>></p>
+
+    <p><label for="trainingTo">{{@lng.trainee.fields.trainingTo}}</label>
+    <input type="date" name="trainingTo" id="trainingTo" 
+    <check if="{{isset(@POST.trainingTo)}}">
+      value="{{'{0,date,custom,%Y-%m-%d}', strtotime(@POST.trainingTo) | format,esc}}"
+    </check>></p>
+
+    <p><label for="trainingContract">{{@lng.trainee.fields.trainingContract}}</label>
+      <select name="trainingContract" id="trainingContract">
+        <option {{is_null(@@POST.trainingContract) ? 'selected' : ''}} value="">{{@lng.trainee.trainingContract.none}}</option>
+        <repeat group="{{@page.trainingContractList}}" value="{{@item}}">
+          <option {{@@POST.trainingContract === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.trainingContract[@item]}}</option>
+        </repeat>
+      </select></p>
+
+    <label for="trainingStartRemarks">{{@lng.trainee.fields.trainingStartRemarks}}</label>
+    <textarea name="trainingStartRemarks" id="trainingStartRemarks">{{@@POST.trainingStartRemarks}}</textarea>
+  </fieldset>
+  </fieldset>
+
+  <fieldset>
+    <legend><h2>{{@lng.trainee.sections.payer}}</h2></legend>
+    <p><label for="payerName">{{@lng.trainee.fields.payerName}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PAYER_MIN_LENGTH, @page.modelConsts.PAYER_MAX_LENGTH | format}}
+      </label>
+    <input type="text" name="payerName" id="payerName" value="{{@@POST.payerName}}"
+      minlength="{{@page.modelConsts.PAYER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_MAX_LENGTH}}"></p>
+
+    <p><label for="payerAddress">{{@lng.trainee.fields.payerAddress}}
+      {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="payerAddress" id="payerAddress" value="{{@@POST.payerAddress}}"
+      minlength="{{@page.modelConsts.ADDRESS_MIN_LENGTH}}" maxlength="{{@page.modelConsts.ADDRESS_MAX_LENGTH}}"></p>
+
+    <p><label for="payerContactPerson">{{@lng.trainee.fields.payerContactPerson}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH, @page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="payerContactPerson" id="payerContactPerson" value="{{@@POST.payerContactPerson}}"
+      minlength="{{@page.modelConsts.PAYER_CONTACT_PERSON_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_CONTACT_PERSON_MAX_LENGTH}}"></p>
+
+    <p><label for="payerPhone">{{@lng.trainee.fields.payerPhone}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
+    </label>
+    <input type="tel" name="payerPhone" id="payerPhone" value="{{@@POST.payerPhone}}"
+      minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
+
+    <p><label for="payerCustomerNumber">{{@lng.trainee.fields.payerCustomerNumber}}
+      {{@lng.resource.betweenChars, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH, @page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH | format}}
+    </label>
+    <input type="text" name="payerCustomerNumber" id="payerCustomerNumber" value="{{@@POST.payerCustomerNumber}}"
+      minlength="{{@page.modelConsts.PAYER_CUSTOMER_NUMBER_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PAYER_CUSTOMER_NUMBER_MAX_LENGTH}}"></p>
+
+    <p><label for="payerCostCommitment">{{@lng.trainee.fields.payerCostCommitment}}</label>
+      <select required name="payerCostCommitment" id="payerCostCommitment">
+        <repeat group="{{@page.payerCostCommitmentList}}" value="{{@item}}">
+          <option {{@@POST.payerCostCommitment === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.payerCostCommitment[@item]}}</option>
+        </repeat>
+      </select></p>
+
+    <label for="payerRemarks">{{@lng.trainee.fields.payerRemarks}}</label>
+    <textarea name="payerRemarks" id="payerRemarks">{{@@POST.payerRemarks}}</textarea>
+
+    <p><label for="accommodation">{{@lng.trainee.fields.accommodation}}</label>
+      <select name="accommodation" id="accommodation">
+        <option {{is_null(@@POST.accommodation) ? 'selected' : ''}} value="">{{@lng.trainee.accommodation.none}}</option>
+        <repeat group="{{@page.accommodationList}}" value="{{@item}}">
+          <option {{@@POST.accommodation === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.trainee.accommodation[@item]}}</option>
+        </repeat>
+      </select></p>
+
+    <label for="remarksInt">{{@lng.trainee.fields.remarksInt}}</label>
+    <textarea name="remarksInt" id="remarksInt">{{@@POST.remarksInt}}</textarea>
+
+    <p><label for="youthProtectionExaminationReceived">{{@lng.trainee.fields.youthProtectionExaminationReceived}}</label>
+      <input type="checkbox" {{@@POST.youthProtectionExaminationReceived ? 'checked' : ''}} name="youthProtectionExaminationReceived" id="youthProtectionExaminationReceived" value="true">
+    </p>
+  </fieldset>
+
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button accesskey="s">{{@lng.trainee.edit.save}}</button>
+</form>

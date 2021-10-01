@@ -42,7 +42,7 @@
     </false>
   </check>
 </p>
-<p>{{@lng.interested.fields.phoneMobile}}: {{@page.interested.phoneMobile | esc}}</p>
+<p>{{@lng.interested.fields.phoneMobile}}: {{@page.interested.phoneMobile ?? @lng.main.notSet | esc}}</p>
 <p>{{@lng.interested.fields.phonePrivate}}: {{@page.interested.phonePrivate ?? @lng.main.notSet | esc}}</p>
 <p>{{@lng.interested.fields.maritalStatus}}: {{@lng.interested.maritalStatus[@page.interested.maritalStatus] ?? @lng.interested.maritalStatus.none}}</p>
 <p>{{@lng.interested.fields.hasChilds}}: {{@page.interested.hasChilds ? @lng.main.true : @lng.main.false}}</p>
@@ -122,6 +122,9 @@
 <p>{{@lng.interested.fields.membershipCertificateForHealthInsuranceAvailable}}: {{@page.interested.membershipCertificateForHealthInsuranceAvailable ? @lng.main.true : @lng.main.false}}</p>
 <p>{{@lng.interested.fields.paymentOfSVContributions}}: {{@lng.interested.paymentOfSVContributions[@page.interested.paymentOfSVContributions] ?? @lng.interested.paymentOfSVContributions.none}}</p>
 
+<h3>{{@lng.interested.fields.sourceOfFirstContact}}</h3>
+<pre>{{@page.interested.sourceOfFirstContact ?? @lng.main.notSet | esc}}</pre>
+
 <h2>{{@lng.interested.sections.training}}</h2>
 <p>{{@lng.interested.fields.retraining}}: {{@page.interested.retraining ? @lng.main.true : @lng.main.false}}</p>
 <p>
@@ -192,7 +195,10 @@
     </false>
   </check>
 </p>
-<p>{{@lng.interested.fields.trainingContract}}: {{@lng.interested.trainingContract[@page.interested.trainingContract] | esc}}</p>
+<p>{{@lng.interested.fields.trainingContract}}: {{@lng.interested.trainingContract[@page.interested.trainingContract] ?? @lng.interested.trainingContract.none}}</p>
+
+<h3>{{@lng.interested.fields.trainingStartRemarks}}</h3>
+<pre>{{@page.interested.trainingStartRemarks ?? @lng.main.notSet | esc}}</pre>
 
 <h2>{{@lng.interested.sections.payer}}</h2>
 <p>{{@lng.interested.fields.payerName}}: {{@page.interested.payerName ?? @lng.main.notSet | esc}}</p>
@@ -202,6 +208,9 @@
 <p>{{@lng.interested.fields.payerCostCommitment}}: {{@lng.interested.payerCostCommitment[@page.interested.payerCostCommitment]}}</p>
 <p>{{@lng.interested.fields.accommodation}}: {{@lng.interested.accommodation[@page.interested.accommodation] ?? @lng.interested.accommodation.none}}</p>
 <p>{{@lng.interested.fields.youthProtectionExaminationReceived}}: {{@page.interested.youthProtectionExaminationReceived ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.interested.fields.remarksInt}}</h3>
+<pre>{{@page.interested.remarksInt ?? @lng.main.notSet | esc}}</pre>
 
 <h3>{{@lng.interested.fields.payerRemarks}}</h3>
 <pre>{{@page.interested.payerRemarks ?? @lng.main.notSet | esc}}</pre>

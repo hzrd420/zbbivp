@@ -1,0 +1,13 @@
+<set actions="{{@page.getUIActions(@item)}}">
+<check if="{{empty(@actions)}}">
+  <true>
+    <p>{{@lng.resource.noActions}}</p>
+  </true>
+  <false>
+    <ul class="actionList">
+      <repeat group="{{@actions}}" value="{{@action}}">
+        <li><a class="{{@action.class}}" role="button" href="{{@BASE . @action.route}}">{{@action.name}}</a></li>
+      </repeat>
+    </ul>
+  </false>
+</check>

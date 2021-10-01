@@ -1,0 +1,11 @@
+<h1>{{@lng.trainingCourse.edit.heading}}</h1>
+<form method="post">
+  <p><label for="name">{{@lng.trainingCourse.fields.name}}
+    {{@lng.resource.betweenChars, @page.modelConsts.NAME_MIN_LENGTH, @page.modelConsts.NAME_MAX_LENGTH | format}}
+    </label>
+  <input autofocus required type="text" name="name" id="name" value="{{@@POST.name}}"
+    minlength="{{@page.modelConsts.NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NAME_MAX_LENGTH}}"></p>
+
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button accesskey="s">{{@lng.trainingCourse.edit.save}}</button>
+</form>

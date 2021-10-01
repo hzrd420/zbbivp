@@ -1,0 +1,18 @@
+<table>
+  <thead>
+    <tr>
+      <th>{{@lng.trainingCourse.fields.name}}</th>
+      <th>{{@lng.resource.actions}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <repeat group="{{@list}}" value="{{@item}}">
+      <tr>
+        <th><a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
+        <td>
+          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+        </td>
+      </tr>
+    </repeat>
+  </tbody>
+</table>

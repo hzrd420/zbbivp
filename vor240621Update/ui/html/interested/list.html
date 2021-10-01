@@ -1,0 +1,77 @@
+<p><a class="export" href="{{@BASE}}{{'exportInterested1' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.main.export, @lng.interested.export.export1 | format}}</a></p>
+<p><a class="export" href="{{@BASE}}{{'exportInterested2' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.main.export, @lng.interested.export.export2 | format}}</a></p>
+<table>
+  <thead>
+    <tr>
+      <th>{{@lng.interested.fields.name}}</th>
+      <th>{{@lng.interested.fields.created}}</th>
+      <th>{{@lng.interested.fields.birthDate}}</th>
+      <th>{{@lng.interested.fields.trainingCourse1}}</th>
+      <th>{{@lng.interested.fields.trainingCourse2}}</th>
+      <th>{{@lng.interested.list.numberOfSteps}}</th>
+      <th>{{@lng.interested.list.newestStep}}</th>
+      <th>{{@lng.resource.actions}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <repeat group="{{@list}}" value="{{@item}}">
+      <set newestStep="{{@item->getNewestStep()}}" />
+      <tr>
+        <th><a href="{{@BASE}}{{'showInterested', 'id =' . @item._id | alias}}">{{'{0} {1}', @item.firstName, @item.surname | format,esc}}</a></th>
+        <td>{{'{0,date} {0,time}', strtotime(@item.created) | format,esc}}</td>
+        <td>
+          <check if="{{is_null(@item.birthDate)}}">
+            <true>
+              {{@lng.main.notSet}}
+            </true>
+            <false>
+              {{'{0,date}', strtotime(@item.birthDate) | format,esc}}
+            </false>
+          </check>
+        </td>
+        <td>
+          <check if="{{is_null(@item.trainingCourse1Id)}}">
+            <true>
+              {{@lng.interested.list.noTrainingCourse}}
+            </true>
+            <false>
+              <a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item.trainingCourse1Id._id | alias}}">
+                {{@item.trainingCourse1Id.name | esc}}
+              </a>
+            </false>
+          </check>
+        </td>
+        <td>
+          <check if="{{is_null(@item.trainingCourse2Id)}}">
+            <true>
+              {{@lng.interested.list.noTrainingCourse}}
+            </true>
+            <false>
+              <a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item.trainingCourse2Id._id | alias}}">
+                {{@item.trainingCourse2Id.name | esc}}
+              </a>
+            </false>
+          </check>
+        </td>
+        <td><a href="{{@BASE}}{{'listSteps', 'interestedId =' . @item._id | alias}}">
+          {{@item.count_steps ?? 0}}
+        </a></td>
+        <td>
+          <check if="{{is_null(@newestStep)}}">
+            <true>
+              {{@lng.interested.list.noSteps}}
+            </true>
+            <false>
+              <a href="{{@BASE}}{{'showStep', 'id =' . @newestStep._id | alias}}">
+                {{@newestStep.stepTypeId.name . (is_null(@newestStep.comment) ? '' : ' (' . H::shortenString(@newestStep.comment, 50) . ')') | esc}}
+              </a>
+            </false>
+          </check>
+        </td>
+        <td>
+          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+        </td>
+      </tr>
+    </repeat>
+  </tbody>
+</table>

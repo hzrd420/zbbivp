@@ -1,0 +1,15 @@
+<h1>{{@lng[@page.resourceName].list.heading, @page.resourceList.total | format,esc}}</h1>
+<check if="{{@page.permitNew}}">
+  <p><a class="newItem" href="{{@BASE}}{{'add' . ucfirst(@page.resourceName) | alias}}">{{@lng[@page.resourceName].actions.add}}</a></p>
+</check>
+<include href="html/snippets/filterPanel.html" />
+<check if="{{empty(@page.resourceList.subset)}}">
+  <true>
+    <p>{{@lng[@page.resourceName].list.empty}}</p>
+  </true>
+  <false>
+    <include href="{{'html/' . @page.resourceName . '/list.html'}}"
+      with="list={{@page.resourceList.subset}}" />
+    {{@page.pageBrowser | raw}}
+  </false>
+</check>

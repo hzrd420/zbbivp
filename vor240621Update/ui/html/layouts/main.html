@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{@LANGUAGE}}">
+  <head>
+    <meta charset="{{@ENCODING}}">
+    <link rel="stylesheet" href="{{@BASE . '/' . @UI}}css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{@PROGRAM_NAME}} - {{@page.title}}</title>
+    <meta name="author" content="Adrian Kurz">
+  </head>
+
+  <body>
+    <header>
+      <include href="html/layouts/navigation.html" />
+    </header>
+
+    <main>
+      <check if="{{\Flash::instance()->hasMessages()}}">
+        <h2>{{@lng.main.notifications}}</h2>
+        <repeat group="{{\Flash::instance()->getMessages()}}" value="{{@msg}}">
+          <p class="message_{{@msg.status}}">{{@msg.text}}</p>
+        </repeat>
+      </check>
+
+      <include if="{{isset(@page.content)}}" href="{{@page.content}}" />
+    </main>
+    <footer>
+      <p>{{@lng.main.footer, @PROGRAM_NAME, round(1e3 * (microtime(true) - @startTime), 2), memory_get_usage()/1024**2| format}}</p>
+    </footer>
+  </body>
+</html>

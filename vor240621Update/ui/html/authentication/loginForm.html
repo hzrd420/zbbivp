@@ -1,0 +1,11 @@
+<h1>{{@lng.authentication.heading}}</h1>
+<form method="post">
+  <p><label for="username">{{@lng.authentication.username}}</label>
+  <input type="text" autofocus required name="username" id ="username" value="{{@@POST.username}}"></p>
+  <p><label for="password">{{@lng.authentication.password}}</label>
+  <input type="password" name="password" id ="password"></p>
+
+  <p><label for="stayLoggedIn">{{@lng.authentication.stayLoggedIn}}</label>
+  <input type="checkbox" name="stayLoggedIn" id="stayLoggedIn"></p>
+  <button>{{@lng.authentication.logIn}}</button>
+</form>

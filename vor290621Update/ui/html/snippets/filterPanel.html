@@ -1,0 +1,25 @@
+<form role="search" method="get">
+  <check if="{{@page.hasFilter}}">
+    <details>
+      <summary>{{@lng.filter.heading}}</summary>
+      <include if="{{@page.hasFilter}}" href="{{'html/' . @page.resourceName . '/filter.html'}}" />
+    </details>
+  </check>
+  <p>
+    <label for="sort">{{@lng.filter.sortBy}}</label>
+    <select name="sort" id="sort">
+      <repeat group="{{@page.sortableFields}}" key="@field" value="{{@lngString}}">
+        <option {{(@@GET.sort) == @field ? 'selected' : ''}} value="{{@field}}">{{@lng[@page.resourceName].fields[@lngString]}}</option>
+      </repeat>
+    </select>
+  </p>
+  <p>
+    <input type="radio" name="order" id="orderASC" {{(@@GET.order == 'ASC' || @@GET.order !== 'DESC' ? 'checked' : '')}} value="ASC">
+    <label for="orderASC">{{@lng.filter.ascending}}</label>
+  </p>
+  <p>
+    <input type="radio" name="order" id="orderDESC" {{(@@GET.order) == 'DESC' ? 'checked' : ''}} value="DESC">
+    <label for="orderDESC">{{@lng.filter.descending}}</label>
+  </p>
+  <button accesskey="f">{{@lng.filter.filter}}</button>
+</form>

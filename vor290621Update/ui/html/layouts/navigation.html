@@ -1,0 +1,19 @@
+<nav>
+  <ul>
+    <check if="{{is_null(@USER)}}">
+      <true>
+        <li><a accesskey="l" href="{{@BASE}}{{'login' | alias}}">{{@lng.main.login}}</a></li>
+      </true>
+      <false>
+        <li><a accesskey="h" href="{{@BASE}}{{'home' | alias}}">{{@lng.main.home}}</a></li>
+        <li><a accesskey="i" href="{{@BASE}}{{'listInterested' | alias}}">{{@lng.main.interested}}</a></li>
+        <li><a accesskey="d" href="{{@BASE}}{{'listDueSteps' | alias}}">{{@lng.main.dueSteps}}</a></li>
+        <li><a accesskey="o" href="{{@BASE}}{{'listOverDueSteps' | alias}}">{{@lng.main.overDueSteps}}</a></li>
+        <li><a accesskey="a" href="{{@BASE}}{{'listTrainingCourses' | alias}}">{{@lng.main.trainingCourses}}</a></li>
+        <li><a accesskey="t" href="{{@BASE}}{{'listStepTypes' | alias}}">{{@lng.main.stepTypes}}</a></li>
+        <li><a accesskey="b" href="{{@BASE}}{{'listUsers' | alias}}">{{@lng.main.userAdministration}}</a></li>
+        <li><a accesskey="x" href="{{@BASE}}{{'logout' | alias}}">{{@lng.main.logout}}</a></li>
+      </false>
+    </check>
+  </ul>
+</nav>

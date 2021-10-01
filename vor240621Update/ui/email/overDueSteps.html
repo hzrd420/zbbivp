@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="{{@LANGUAGE}}">
+  <head>
+    <meta charset="UTF-8">
+    <title>{{@lng.mail.overDueStepsTitle}}</title>
+  </head>
+
+  <body>
+    <p>{{@lng.mail.greeting}}</p>
+    <p>{{@lng.mail.overDueSteps}}</p>
+    <include href="{{'email/stepList.html'}}"
+      with="list={{@page.overDueSteps}}" />
+  </body>
+</html>

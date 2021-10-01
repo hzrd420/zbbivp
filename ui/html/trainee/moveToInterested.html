@@ -1,0 +1,7 @@
+<h1>{{@lng.trainee.move.heading}}</h1>
+<p>{{@lng.trainee.move.question, @page.trainee.firstName, @page.trainee.surname | format,esc}}</p>
+<form method="post">
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button name="decision" value="true">{{@lng.trainee.move.move}}</button>
+  <button name="decision" value="false">{{@lng.trainee.move.cancel}}</button>
+</form>

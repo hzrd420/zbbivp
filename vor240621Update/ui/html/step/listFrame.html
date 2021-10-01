@@ -1,0 +1,20 @@
+<h1>{{@lng.step.list.heading, @page.interested.firstName, @page.interested.surname, @page.resourceList.total | format,esc}}</h1>
+<check if="{{@page.permitNew}}">
+  <p><a 
+    class="newItem"
+    href="{{@BASE}}{{'addStep', 'interestedId =' . @page.interested._id | alias}}"
+  >
+    {{@lng.step.actions.add, @page.interested.firstName, @page.interested.surname | format,esc}}
+  </a></p>
+</check>
+<include href="html/snippets/filterPanel.html" />
+<check if="{{empty(@page.resourceList.subset)}}">
+  <true>
+    <p>{{@lng.step.list.empty}}</p>
+  </true>
+  <false>
+    <include href="{{'html/step/list.html'}}"
+      with="list={{@page.resourceList.subset}}" />
+    {{@page.pageBrowser | raw}}
+  </false>
+</check>

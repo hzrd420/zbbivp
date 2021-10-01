@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>{{@lng.user.fields.username}}</th>
+      <th>{{@lng.user.fields.surname}}</th>
+      <th>{{@lng.user.fields.firstName}}</th>
+      <th>{{@lng.resource.actions}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <repeat group="{{@list}}" value="{{@item}}">
+      <tr>
+        <th><a href="{{@BASE}}{{'showUser', 'id =' . @item._id | alias}}">{{@item.username | esc}}</a></th>
+        <td>{{@item.surname | esc}}</td>
+        <td>{{@item.firstName | esc}}</td>
+        <td>
+          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+        </td>
+      </tr>
+    </repeat>
+  </tbody>
+</table>

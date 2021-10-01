@@ -400,6 +400,53 @@ Abstract class Resource extends Base {
     // Do nothing, only to overwrite optional
   } // afterEditCallback()
 
+  public function moveToTrainee(\Base $f3, array $params){
+    $id = $params['id'];
+    $this->loadRecord($id);
+    if ($f3->get('VERB') == 'GET') {
+      // Show form:
+      $this->saveCsrf();
+      $f3->copy('lng.' . $this->resourceName . '.move.title', 'page.title');
+      $f3->set('page.' . $this->resourceName, $this->model);
+      $f3->set('page.content', 'html/' . $this->resourceName . '/moveToTrainee.html');
+    } else if ($f3->exists('POST.decision', $decision) && $decision === 'true') {
+      // Delete resource:
+      $this->checkCsrf();
+      $f3->get('db')->exec("INSERT INTO trainee SELECT * FROM interested where id = $id");
+      $this->model->erase();
+      \Flash::instance()->addMessage($f3->get('lng.' . $this->resourceName . '.move.success'), 'success');
+      $f3->reroute($this->reroute);
+    } else {
+      // Keep Resource:
+      \Flash::instance()->addMessage($f3->get('lng.' . $this->resourceName . '.move.canceled'), 'info');
+      $f3->reroute($this->reroute);
+    }
+  }
+      
+  public function moveToInterested(\Base $f3, array $params){
+    $id = $params['id'];
+    $this->loadRecord($id);
+    if ($f3->get('VERB') == 'GET') {
+      // Show form:
+      $this->saveCsrf();
+      $f3->copy('lng.' . $this->resourceName . '.move.title', 'page.title');
+      $f3->set('page.' . $this->resourceName, $this->model);
+      $f3->set('page.content', 'html/' . $this->resourceName . '/moveToInterested.html');
+    } else if ($f3->exists('POST.decision', $decision) && $decision === 'true') {
+      // Delete resource:
+      $this->checkCsrf();
+      $f3->get('db')->exec("INSERT INTO interested SELECT * FROM trainee where id = $id");
+      $this->model->erase();
+      \Flash::instance()->addMessage($f3->get('lng.' . $this->resourceName . '.move.success'), 'success');
+      $f3->reroute($this->reroute);
+    } else {
+      // Keep Resource:
+      \Flash::instance()->addMessage($f3->get('lng.' . $this->resourceName . '.move.canceled'), 'info');
+      $f3->reroute('/test1');
+    }
+  
+  
+  }
   /**
    * Delete a resource
    *

@@ -1,0 +1,14 @@
+<h1>{{@lng.stepType.edit.heading}}</h1>
+<form method="post">
+  <p><label for="name">{{@lng.stepType.fields.name}}
+    {{@lng.resource.betweenChars, @page.modelConsts.NAME_MIN_LENGTH, @page.modelConsts.NAME_MAX_LENGTH | format}}
+    </label>
+  <input autofocus required type="text" name="name" id="name" value="{{@@POST.name}}"
+    minlength="{{@page.modelConsts.NAME_MIN_LENGTH}}" maxlength="{{@page.modelConsts.NAME_MAX_LENGTH}}"></p>
+
+  <label for="description">{{@lng.stepType.fields.description}}</label>
+  <textarea name="description" id="description">{{@@POST.description}}</textarea>
+
+  <input type="hidden" name="csrf" value="{{@CSRF}}">
+  <button accesskey="s">{{@lng.stepType.edit.save}}</button>
+</form>

@@ -23,11 +23,13 @@ class Interested extends Base {
     'divorced',
     'widowed'
   ];
-  public const ADDRESS_MIN_LENGTH = 5;
+  public const ADDRESS_MIN_LENGTH = 1;
   public const ADDRESS_MAX_LENGTH = 500;
+  public const POST_CODE_MIN_LENGTH = 4;
+  public const POST_CODE_MAX_LENGTH = 5;
   public const LEGAL_REPRESENTATIVE_MIN_LENGTH = 5;
   public const LEGAL_REPRESENTATIVE_MAX_LENGTH = 400;
-  public const NATIONALITY_MIN_LENGTH = 4;
+  public const NATIONALITY_MIN_LENGTH = 1;
   public const NATIONALITY_MAX_LENGTH = 100;
   public const PHONE_MIN_LENGTH = 5;
   public const PHONE_MAX_LENGTH = 100;
@@ -120,7 +122,7 @@ class Interested extends Base {
       'passThrough' => true,
       'accepted' => true,
       'filter' => 'trim',
-      'validate' => 'exact_len,5'
+      'validate' => 'numeric|min_len,' . self::POST_CODE_MIN_LENGTH . '|max_len,' . self::POST_CODE_MAX_LENGTH
     ],
     'location' => [
       'type' => 'varchar(' . self::ADDRESS_MAX_LENGTH . ')',
@@ -172,11 +174,9 @@ class Interested extends Base {
     'phoneMobile' => [
       'type' => 'varchar(' . self::PHONE_MAX_LENGTH . ')',
       'passThrough' => true,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
-      'validate' => 'required|phone_number|max_len,' . self::PHONE_MAX_LENGTH
+      'validate' => 'phone_number|max_len,' . self::PHONE_MAX_LENGTH
     ],
     'phonePrivate' => [
       'type' => 'varchar(' . self::PHONE_MAX_LENGTH . ')',
@@ -290,6 +290,11 @@ class Interested extends Base {
       'filter' => 'trim'
     ],
     'medicalRemarks' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
+    ],
+    'sourceOfFirstContact' => [
       'type' => \DB\SQL\Schema::DT_LONGTEXT,
       'accepted' => true,
       'filter' => 'trim'
@@ -433,11 +438,14 @@ class Interested extends Base {
     'trainingContract' => [
       'type' => 'varchar(20)',
       'passThrough' => true,
-      'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
       'filter' => 'trim',
       'item' => self::TRAINING_CONTRACT
+    ],
+    'trainingStartRemarks' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
     ],
     'payerName' => [
       'type' => 'varchar(' . self::PAYER_MAX_LENGTH . ')',
@@ -494,6 +502,11 @@ class Interested extends Base {
       'accepted' => true,
       'filter' => 'trim',
       'item' => self::ACCOMMODATION
+    ],
+    'remarksInt' => [
+      'type' => \DB\SQL\Schema::DT_LONGTEXT,
+      'accepted' => true,
+      'filter' => 'trim'
     ],
     'youthProtectionExaminationReceived' => [
       'type' => \DB\SQL\Schema::DT_BOOLEAN,

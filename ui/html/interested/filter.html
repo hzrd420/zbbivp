@@ -196,6 +196,9 @@
         <option {{@@REQUEST.filter_paymentOfSVContributions === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.paymentOfSVContributions[@item]}}</option>
       </repeat>
     </select></p>
+
+  <p><label for="filter_sourceOfFirstContact">{{@lng.interested.fields.sourceOfFirstContact}}</label>
+  <input type="text" name="filter_sourceOfFirstContact" id="filter_sourceOfFirstContact" value="{{@@REQUEST.filter_sourceOfFirstContact}}"></p>
 </details>
 
 <details>
@@ -293,10 +296,14 @@
   <p><label for="filter_trainingContract">{{@lng.interested.fields.trainingContract}}</label>
     <select name="filter_trainingContract" id="filter_trainingContract">
       <option value="">{{@lng.main.noChoice}}</option>
+      <option {{@@REQUEST.filter_trainingContract === 'none' ? 'selected' : ''}} value="none">{{@lng.interested.trainingContract.none}}</option>
       <repeat group="{{@page.trainingContractList}}" value="{{@item}}">
         <option {{@@REQUEST.filter_trainingContract === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.trainingContract[@item]}}</option>
       </repeat>
     </select></p>
+
+  <p><label for="filter_trainingStartRemarks">{{@lng.interested.fields.trainingStartRemarks}}</label>
+  <input type="text" name="filter_trainingStartRemarks" id="filter_trainingStartRemarks" value="{{@@REQUEST.filter_trainingStartRemarks}}"></p>
 </details>
 
 <details>
@@ -335,6 +342,9 @@
         <option {{@@REQUEST.filter_accommodation === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.accommodation[@item]}}</option>
       </repeat>
     </select></p>
+
+  <p><label for="filter_remarksInt">{{@lng.interested.fields.remarksInt}}</label>
+  <input type="text" name="filter_remarksInt" id="filter_remarksInt" value="{{@@REQUEST.filter_remarksInt}}"></p>
 
   <p><label for="filter_youthProtectionExaminationReceived">{{@lng.interested.fields.youthProtectionExaminationReceived}}</label>
   <select name="filter_youthProtectionExaminationReceived" id="filter_youthProtectionExaminationReceived">

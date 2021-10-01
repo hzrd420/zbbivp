@@ -46,7 +46,7 @@
 
     <p><label for="postCode">{{@lng.interested.fields.postCode}}</label>
     <input type="text" name="postCode" id="postCode" value="{{@@POST.postCode}}"
-      minlength="5" maxlength="5"></p>
+      minlength="{{@page.modelConsts.POST_CODE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.POST_CODE_MAX_LENGTH}}"></p>
 
     <p><label for="location">{{@lng.interested.fields.location}}
       {{@lng.resource.betweenChars, @page.modelConsts.ADDRESS_MIN_LENGTH, @page.modelConsts.ADDRESS_MAX_LENGTH | format}}
@@ -63,7 +63,7 @@
     <p><label for="phoneMobile">{{@lng.interested.fields.phoneMobile}}
       {{@lng.resource.betweenChars, @page.modelConsts.PHONE_MIN_LENGTH, @page.modelConsts.PHONE_MAX_LENGTH | format}}
     </label>
-    <input required type="tel" name="phoneMobile" id="phoneMobile" value="{{@@POST.phoneMobile}}"
+    <input type="tel" name="phoneMobile" id="phoneMobile" value="{{@@POST.phoneMobile}}"
       minlength="{{@page.modelConsts.PHONE_MIN_LENGTH}}" maxlength="{{@page.modelConsts.PHONE_MAX_LENGTH}}"></p>
 
     <p><label for="phonePrivate">{{@lng.interested.fields.phonePrivate}}
@@ -232,6 +232,9 @@
         <option {{@@POST.paymentOfSVContributions=== @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.paymentOfSVContributions[@item]}}</option>
         </repeat>
       </select></p>
+
+    <label for="sourceOfFirstContact">{{@lng.interested.fields.sourceOfFirstContact}}</label>
+    <textarea name="sourceOfFirstContact" id="sourceOfFirstContact">{{@@POST.sourceOfFirstContact}}</textarea>
   </fieldset>
 
   <fieldset>
@@ -315,11 +318,16 @@
     </check>></p>
 
     <p><label for="trainingContract">{{@lng.interested.fields.trainingContract}}</label>
-      <select required name="trainingContract" id="trainingContract">
+      <select name="trainingContract" id="trainingContract">
+        <option {{is_null(@@POST.trainingContract) ? 'selected' : ''}} value="">{{@lng.interested.trainingContract.none}}</option>
         <repeat group="{{@page.trainingContractList}}" value="{{@item}}">
           <option {{@@POST.trainingContract === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.trainingContract[@item]}}</option>
         </repeat>
       </select></p>
+
+    <label for="trainingStartRemarks">{{@lng.interested.fields.trainingStartRemarks}}</label>
+    <textarea name="trainingStartRemarks" id="trainingStartRemarks">{{@@POST.trainingStartRemarks}}</textarea>
+  </fieldset>
   </fieldset>
 
   <fieldset>
@@ -371,6 +379,9 @@
           <option {{@@POST.accommodation === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.interested.accommodation[@item]}}</option>
         </repeat>
       </select></p>
+
+    <label for="remarksInt">{{@lng.interested.fields.remarksInt}}</label>
+    <textarea name="remarksInt" id="remarksInt">{{@@POST.remarksInt}}</textarea>
 
     <p><label for="youthProtectionExaminationReceived">{{@lng.interested.fields.youthProtectionExaminationReceived}}</label>
       <input type="checkbox" {{@@POST.youthProtectionExaminationReceived ? 'checked' : ''}} name="youthProtectionExaminationReceived" id="youthProtectionExaminationReceived" value="true">
