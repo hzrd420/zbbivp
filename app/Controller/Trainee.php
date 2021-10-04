@@ -280,7 +280,7 @@ class Trainee extends Resource {
       public function loadEditFormRecord(\Base $f3): void {
         // Check that there are already some trainingCourses:
         if ($this->model->rel('trainingCourse1Id')->count() === 0)
-          throw new ControllerException($f3->get('lng.interested.error.noTrainingCourses'));
+          throw new ControllerException($f3->get('lng.trainee.error.noTrainingCourses'));
         parent::loadEditFormRecord($f3);
       } // loadEditFormRecord()
     
@@ -291,7 +291,7 @@ class Trainee extends Resource {
             && !is_null($this->model->trainingCourse2Id)
             && $this->model->trainingCourse1Id->_id == $this->model->trainingCourse2Id->_id
           )
-          throw new ControllerException($f3->get('lng.interested.error.sameTrainingCourses'));
+          throw new ControllerException($f3->get('lng.trainee.error.sameTrainingCourses'));
       } // editHook()
     
       protected function loadLists(\Base $f3): void {
@@ -330,7 +330,7 @@ class Trainee extends Resource {
        */
       protected function streamXLSX(\Base $f3, array $rows, string $name):void {
         if (empty($rows)) {
-          \Flash::instance()->addMessage($f3->get('lng.interested.export.noItems'), 'info');
+          \Flash::instance()->addMessage($f3->get('lng.trainee.export.noItems'), 'info');
           $this->rerouteToLast();
         } // if
         \Spatie\SimpleExcel\SimpleExcelWriter::streamDownload($name . '.xlsx')
@@ -339,12 +339,12 @@ class Trainee extends Resource {
       } // streamXLSX()
     
       /**
-       * Export filtered or all interested to XLS files
+       * Export filtered or all trainee to XLS files
        *
        * Fields are given by customer (report 1)
        */
       public function export1(\Base $f3): void {
-        // Load all interested to export:
+        // Load all trainee to export:
         $filter = $this->createListFilter($f3, $this->model);
         $options = $this->createListOptions($f3, $this->model);
         $this->model->load($filter, $options);
@@ -353,41 +353,35 @@ class Trainee extends Resource {
         while (!$this->model->dry()) {
           $surname = $this->model->surname;
           $firstName = $this->model->firstName;
-          $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
+          $degreeOfVisualImpairment = $lng['trainee']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
           $birthDate = $this->replaceNotSetTime($this->model->birthDate, '{0,date}');
           $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $this->model->trainingCourse1Id->name;
           $trainingCourse2 = is_null($this->model->trainingCourse2Id) ? $lng['main']['notSet'] : $this->model->trainingCourse2Id->name;
-          $trainingType = $lng['interested']['export'][$this->model->retraining ? 'retraining' : 'training'];
-          $accommodation = $lng['interested']['accommodation'][$this->model->accommodation ?? 'none'];
-          $lastStep = $this->model->getNewestStep();
-          if (is_null($lastStep))
-            $lastStep = $lng['interested']['export']['noSteps'];
-          else
-            $lastStep = $lastStep->stepTypeId->name;
+          $trainingType = $lng['trainee']['export'][$this->model->retraining ? 'retraining' : 'training'];
+          $accommodation = $lng['trainee']['accommodation'][$this->model->accommodation ?? 'none'];
+          
           
           $rows[] = [
-            $lng['interested']['fields']['surname'] => $surname,
-            $lng['interested']['fields']['firstName'] => $firstName,
-            $lng['interested']['fields']['degreeOfVisualImpairment'] => $degreeOfVisualImpairment,
-            $lng['interested']['fields']['birthDate'] => $birthDate,
-            $lng['interested']['fields']['trainingCourse1'] => $trainingCourse1,
-            $lng['interested']['fields']['trainingCourse2'] => $trainingCourse2,
-            $lng['interested']['export']['trainingType'] => $trainingType,
-            $lng['interested']['fields']['accommodation'] => $accommodation,
-            $lng['interested']['export']['lastStep'] => $lastStep,
+            $lng['trainee']['fields']['surname'] => $surname,
+            $lng['trainee']['fields']['firstName'] => $firstName,
+            $lng['trainee']['fields']['degreeOfVisualImpairment'] => $degreeOfVisualImpairment,
+            $lng['trainee']['fields']['birthDate'] => $birthDate,
+            $lng['trainee']['fields']['trainingCourse1'] => $trainingCourse1,
+            $lng['trainee']['export']['trainingType'] => $trainingType,
+            $lng['trainee']['fields']['accommodation'] => $accommodation,
           ];
           $this->model->next();
         } // while
-        $this->streamXLSX($f3, $rows, $lng['interested']['export']['export1']);
+        $this->streamXLSX($f3, $rows, $lng['trainee']['export']['export1']);
       } // export1()
     
       /**
-       * Export filtered or all interested to XLS files
+       * Export filtered or all trainee to XLS files
        *
        * Fields are given by customer (report 2)
        */
       public function export2(\Base $f3): void {
-        // Load all interested to export:
+        // Load all trainee to export:
         $filter = $this->createListFilter($f3, $this->model);
         $options = $this->createListOptions($f3, $this->model);
         $this->model->load($filter, $options);
@@ -413,43 +407,43 @@ class Trainee extends Resource {
           $pensionInsuranceNumber = $this->model->pensionInsuranceNumber ?? $lng['main']['notSet'];
           $taxID = $this->model->taxID ?? $lng['main']['notSet'];
           $healthInsuranceName = $this->model->healthInsuranceName ?? $lng['main']['notSet'];
-          $paymentOfSVContributions = $lng['interested']['paymentOfSVContributions'][$this->model->paymentOfSVContributions ?? 'none'];
+          $paymentOfSVContributions = $lng['trainee']['paymentOfSVContributions'][$this->model->paymentOfSVContributions ?? 'none'];
           $handicappedIdAvailable = $lng['main'][$this->model->handicappedIdAvailable ? 'true' : 'false'];
           $trainingCourse1 = is_null($this->model->trainingCourse1Id) ? $lng['main']['notSet'] : $this->model->trainingCourse1Id->name;
-          $denomination = $lng['interested']['denomination'][$this->model->denomination ?? 'none'];
-          $degreeOfVisualImpairment = $lng['interested']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
-          $otherDisability = $lng['interested']['otherDisability'][$this->model->otherDisability ?? 'none'];
+          $denomination = $lng['trainee']['denomination'][$this->model->denomination ?? 'none'];
+          $degreeOfVisualImpairment = $lng['trainee']['degreeOfVisualImpairment'][$this->model->degreeOfVisualImpairment ?? 'none'];
+          $otherDisability = $lng['trainee']['otherDisability'][$this->model->otherDisability ?? 'none'];
     
           $rows[] = [
-            $lng['interested']['fields']['surname'] => $surname,
-            $lng['interested']['fields']['firstName'] => $firstName,
-            $lng['interested']['fields']['birthLocation'] => $birthLocation,
-            $lng['interested']['fields']['birthDate'] => $birthDate,
-            $lng['interested']['fields']['street'] => $street,
-            $lng['interested']['fields']['postCode'] => $postCode,
-            $lng['interested']['fields']['location'] => $location,
-            $lng['interested']['fields']['phoneMobile'] => $phoneMobile,
-            $lng['interested']['fields']['nationality'] => $nationality,
-            $lng['interested']['fields']['payerCustomerNumber'] => $payerCustomerNumber,
-            $lng['interested']['fields']['trainingCourse1'] => $trainingCourse1,
-            $lng['interested']['fields']['trainingFrom'] => $trainingFrom,
-            $lng['interested']['fields']['trainingTo'] => $trainingTo,
-            $lng['interested']['fields']['payerName'] => $payerName,
-            $lng['interested']['fields']['payerAddress'] => $payerAddress,
-            $lng['interested']['fields']['payerContactPerson'] => $payerContactPerson,
-            $lng['interested']['fields']['payerPhone'] => $payerPhone,
-            $lng['interested']['fields']['pensionInsuranceNumber'] => $pensionInsuranceNumber,
-            $lng['interested']['fields']['taxID'] => $taxID,
-            $lng['interested']['fields']['healthInsuranceName'] => $healthInsuranceName,
-            $lng['interested']['fields']['paymentOfSVContributions'] => $paymentOfSVContributions,
-            $lng['interested']['fields']['handicappedIdAvailable'] => $handicappedIdAvailable,
-            $lng['interested']['fields']['denomination'] => $denomination,
-            $lng['interested']['fields']['degreeOfVisualImpairment'] => $degreeOfVisualImpairment,
-            $lng['interested']['fields']['otherDisability'] => $otherDisability
+            $lng['trainee']['fields']['surname'] => $surname,
+            $lng['trainee']['fields']['firstName'] => $firstName,
+            $lng['trainee']['fields']['birthLocation'] => $birthLocation,
+            $lng['trainee']['fields']['birthDate'] => $birthDate,
+            $lng['trainee']['fields']['street'] => $street,
+            $lng['trainee']['fields']['postCode'] => $postCode,
+            $lng['trainee']['fields']['location'] => $location,
+            $lng['trainee']['fields']['phoneMobile'] => $phoneMobile,
+            $lng['trainee']['fields']['nationality'] => $nationality,
+            $lng['trainee']['fields']['payerCustomerNumber'] => $payerCustomerNumber,
+            $lng['trainee']['fields']['trainingCourse1'] => $trainingCourse1,
+            $lng['trainee']['fields']['trainingFrom'] => $trainingFrom,
+            $lng['trainee']['fields']['trainingTo'] => $trainingTo,
+            $lng['trainee']['fields']['payerName'] => $payerName,
+            $lng['trainee']['fields']['payerAddress'] => $payerAddress,
+            $lng['trainee']['fields']['payerContactPerson'] => $payerContactPerson,
+            $lng['trainee']['fields']['payerPhone'] => $payerPhone,
+            $lng['trainee']['fields']['pensionInsuranceNumber'] => $pensionInsuranceNumber,
+            $lng['trainee']['fields']['taxID'] => $taxID,
+            $lng['trainee']['fields']['healthInsuranceName'] => $healthInsuranceName,
+            $lng['trainee']['fields']['paymentOfSVContributions'] => $paymentOfSVContributions,
+            $lng['trainee']['fields']['handicappedIdAvailable'] => $handicappedIdAvailable,
+            $lng['trainee']['fields']['denomination'] => $denomination,
+            $lng['trainee']['fields']['degreeOfVisualImpairment'] => $degreeOfVisualImpairment,
+            $lng['trainee']['fields']['otherDisability'] => $otherDisability
           ];
           $this->model->next();
         } // while
-        $this->streamXLSX($f3, $rows, $lng['interested']['export']['export2']);
+        $this->streamXLSX($f3, $rows, $lng['trainee']['export']['export2']);
       } // export2()
     
       /**
