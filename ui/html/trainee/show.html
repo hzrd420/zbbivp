@@ -1,0 +1,216 @@
+<h1>{{@lng.trainee.show.heading, @page.trainee.firstName, @page.trainee.surname | format,esc}}</h1>
+<include href="{{'html/snippets/actions.html'}}" with="item={{@page.trainee}}" />
+<p>{{@lng.trainee.fields.created}}: {{'{0,date}, {0,time}', strtotime(@page.trainee.created) | format,esc}}</p>
+
+<h2>{{@lng.trainee.show.steps}}</h2>
+<check if="{{is_null(@page.trainee.count_steps)}}">
+  <true>
+    <p>{{@lng.trainee.show.noSteps}}</p>
+  </true>
+  <false>
+    <a href="{{@BASE}}{{'listSteps', 'traineeId =' . @page.trainee._id | alias}}">{{@page.trainee.count_steps}}</a>
+  </false>
+</check>
+
+<h2>{{@lng.trainee.sections.baseData}}</h2>
+<p>{{@lng.trainee.fields.gender}}: {{@lng.trainee.gender[@page.trainee.gender] | esc}}</p>
+<p>{{@lng.trainee.fields.name}}: {{'{0} {1}', @page.trainee.firstName, @page.trainee.surname | format,esc}}</p>
+<p>
+  {{@lng.trainee.fields.birthDate}}: 
+  <check if="{{is_null(@page.trainee.birthDate)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.birthDate) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.trainee.fields.birthLocation}}: {{@page.trainee.birthLocation ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.street}}: {{@page.trainee.street ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.postCode}}: {{@page.trainee.postCode ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.location}}: {{@page.trainee.location ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.nationality}}: {{@page.trainee.nationality ?? @lng.main.notSet | esc}}</p>
+<p>
+  {{@lng.trainee.fields.email}}: 
+  <check if="{{is_null(@page.trainee.email)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+      <a href="mailto:{{@page.trainee.email | esc}}">{{@page.trainee.email | esc}}</a>
+    </false>
+  </check>
+</p>
+<p>{{@lng.trainee.fields.phoneMobile}}: {{@page.trainee.phoneMobile ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.phonePrivate}}: {{@page.trainee.phonePrivate ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.maritalStatus}}: {{@lng.trainee.maritalStatus[@page.trainee.maritalStatus] ?? @lng.trainee.maritalStatus.none}}</p>
+<p>{{@lng.trainee.fields.hasChilds}}: {{@page.trainee.hasChilds ? @lng.main.true : @lng.main.false}}</p>
+
+<check if="{{!is_null(@page.trainee.legalRepresentative)}}">
+  <p>{{@lng.trainee.fields.legalRepresentative}}: {{@page.trainee.legalRepresentative | esc}}</p>
+</check>
+<check if="{{!is_null(@page.trainee.emailLegalRepresentative)}}">
+  <p>{{@lng.trainee.fields.emailLegalRepresentative}}: {{@page.trainee.emailLegalRepresentative | esc}}</p>
+</check>
+<check if="{{!is_null(@page.trainee.phoneLegalRepresentative)}}">
+  <p>{{@lng.trainee.fields.phoneLegalRepresentative}}: {{@page.trainee.phoneLegalRepresentative | esc}}</p>
+</check>
+
+<h2>{{@lng.trainee.sections.education}}</h2>
+<p>{{@lng.trainee.fields.lastGraduation}}: {{@page.trainee.lastGraduation ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.graduationYear}}: {{@page.trainee.graduationYear ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.lastSchool}}: {{@page.trainee.lastSchool ?? @lng.main.notSet | esc}}</p>
+<p>
+  {{@lng.trainee.fields.schoolFrom}}: 
+  <check if="{{is_null(@page.trainee.schoolFrom)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.schoolFrom) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>
+  {{@lng.trainee.fields.schoolTo}}: 
+  <check if="{{is_null(@page.trainee.schoolTo)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.schoolTo) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.trainee.fields.hasBoardingSchoolExperience}}: {{@page.trainee.hasBoardingSchoolExperience ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.trainee.fields.germanLevel}}: {{@lng.trainee.germanLevel[@page.trainee.germanLevel] | esc}}</p>
+
+<h2>{{@lng.trainee.sections.medicalData}}</h2>
+<p>{{@lng.trainee.fields.degreeOfVisualImpairment}}: {{@lng.trainee.degreeOfVisualImpairment[@page.trainee.degreeOfVisualImpairment] ?? @lng.trainee.degreeOfVisualImpairment.none}}</p>
+<p>{{@lng.trainee.fields.otherDisability}}: 
+  <check if="{{is_null(@page.trainee.otherDisability)}}">
+    <true>
+      {{@lng.trainee.otherDisability.none}}
+    </true>
+    <false>
+      {{'{0} ({1})', @page.trainee.otherDisability, @lng.trainee.otherDisability[@page.trainee.otherDisability] | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.trainee.fields.handicappedIdAvailable}}: {{@page.trainee.handicappedIdAvailable ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.trainee.fields.requiredAccessibilityTools}}</h3>
+<pre>{{@page.trainee.requiredAccessibilityTools ?? @lng.main.notSet | esc}}</pre>
+
+<h3>{{@lng.trainee.fields.lpf}}</h3>
+<pre>{{@page.trainee.lpf ?? @lng.main.notSet | esc}}</pre>
+
+<h3>{{@lng.trainee.fields.oAndM}}</h3>
+<pre>{{@page.trainee.oAndM ?? @lng.main.notSet | esc}}</pre>
+
+<h3>{{@lng.trainee.fields.medicalRemarks}}</h3>
+<pre>{{@page.trainee.medicalRemarks ?? @lng.main.notSet | esc}}</pre>
+
+<h2>{{@lng.trainee.sections.otherInformation}}</h2>
+<p>{{@lng.trainee.fields.pensionInsuranceNumber}}: {{@page.trainee.pensionInsuranceNumber ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.taxID}}: {{@page.trainee.taxID ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.taxClass}}: {{@page.trainee.taxClass ?? @lng.main.notSet}}</p>
+<p>{{@lng.trainee.fields.denomination}}: {{@lng.trainee.denomination[@page.trainee.denomination] ?? @lng.trainee.denomination.none}}</p>
+<p>{{@lng.trainee.fields.healthInsuranceName}}: {{@page.trainee.healthInsuranceName ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.healthInsuranceNumber}}: {{@page.trainee.healthInsuranceNumber ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.membershipCertificateForHealthInsuranceAvailable}}: {{@page.trainee.membershipCertificateForHealthInsuranceAvailable ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.trainee.fields.paymentOfSVContributions}}: {{@lng.trainee.paymentOfSVContributions[@page.trainee.paymentOfSVContributions] ?? @lng.trainee.paymentOfSVContributions.none}}</p>
+
+<h3>{{@lng.trainee.fields.sourceOfFirstContact}}</h3>
+<pre>{{@page.trainee.sourceOfFirstContact ?? @lng.main.notSet | esc}}</pre>
+
+<h2>{{@lng.trainee.sections.training}}</h2>
+<p>{{@lng.trainee.fields.retraining}}: {{@page.trainee.retraining ? @lng.main.true : @lng.main.false}}</p>
+<p>
+  {{@lng.trainee.fields.trainingCourse1}}: 
+  {{is_null(@page.trainee.trainingCourse1Id) ? @lng.main.notSet : @page.trainee.trainingCourse1Id.name | esc}}
+</p>
+
+<p>
+  {{@lng.trainee.fields.trainingCourse2}}: 
+  {{is_null(@page.trainee.trainingCourse2Id) ? @lng.main.notSet : @page.trainee.trainingCourse2Id.name | esc}}
+</p>
+
+<h3>{{@lng.trainee.fields.electives}}</h3>
+<pre>{{@page.trainee.electives ?? @lng.main.notSet | esc}}</pre>
+
+<h2>{{@lng.trainee.sections.orientationWeek}}</h2>
+<p>{{@lng.trainee.fields.orientationWeekInterest}}: {{@page.trainee.orientationWeekInterest ? @lng.main.true : @lng.main.false}}</p>
+<p>
+  {{@lng.trainee.fields.orientationWeekFrom}}: 
+  <check if="{{is_null(@page.trainee.orientationWeekFrom)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.orientationWeekFrom) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>
+  {{@lng.trainee.fields.orientationWeekTo}}: 
+  <check if="{{is_null(@page.trainee.orientationWeekTo)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.orientationWeekTo) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.trainee.fields.orientationWeekAccommodationRequired}}: {{@page.trainee.orientationWeekAccommodationRequired ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.trainee.fields.orientationWeekPayer}}: {{@page.trainee.orientationWeekPayer ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.orientationWeekCostCommitmentRequested}}: {{@page.trainee.orientationWeekCostCommitmentRequested ? @lng.main.true : @lng.main.false}}</p>
+<p>{{@lng.trainee.fields.orientationWeekCostCommitmentReceived}}: {{@page.trainee.orientationWeekCostCommitmentReceived ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.trainee.fields.orientationWeekRemarks}}</h3>
+<pre>{{@page.trainee.orientationWeekRemarks ?? @lng.main.notSet | esc}}</pre>
+
+<h2>{{@lng.trainee.sections.trainingStart}}</h2>
+<p>
+  {{@lng.trainee.fields.trainingFrom}}: 
+  <check if="{{is_null(@page.trainee.trainingFrom)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.trainingFrom) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>
+  {{@lng.trainee.fields.trainingTo}}: 
+  <check if="{{is_null(@page.trainee.trainingTo)}}">
+    <true>
+      {{@lng.main.notSet}}
+    </true>
+    <false>
+    {{'{0,date}', strtotime(@page.trainee.trainingTo) | format,esc}}
+    </false>
+  </check>
+</p>
+<p>{{@lng.trainee.fields.trainingContract}}: {{@lng.trainee.trainingContract[@page.trainee.trainingContract] ?? @lng.trainee.trainingContract.none}}</p>
+
+<h3>{{@lng.trainee.fields.trainingStartRemarks}}</h3>
+<pre>{{@page.trainee.trainingStartRemarks ?? @lng.main.notSet | esc}}</pre>
+
+<h2>{{@lng.trainee.sections.payer}}</h2>
+<p>{{@lng.trainee.fields.payerName}}: {{@page.trainee.payerName ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.payerAddress}}: {{@page.trainee.payerAddress ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.payerContactPerson}}: {{@page.trainee.payerContactPerson ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.payerCustomerNumber}}: {{@page.trainee.payerCustomerNumber ?? @lng.main.notSet | esc}}</p>
+<p>{{@lng.trainee.fields.payerCostCommitment}}: {{@lng.trainee.payerCostCommitment[@page.trainee.payerCostCommitment]}}</p>
+<p>{{@lng.trainee.fields.accommodation}}: {{@lng.trainee.accommodation[@page.trainee.accommodation] ?? @lng.trainee.accommodation.none}}</p>
+<p>{{@lng.trainee.fields.youthProtectionExaminationReceived}}: {{@page.trainee.youthProtectionExaminationReceived ? @lng.main.true : @lng.main.false}}</p>
+
+<h3>{{@lng.trainee.fields.remarksInt}}</h3>
+<pre>{{@page.trainee.remarksInt ?? @lng.main.notSet | esc}}</pre>
+
+<h3>{{@lng.trainee.fields.payerRemarks}}</h3>
+<pre>{{@page.trainee.payerRemarks ?? @lng.main.notSet | esc}}</pre>

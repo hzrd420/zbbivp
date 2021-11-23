@@ -11,6 +11,7 @@ class Trainee extends Resource {
         ['delete', 'deleteTrainee', ['id' => '_id'], []],
         ['moveTrainee', 'moveTrainee', ['id' => '_id'], []],
       ];
+      
       protected $reroute = '@listtrainee';
       protected $hasFilter = true;
     

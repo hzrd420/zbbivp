@@ -272,6 +272,26 @@ Abstract class Resource extends Base {
     } // catch
   } // show()
 
+
+  public function showTrainee(\Base $f3, array $params): void {
+    try {
+      $id = $params['id'];
+      $result = $this->loadRecord($id);
+      if (!$result) // Model could not be loaded
+        $f3->error(404);
+
+      // Run show hook for certain tasks like permissions or loading additional data
+      $this->showHook($f3);
+
+      $f3->set('page.' . $this->resourceName, $this->model);
+      $f3->copy('lng.' . $this->resourceName . '.show.title', 'page.title');
+      $f3->set('page.content', 'html/' . $this->resourceName . '/show.html');
+    } catch (ControllerException $e) {
+      \Flash::instance()->addMessage($e->getMessage(), 'danger');
+      $f3->reroute($this->reroute);
+    } // catch
+  } // show()
+
   /**
    * Overwrite this method for certain tasks before it will be shown by the show function without errors
    * @param \Base $f3 The instance of F3

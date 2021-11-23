@@ -16,7 +16,7 @@
     <repeat group="{{@list}}" value="{{@item}}">
         <set newestStep="{{@item->getNewestStep()}}" />
       <tr>
-        <th><a href="{{@BASE}}{{'showInterested', 'id =' . @item._id | alias}}">{{'{0} {1}', @item.firstName, @item.surname | format,esc}}</a></th>
+        <th><a href="{{@BASE}}{{'showTrainee', 'id =' . @item._id | alias}}">{{'{0} {1}', @item.firstName, @item.surname | format,esc}}</a></th>
         <td>{{'{0,date} {0,time}', strtotime(@item.created) | format,esc}}</td>
         <td>
           <check if="{{is_null(@item.birthDate)}}">
@@ -32,7 +32,7 @@
         <td>
           <check if="{{is_null(@item.trainingCourse1Id)}}">
             <true>
-              {{@lng.interested.list.noTrainingCourse}}
+              {{@lng.trainee.list.noTrainingCourse}}
             </true>
             <false>
               <a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item.trainingCourse1Id._id | alias}}">
