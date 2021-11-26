@@ -1,5 +1,6 @@
 <p><a class="export" href="{{@BASE}}{{'exporttrainee1' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.main.export, @lng.trainee.export.export1 | format}}</a></p>
 <p><a class="export" href="{{@BASE}}{{'exporttrainee2' | alias}}{{!empty(@QUERY) ? '?' . @QUERY : ''}}">{{@lng.main.export, @lng.trainee.export.export2 | format}}</a></p>
+
 <table>
   <thead>
     <tr>
@@ -9,7 +10,15 @@
       <th>{{@lng.trainee.fields.trainingCourse1}}</th>
       <th></th>
       <th></th>
-      <th>{{@lng.resource.actions}}</th>
+      <check if="{{@USER.is_admin}} == 1" >
+        <true>
+          <th>{{@lng.resource.actions}}</th>
+        </true>
+        <false>
+          <th></th>
+        </false>
+      </check>
+      
     </tr>
   </thead>
   <tbody>
@@ -43,9 +52,20 @@
         </td>
         <td></td>
         <td></td>
-        <td>
-          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
-        </td>
+        
+        <check if= "{{@USER.is_admin}} == 1">
+           <true>
+              <td>
+                <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+              </td>
+           </true>
+           <false>
+             <td>
+
+             </td>
+           </false>
+        </check>
+        
       </tr>
     </repeat>
   </tbody>

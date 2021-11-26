@@ -1,5 +1,15 @@
 <h1>{{@lng.trainee.show.heading, @page.trainee.firstName, @page.trainee.surname | format,esc}}</h1>
-<include href="{{'html/snippets/actions.html'}}" with="item={{@page.trainee}}" />
+
+<check if = "{{@USER.is_admin}} == 1">
+  <true>
+    <include href="{{'html/snippets/actions.html'}}" with="item={{@page.trainee}}" />
+  </true>
+  <false>
+      
+  </false>
+</check>
+
+
 <p>{{@lng.trainee.fields.created}}: {{'{0,date}, {0,time}', strtotime(@page.trainee.created) | format,esc}}</p>
 
 <h2>{{@lng.trainee.show.steps}}</h2>

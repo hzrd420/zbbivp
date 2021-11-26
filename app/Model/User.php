@@ -57,6 +57,7 @@ class User extends Base {
   public $sortableFields = [
     'username' => 'username',
     'surname' => 'surname',
-    'firstName' => 'firstName'
+    'firstName' => 'firstName',
+    'is_admin'  => 'is_admin'
   ];
 } // class

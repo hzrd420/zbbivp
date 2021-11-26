@@ -83,6 +83,8 @@ class AuthenticationHelper {
     return $this->user;
   } // getUser()
 
+  
+
   /**
    * Check if "remember me" coockies exist
    * @ return int|null The userId of the user of the specific cookies or null if cookies are wrong

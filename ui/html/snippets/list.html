@@ -1,7 +1,15 @@
 <h1>{{@lng[@page.resourceName].list.heading, @page.resourceList.total | format,esc}}</h1>
-<check if="{{@page.permitNew}}">
-  <p><a class="newItem" href="{{@BASE}}{{'add' . ucfirst(@page.resourceName) | alias}}">{{@lng[@page.resourceName].actions.add}}</a></p>
+<check if = "{{@USER.is_admin}} == 1">
+  <true>
+    <check if="{{@page.permitNew}}">
+      <p><a class="newItem" href="{{@BASE}}{{'add' . ucfirst(@page.resourceName) | alias}}">{{@lng[@page.resourceName].actions.add}}</a></p>
+    </check>
+  </true>
+  <false>
+      
+  </false>
 </check>
+
 <include href="html/snippets/filterPanel.html" />
 <check if="{{empty(@page.resourceList.subset)}}">
   <true>

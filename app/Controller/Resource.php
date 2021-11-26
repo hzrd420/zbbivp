@@ -345,7 +345,7 @@ Abstract class Resource extends Base {
    * Evaluate the edit/add form and edit or add the resource
    * @param Base $f3 The instance of F3
    */
-  public function edit(\Base $f3): void {
+  public function edit(\Base $f3, array $params): void {
     try {
       $this->checkCsrf();
       if (!$this->checkPostFields())

@@ -39,6 +39,8 @@ class Authentication extends Base {
     } // else
   } // logInUser()
 
+
+
   /**
    * Log out the user
    * @param $f3 the instance of f3
@@ -50,4 +52,7 @@ class Authentication extends Base {
     // Reroute to home page
     $f3->reroute('/');
   } // logout()
+
+
+
 } // class

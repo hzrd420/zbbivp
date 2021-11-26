@@ -2,16 +2,28 @@
   <thead>
     <tr>
       <th>{{@lng.trainingCourse.fields.name}}</th>
-      <th>{{@lng.resource.actions}}</th>
+      <check if = "{{@USER.is_admin}} == 1">
+        <true>
+          <th>{{@lng.resource.actions}}</th>
+        </true>
+        <false>
+          <th></th>
+        </false>
+      </check>
+      
     </tr>
   </thead>
   <tbody>
     <repeat group="{{@list}}" value="{{@item}}">
       <tr>
-        <th><a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a></th>
-        <td>
-          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
-        </td>
+        <th><a href="{{@BASE}}{{'showTrainingCourse', 'id =' . @item._id | alias}}">{{@item.name | esc}}</a><br><br></th>
+        <check if = "{{@USER.is_admin}} == 1">
+          <true>
+            <td>
+              <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+            </td>
+          </true>
+        </check>
       </tr>
     </repeat>
   </tbody>

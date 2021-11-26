@@ -68,9 +68,20 @@
             </false>
           </check>
         </td>
-        <td>
-          <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
-        </td>
+        <check if = "{{@USER.is_admin}} == 1">
+          <true>
+            <td>
+              <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+            </td>
+          </true>
+          <false>
+            <td>
+              
+            </td>
+          </false>
+        </check>
+
+        
       </tr>
     </repeat>
   </tbody>
