@@ -10,7 +10,15 @@
       <th>{{@lng.interested.fields.trainingCourse2}}</th>
       <th>{{@lng.interested.list.numberOfSteps}}</th>
       <th>{{@lng.interested.list.newestStep}}</th>
-      <th>{{@lng.resource.actions}}</th>
+      <check if= "{{@USER.is_admin}} == 1">
+        <true>
+          <th>{{@lng.resource.actions}}</th>
+        </true>
+        <false>
+          <th></th>
+        </false>
+      </check>
+      
     </tr>
   </thead>
   <tbody>

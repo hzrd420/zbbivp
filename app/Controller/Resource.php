@@ -363,7 +363,7 @@ Abstract class Resource extends Base {
 
       // Start transaction and set fields into the model:
       $this->model->startTransaction();
-      $this->model->defaults(true); // Useful for check boxes without values like booleans)
+      $this->model->defaults(false); // Useful for check boxes without values like booleans)
       $this->model->copyfrom('POST');
       // Run optional function with model as parameter, may be overwridden by class to change model individually
       $this->editHook($f3);
