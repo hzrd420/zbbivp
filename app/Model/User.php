@@ -49,11 +49,6 @@ class User extends Base {
       'filter' => 'trim',
       'validate' => 'required|min_len,' . self::SURNAME_MIN_LENGTH . '|max_len,' . self::SURNAME_MAX_LENGTH
     ],
-    'is_admin' => [
-      'type' => 'BIT',
-      'nullable' => false,
-      'default' => 0
-    ],
     
     'securityTokens' => [
       'has-many' => ['\Model\SecurityToken', 'userId']

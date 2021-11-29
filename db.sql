@@ -4,6 +4,7 @@ CREATE OR REPLACE TABLE `user` (
     `password` varchar(250) NOT NULL,
     `firstName` VARCHAR(100) NOT NULL,
     `surname` VARCHAR(100) NOT NULL,
+    `is_admin` int NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 

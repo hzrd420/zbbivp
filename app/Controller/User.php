@@ -30,6 +30,8 @@ class User extends Resource {
     if (array_key_exists('surname', $opts))
       $filters[] = ['surname LIKE ?', '%' . $opts['surname'] . '%'];
 
+     
+
     return $filters;
   } // getFilters()
 
