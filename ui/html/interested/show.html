@@ -1,5 +1,5 @@
 <h1>{{@lng.interested.show.heading, @page.interested.firstName, @page.interested.surname | format,esc}}</h1>
-<check if = "{{@USER.is_admin}} == 1">
+<check if = "{{@USER.ADMIN}} == 1">
   <true>
     <include href="{{'html/snippets/actions.html'}}" with="item={{@page.interested}}" />
   </true>

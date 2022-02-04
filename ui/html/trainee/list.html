@@ -10,7 +10,7 @@
       <th>{{@lng.trainee.fields.trainingCourse1}}</th>
       <th></th>
       <th></th>
-      <check if="{{@USER.is_admin}} == 1" >
+      <check if="{{@USER.ADMIN}} == 1" >
         <true>
           <th>{{@lng.resource.actions}}</th>
         </true>
@@ -53,7 +53,7 @@
         <td></td>
         <td></td>
         
-        <check if= "{{@USER.is_admin}} == 1">
+        <check if= "{{@USER.ADMIN}} == 1">
            <true>
               <td>
                 <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />

@@ -35,6 +35,11 @@ class User extends Resource {
     return $filters;
   } // getFilters()
 
+
+  protected function loadLists(\Base $f3): void {
+    $f3->set('page.permissions', $this->model::PERMISSIONS);
+  }
+
   protected function editHook(\Base $f3): void {
     // Check if passwords matches:
     if ($f3->exists('POST.password', $password) && !empty($password)) {

@@ -4,7 +4,7 @@
       <th>{{@lng.user.fields.username}}</th>
       <th>{{@lng.user.fields.surname}}</th>
       <th>{{@lng.user.fields.firstName}}</th>
-      <th>{{@lng.user.fields.is_admin}}</th>
+      <th>{{@lng.user.fields.ADMIN}}</th>
       <th>{{@lng.resource.actions}}</th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
         <td>{{@item.surname | esc}}</td>
         <td>{{@item.firstName | esc}}</td>
         <td>
-          <check if= "{{@item.is_admin==1}}">
+          <check if= "{{@item.ADMIN==1}}">
             <true>
               Ja
             </true>

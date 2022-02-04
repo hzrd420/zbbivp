@@ -4,12 +4,12 @@ CREATE OR REPLACE TABLE `user` (
     `password` varchar(250) NOT NULL,
     `firstName` VARCHAR(100) NOT NULL,
     `surname` VARCHAR(100) NOT NULL,
-    `is_admin` int NOT NULL,
+    `ADMIN` int NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 
-INSERT INTO user (username, password, surname, firstName) VALUES
-    ('admin', '$2y$10$P6.Hp/NcWeLWuV53NsV9X.BLbJQ2w1IxVulDJ2pI8cKCi.OgErNz.', 'User', 'Administrator');
+INSERT INTO user (username, password, surname, firstName, ADMIN) VALUES
+    ('admin', '$2y$10$P6.Hp/NcWeLWuV53NsV9X.BLbJQ2w1IxVulDJ2pI8cKCi.OgErNz.', 'User', 'Administrator', 1);
 
 CREATE OR REPLACE TABLE `securityToken` (
     `id` bigint unsigned AUTO_INCREMENT,

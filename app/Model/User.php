@@ -12,6 +12,9 @@ class User extends Base {
   public const FIRST_NAME_MAX_LENGTH = 100;
   public const SURNAME_MIN_LENGTH = 1;
   public const SURNAME_MAX_LENGTH = 100;
+  public const PERMISSIONS = [
+    1
+  ];
 
   protected $fieldConf = [
     'username' => [
@@ -49,6 +52,16 @@ class User extends Base {
       'filter' => 'trim',
       'validate' => 'required|min_len,' . self::SURNAME_MIN_LENGTH . '|max_len,' . self::SURNAME_MAX_LENGTH
     ],
+
+    'ADMIN' => [
+      'type' => \DB\SQL\Schema::DT_INT,
+      'passThrough' => true,
+      'nullable' => false,
+      'unique' => true,
+      'accepted' => true,
+      'necessaryPost' => true,
+      'filter' => 'trim',
+    ],
     
     'securityTokens' => [
       'has-many' => ['\Model\SecurityToken', 'userId']
@@ -59,6 +72,6 @@ class User extends Base {
     'username' => 'username',
     'surname' => 'surname',
     'firstName' => 'firstName',
-    'is_admin'  => 'is_admin'
+    'ADMIN'  => 'ADMIN'
   ];
 } // class

@@ -13,7 +13,7 @@
         <li><a accesskey="a" href="{{@BASE}}{{'listTrainingCourses' | alias}}">{{@lng.main.trainingCourses}}</a></li>
         <li><a accesskey="t" href="{{@BASE}}{{'listStepTypes' | alias}}">{{@lng.main.stepTypes}}</a></li>
         
-        <check if = "{{@USER.is_admin}} == 1">
+        <check if = "{{@USER.ADMIN}} == 1">
           <true>
             <li><a accesskey="b" href="{{@BASE}}{{'listUsers' | alias}}">{{@lng.main.userAdministration}}</a></li>
           </true>

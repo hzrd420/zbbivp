@@ -1,5 +1,5 @@
 <h1>{{@lng[@page.resourceName].list.heading, @page.resourceList.total | format,esc}}</h1>
-<check if = "{{@USER.is_admin}} == 1">
+<check if = "{{@USER.ADMIN}} == 1">
   <true>
     <check if="{{@page.permitNew}}">
       <p><a class="newItem" href="{{@BASE}}{{'add' . ucfirst(@page.resourceName) | alias}}">{{@lng[@page.resourceName].actions.add}}</a></p>
