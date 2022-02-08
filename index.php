@@ -90,12 +90,23 @@ if (!$f3->get('CLI')) {
   new DB\SQL\Session($f3->get('db'), 'sessions', true, null, 'CSRF');
 
   $user = $dice->create('\AuthenticationHelper')->getUser();
-  $f3->set('USER', $user);
+  $admin = $dice->create('\AuthenticationHelper')->getAdmin();
 
+  $f3->set('USER', $user);
+  $f3->set('ADMIN', $admin);
+
+  
   // Route access control:
   $f3->config('app/access.ini');
   $access = \Access::instance();
-  $subject = is_null($user) ? 'unauthenticated' : 'user';
+
+  /**null check to set Role from \AuthenticationHelper
+   * checks $user, if null = unauthenticated
+   * otherwise check $admin, if null = user
+  */
+  $subject = is_null($user) ? 'unauthenticated' : (is_null($admin) ? 'user' : 'admin');
+
+  
   $access->authorize($subject, function ($route, $subject) use ($f3) {
     if ($subject == 'unauthenticated') { // Redirect to login page
       // Remove request type from $route to set in origin for login to reroute back after successful login
@@ -111,6 +122,8 @@ if (!$f3->get('CLI')) {
     $f3->reroute('/');
   });
 } // if
+
+echo $subject;
 
 // Start validation engine and add some custom filters:
 $validation = \Validation::instance();

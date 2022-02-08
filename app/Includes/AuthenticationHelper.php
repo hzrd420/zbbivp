@@ -3,13 +3,16 @@ declare(strict_types=1);
 class AuthenticationHelper {
   protected $user;
   protected $token;
+  protected $admin;
+  
 
   /**
    * Initialize Authentication class
    */
-  public function __construct(\Model\User $user, \Model\SecurityToken $token) {
+  public function __construct(\Model\User $user,\Model\User $admin ,\Model\SecurityToken $token) {
     $this->user = $user;
     $this->token = $token;
+    $this->admin = $admin;
   } // __construct
 
   /**
@@ -80,10 +83,33 @@ class AuthenticationHelper {
       $f3->clear('SESSION');
       return null;
     } // if
-    return $this->user;
+    return $this->user;   
   } // getUser()
 
+  /**
+   * Get admin or user
+   * Use this to check if user is admin or not
+   * @return object null if user isn't an admin in
+   * @return object admin if user is admin
+   */
+  public function getAdmin(): ?\Model\User {
+    
+    $f3 = \Base::instance();
+    if (!$f3->exists('SESSION.userId', $userId)) {
+      $userId = $this->checkRememberCookies();
+      if (is_null($userId))
+        return $userId;
+      $f3->set('SESSION.userId', $userId);
+    } // if
   
+    $this->user->load(['_id = ?', $userId]);
+    
+    if($this->user->getRaw('ADMIN') == 1)
+      return $this->admin;
+    
+    return null;
+    
+  }
 
   /**
    * Check if "remember me" coockies exist

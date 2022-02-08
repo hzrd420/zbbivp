@@ -10,14 +10,8 @@
       <th>{{@lng.interested.fields.trainingCourse2}}</th>
       <th>{{@lng.interested.list.numberOfSteps}}</th>
       <th>{{@lng.interested.list.newestStep}}</th>
-      <check if= "{{@USER.ADMIN}} == 1">
-        <true>
-          <th>{{@lng.resource.actions}}</th>
-        </true>
-        <false>
-          <th></th>
-        </false>
-      </check>
+      <th>{{@lng.resource.actions}}</th>
+       
       
     </tr>
   </thead>
@@ -76,18 +70,10 @@
             </false>
           </check>
         </td>
-        <check if = "{{@USER.ADMIN}} == 1">
-          <true>
-            <td>
-              <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
-            </td>
-          </true>
-          <false>
-            <td>
-              
-            </td>
-          </false>
-        </check>
+        <td>
+            <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
+        </td>
+         
 
         
       </tr>

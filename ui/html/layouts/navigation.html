@@ -13,14 +13,9 @@
         <li><a accesskey="a" href="{{@BASE}}{{'listTrainingCourses' | alias}}">{{@lng.main.trainingCourses}}</a></li>
         <li><a accesskey="t" href="{{@BASE}}{{'listStepTypes' | alias}}">{{@lng.main.stepTypes}}</a></li>
         
-        <check if = "{{@USER.ADMIN}} == 1">
-          <true>
-            <li><a accesskey="b" href="{{@BASE}}{{'listUsers' | alias}}">{{@lng.main.userAdministration}}</a></li>
-          </true>
-          <false>
-              
-          </false>
-        </check>
+        
+        <li><a accesskey="b" href="{{@BASE}}{{'listUsers' | alias}}">{{@lng.main.userAdministration}}</a></li>
+          
         
         <li><a accesskey="x" href="{{@BASE}}{{'logout' | alias}}">{{@lng.main.logout}}</a></li>
       </false>

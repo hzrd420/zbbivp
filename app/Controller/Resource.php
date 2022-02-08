@@ -47,7 +47,7 @@ Abstract class Resource extends Base {
     $f3->set('page.hasFilter', $this->hasFilter);
     // Show templates if current user can do specific actions:
     $access = \Access::instance();
-    $subject = 'user';
+    $subject[] =['user', 'admin'];
     $f3->set(
       'page.permitNew',
       $this->permitNew && $access->granted('/*/edit*', $subject)

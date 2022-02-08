@@ -10,14 +10,8 @@
       <th>{{@lng.trainee.fields.trainingCourse1}}</th>
       <th></th>
       <th></th>
-      <check if="{{@USER.ADMIN}} == 1" >
-        <true>
-          <th>{{@lng.resource.actions}}</th>
-        </true>
-        <false>
-          <th></th>
-        </false>
-      </check>
+      <th>{{@lng.resource.actions}}</th>
+  
       
     </tr>
   </thead>
@@ -53,18 +47,12 @@
         <td></td>
         <td></td>
         
-        <check if= "{{@USER.ADMIN}} == 1">
-           <true>
+        
               <td>
                 <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
               </td>
-           </true>
-           <false>
-             <td>
-
-             </td>
-           </false>
-        </check>
+           
+      
         
       </tr>
     </repeat>
