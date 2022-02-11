@@ -14,6 +14,8 @@ This is so the blista (the association to which the ZBB is a part of) can get in
 
 ## Authors
 
-Bastian Brück
-Adrian Kurz
+Bastian Brück 
+E-Mail: bbrueck.zbb@focus.blista.study
 
+Adrian Kurz
+E-Mail: adkurz@bltech.de
