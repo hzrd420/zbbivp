@@ -6,3 +6,11 @@
 
 <p><label for="filter_surname">{{@lng.user.fields.surname}}</label>
 <input type="text" name="filter_surname" id="filter_surname" value="{{@@GET.filter_surname}}"></p> 
+
+<p><label for="ADMIN">{{@lng.user.fields.ADMIN}} 
+</label>
+<select name="ADMIN" id="permissions">
+  <repeat group="{{@page.permissions}}" value="{{@item}}">
+    <option {{@@GET.ADMIN === @item ? 'selected' : ''}} value="{{@item}}">{{@lng.user.permissions[@item]}}</option>
+  </repeat>
+</select></p>

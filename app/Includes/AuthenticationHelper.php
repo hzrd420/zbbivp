@@ -9,10 +9,11 @@ class AuthenticationHelper {
   /**
    * Initialize Authentication class
    */
-  public function __construct(\Model\User $user,\Model\User $admin ,\Model\SecurityToken $token) {
+  public function __construct(\Model\User $user,\Model\User $admin, \Model\User $root ,\Model\SecurityToken $token) {
     $this->user = $user;
     $this->token = $token;
     $this->admin = $admin;
+    $this->root = $root;
   } // __construct
 
   /**
@@ -108,8 +109,26 @@ class AuthenticationHelper {
       return $this->admin;
     
     return null;
-    
   }
+
+  public function getRoot(): ?\Model\User {
+    
+    $f3 = \Base::instance();
+    if (!$f3->exists('SESSION.userId', $userId)) {
+      $userId = $this->checkRememberCookies();
+      if (is_null($userId))
+        return $userId;
+      $f3->set('SESSION.userId', $userId);
+    } // if
+  
+    $this->user->load(['_id = ?', $userId]);
+    
+    if($this->user->getRaw('id') == 1)
+      return $this->root;
+    
+    return null;
+  }
+
 
   /**
    * Check if "remember me" coockies exist

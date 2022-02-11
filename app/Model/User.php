@@ -60,7 +60,7 @@ class User extends Base {
       'passThrough' => true,
       'nullable' => false,
       'accepted' => true,
-      'necessaryPost' => true,
+      'necessaryPost' => false,
       'filter' => 'trim',
       'item' => self::PERMISSIONS
     ],

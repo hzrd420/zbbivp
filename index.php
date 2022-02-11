@@ -91,10 +91,11 @@ if (!$f3->get('CLI')) {
 
   $user = $dice->create('\AuthenticationHelper')->getUser();
   $admin = $dice->create('\AuthenticationHelper')->getAdmin();
+  $root = $dice->create('\AuthenticationHelper')->getRoot();
 
   $f3->set('USER', $user);
   $f3->set('ADMIN', $admin);
-
+  $f3->set('ROOT', $root);
   
   // Route access control:
   $f3->config('app/access.ini');
@@ -104,7 +105,7 @@ if (!$f3->get('CLI')) {
    * checks $user, if null = unauthenticated
    * otherwise check $admin, if null = user
   */
-  $subject = is_null($user) ? 'unauthenticated' : (is_null($admin) ? 'user' : 'admin');
+  $subject = is_null($user) ? 'unauthenticated' : (is_null($admin) ? 'user' : (is_null($root) ? 'admin' : 'root'));
 
   
   $access->authorize($subject, function ($route, $subject) use ($f3) {

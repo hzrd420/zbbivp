@@ -15,14 +15,22 @@
         <td>{{@item.surname | esc}}</td>
         <td>{{@item.firstName | esc}}</td>
         <td>
-          <check if= "{{@item.ADMIN==1}}">
+          <check if=" {{@item.id == 1}}">
             <true>
-              {{@lng.user.permissions.1}}
+              {{@lng.user.permissions.2}}
             </true>
             <false>
-              {{@lng.user.permissions.0}}
+              <check if= "{{@item.ADMIN==1}}">
+                <true>
+                  {{@lng.user.permissions.1}}
+                </true>
+                <false>
+                  {{@lng.user.permissions.0}}
+                </false>
+              </check>
             </false>
           </check>
+          
         </td>    
         <td>
           <include href="{{'html/snippets/actions.html'}}" with="item={{@item}}" />
